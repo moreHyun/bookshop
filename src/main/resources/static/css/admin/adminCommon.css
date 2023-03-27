@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+* {
+    font-family: 'NanumBarunGothic';
+    font-size: 12pt;
+}
+
+/* nav 로고 */
+.nav_logo {
+    width: 70px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+/* nav 메뉴 */
+.main-nav {
+    display: flex;
+    list-style-type: none;
+    font-size: 20px;
+    margin-top : 20px;
+}
+
+.main-nav a {
+    color : black;
+    font-size: 15px;
+    margin-right: 50px;
+    text-decoration-line :none;
+    font-weight: bolder;
+}
+
+.main-nav a:hover {
+    
+    font-weight: 800;
+    color:white;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #CDE990;
+    height: 70px;
+    /*position: sticky;
+    top: 0;*/
+    width: 100%;
+    
+}
+
+/* 상단이동버튼 */
+.topbtn {
+    position :fixed;
+    top: 90%;
+    left: 95%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    z-index : 2;
+}
+
+
+/* 사이드바 */
+.sub-menu {
+    border: 1px solid rgb(223, 217, 217);
+    border-radius: 10px;
+    margin-top: 80px;
+    margin-left: 70px;
+    width: 160px;
+    height: 350px;
+    vertical-align:middle;
+    position: fixed;
+}
+
+ .sub-menu li {
+    margin-top: 50px;
+    text-decoration :none;
+    list-style-type: none;
+    text-align: center;
+}
+
+/*.sub-menu li :hover,
+.sub-menu li.action{
+    background-color: #CDE990;
+    color: #fff;
+} */
+
+.clickmenu :hover,
+.clickmenu :active {
+    background-color: #CDE990;
+    color: #fff;
+}
+
+.sub-menu li a {
+    padding: 15px 20px;
+    text-decoration :none;
+    color: black;
+    font-weight: bolder;
+}
+
+
+/* 탑메뉴 */
+
+.top-menu {
+    top: 180px;
+    left: 400px;
+    width: 550px;
+    text-decoration :none;
+    list-style-type: none;
+    position: absolute;
+}
+
+.top-menu th {
+    font: bold;
+}
+
+.top-menu th a {
+    padding: 15px 20px;
+    text-decoration :none;
+    color: black;
+}
+
+.top-menu th :hover {
+    background-color: #CDE990;
+    color: #fff;
+}
