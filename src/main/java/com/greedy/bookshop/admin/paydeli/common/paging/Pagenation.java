@@ -1,4 +1,4 @@
-package com.greedy.bookshop.admin.member.common.paging;
+package com.greedy.bookshop.admin.paydeli.common.paging;
 
 import java.util.HashMap;
 import java.util.Map;

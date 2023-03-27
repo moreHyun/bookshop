@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.admin.member.model.dao.MemberMapper">
+
+	<resultMap id="memberResultMap" type="com.greedy.bookshop.admin.member.model.dto.MemberDTO">
+		<id property="code" column="USER_CODE"/>
+		<result property="id" column="USER_ID"/>
+		<result property="pwd" column="USER_PWD"/>
+		<result property="name" column="USER_NAME"/>
+		<result property="no" column="USER_NO"/>
+		<result property="phone" column="USER_PHONE"/>
+		<result property="createUserDate" column="CREATE_USER_DATE"/>
+		<result property="deleteUserDate" column="DELETE_USER_DATE"/>
+		<result property="status" column="USER_STATUS"/>
+		<result property="rolecode" column="USER_ROLE_CODE"/>
+		<result property="gradecode" column="USER_RATING_CODE"/>
+		
+	</resultMap>
+	
+		<resultMap id="userDeliveryResultMap" type="com.greedy.bookshop.admin.member.model.dto.MemberDeliveryDTO">
+		<id property="code" column="DESTINATION_CODE"/>
+		<result property="recipient" column="RECIPIENT"/>
+		<result property="phone" column="RECIPIENT_PHONE"/>
+		<result property="nickname" column="DESTINATION_NICKNAME"/>
+		<result property="postalCode" column="POSTAL_CODE"/>
+		<result property="detailedAddress" column="DETAILED_ADDRESS"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="deleteUserDate" column="DELETE_USER_DATE"/>
+		<result property="meno" column="MEMO"/>
+		<result property="userCode" column="USER_CODE"/>
+
+	</resultMap>
+	
+	<resultMap id="userGradeResultMap" type="com.greedy.bookshop.admin.member.model.dto.MemberGradeDTO">
+		<id property="gradecode" column="USER_RATING_CODE"/>
+		<result property="gradename" column="USER_RATING_NAEM"/>
+	</resultMap>
+	
+	<resultMap id="userRoleResultMap" type="com.greedy.bookshop.admin.member.model.dto.MemberRoleDTO">
+		<id property="rolecode" column="USER_ROLE_CODE"/>
+		<result property="rolename" column="ROLE_NAME"/>
+		<result property="roledesc" column="ROLE_DESC"/>
+	</resultMap>	
+	
+		
+	    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+    	SELECT
+		  COUNT(*)
+		  FROM TBL_USER
+        <where>
+            <if test="searchCondition == 'id'">
+                USER_ID LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'name'">
+                USER_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'phone'">
+                USER_PHONE LIKE '%' || #{ searchValue } || '%'
+            </if>
+            AND USER_STATUS = 'Y'
+        </where>
+    </select>
+    
+        <select id="selectMemberList" resultMap="memberResultMap">
+        SELECT 
+        
+                      A.USER_ID
+                    , A.USER_NAME
+			        , A.USER_PHONE
+          FROM (SELECT 
+                      ROWNUM RNUM
+                     , B.USER_ID
+                     , B.USER_NAME
+			         , B.USER_PHONE
+                  FROM ( SELECT 
+                       C.USER_ID
+                     , C.USER_NAME
+			         , C.USER_PHONE
+                  
+                   FROM TBL_USER C
+        <where>
+            <if test="searchCondition == 'id'">
+                C.USER_ID LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'name'">
+                C.USER_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'phone'">
+                C.USER_PHONE LIKE '%' || #{ searchValue } || '%'
+            </if>
+            AND C.USER_STATUS = 'Y'
+        </where>
+        ORDER BY C.USER_CODE ASC 
+        ) B
+        <![CDATA[
+                  WHERE ROWNUM <= #{ endRow }]]>
+         )A
+         
+        WHERE A.RNUM >= #{ startRow }
+        ORDER BY 1 ASC
+    </select>
+    
+            <select id="selectMemberDetail" parameterType="string" resultMap="memberResultMap">
+        SELECT 
+			  
+			  A.USER_ID
+			, A.USER_NAME
+			, A.USER_NO
+			, A.USER_PHONE
+			, A.CREATE_USER_DATE
+			, A.DELETE_USER_DATE
+			, A.USER_STATUS
+			, A.USER_ROLE_CODE
+			, A.USER_RATING_CODE
+        FROM TBL_USER A
+        WHERE A.USER_STATUS = 'Y'
+          AND A.USER_ID = #{ id }
+
+    </select>
+    
+            <select id="selectMemberDetail2" parameterType="string" resultMap="memberResultMap">
+        SELECT 
+			  
+			  A.USER_ID
+			, A.USER_NAME
+			, A.USER_NO
+			, A.USER_PHONE
+			, A.CREATE_USER_DATE
+			, A.DELETE_USER_DATE
+			, A.USER_STATUS
+			, B.ROLE_DESC
+			, C.USER_RATING_NAME
+        FROM TBL_USER A
+        JOIN TBL_USER_ROLE B ON (A.USER_ROLE_CODE = B.USER_ROLE_CODE)
+        JOIN TBL_USER_RATING C ON (A.USER_RATING_CODE = C.USER_RATING_CODE)
+        WHERE A.USER_STATUS = 'Y'
+          AND A.USER_ID = #{ id }
+    </select>
+    
+        <select id="selectMemberDetail3" parameterType="string" resultMap="memberResultMap">
+        SELECT 
+			  
+			  A.USER_ID
+			, A.USER_NAME
+			, A.USER_NO
+			, A.USER_PHONE
+			, A.CREATE_USER_DATE
+			, A.DELETE_USER_DATE
+			, A.USER_STATUS
+			, A.USER_ROLE_CODE
+			, A.USER_RATING_CODE
+			, B.DESTINATION_NICKNAME
+			, B.RECIPIENT_PHONE
+			, B.POSTAL_CODE
+			, B.ADDRESS
+			, B.DETAILED_ADDRESS
+			, B.MEMO
+        FROM TBL_USER A
+        JOIN TBL_USER_DELIvERY B ON (A.USER_CODE = B.USER_CODE)
+        WHERE A.USER_STATUS = 'Y'
+          AND A.USER_ID = #{ id }
+        ORDER BY B.DESTINATION_CODE
+    </select>
+    
+<update id="updateMember" parameterType="com.greedy.bookshop.admin.member.model.dto.MemberDTO">
+    UPDATE TBL_USER 
+    SET 
+        USER_NAME = #{name},
+        USER_PHONE = #{phone},
+        USER_RATING_CODE = #{gradecode},
+        USER_ROLE_CODE = #{rolecode},
+        USER_STATUS = #{status},
+        DELETE_USER_DATE = CASE WHEN #{status} = 'N' THEN CURRENT_TIMESTAMP ELSE null END
+    WHERE USER_ID = #{id}
+</update>
+
+
+   	
+</mapper>
