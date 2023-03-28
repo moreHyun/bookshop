@@ -1,15 +1,7 @@
 package com.greedy.bookshop.main.member.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Service
-public class AuthenticationService {
-
-  
+public interface AuthenticationService {
+    Authentication authenticate(Authentication authentication);
 }
