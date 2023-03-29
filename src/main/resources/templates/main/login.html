@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="../image/책장옆 복사본.png">
@@ -7,6 +8,7 @@
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <title>로그인페이지</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <script src="/src/main/resources/static/js/"></script>
     <style>
     html,
     body {
@@ -33,8 +35,8 @@
     <div class="login_main">
         <img class="login_logo" src="/image/책장옆.png">
         <div class="login_container">
-            <input type="text" placeholder="아이디를 입력하세요." id="id" name="username" class="account">
-            <input type="password" placeholder="비밀번호를 입력하세요." id="password" name="password" class="account">
+            <input type="text" placeholder="아이디를 입력하세요." id="id" name="id" class="account" required>
+            <input type="password" placeholder="비밀번호를 입력하세요." id="password" name="password" class="account" required>
             <button type="submit" value="login" id="login" class="account">로그인</button>
             <div class="login_check">
                 <div class="links">
@@ -61,6 +63,9 @@
             <button id="loginJoin" class="account" onclick="window.open('regist.html')">회원가입</button>
         </div>
     </div>
+    </form>
+    
+    <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
 
 
     <!----footer---->
@@ -69,6 +74,6 @@
             <p><small>&copy; 2023 책장 옆  </small></p>
         </div>
     </footer>
-    </form>
+
 </body>
 </html>

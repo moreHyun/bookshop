@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.greedy.bookshop.admin.member.common.paging.Pagenation;
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
 import com.greedy.bookshop.admin.member.model.dao.MemberMapper;
-import com.greedy.bookshop.admin.member.model.dto.MemberDTO;
+import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("[MemberService] selectCriteria : {}", selectCriteria);
 		
 		/*3. 요청 페이지와 검색 기준에 맞는 게시글을 조회해온다.*/
-		List<MemberDTO> memberList = memberMapper.selectMemberList(selectCriteria);
+		List<AdminMemberDTO> memberList = memberMapper.selectMemberList(selectCriteria);
 		log.info("[MemberService] memberList : {}", memberList);
 
 		Map<String, Object> memberListAndPaging = new HashMap<>();
@@ -65,13 +65,13 @@ public class MemberServiceImpl implements MemberService {
 	
 
 	@Override
-	public MemberDTO selectMemberDetail(String id) {
+	public AdminMemberDTO selectMemberDetail(String id) {
 		
 		return memberMapper.selectMemberDetail(id);
 	}
 
 	 @Override
-	    public void updateMember(MemberDTO member) {
+	    public void updateMember(AdminMemberDTO member) {
 	        memberMapper.updateMember(member);
 	    }
 	 
