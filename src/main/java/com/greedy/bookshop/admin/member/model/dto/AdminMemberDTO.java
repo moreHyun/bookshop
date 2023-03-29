@@ -7,7 +7,7 @@ import lombok.Data;
 
 /* TBL_USER */
 	@Data
-	public class MemberDTO {
+	public class AdminMemberDTO {
 		
 		private int code;								//회원번호
 		private String id;								//회원아이디

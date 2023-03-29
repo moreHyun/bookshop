@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-import com.greedy.bookshop.admin.member.model.dto.MemberDTO;
+import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 import com.greedy.bookshop.admin.member.model.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/member")
-public class MemberController {
+public class AdminMemberController {
 	
 	private MemberService memberService;
 
 
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public AdminMemberController(MemberService memberService) {
 
 		this.memberService = memberService;
 		
@@ -41,13 +41,13 @@ public class MemberController {
 			@RequestParam(required=false) String searchValue,
 			Model model) {
 		
-		log.info("[MemberController] page : {}", page);
+		log.info("[AdminMemberController] page : {}", page);
 		
 		Map<String, String> searchMap = new HashMap<>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchValue", searchValue);
 		
-		log.info("[MemberController] searchMap : {}", searchMap);
+		log.info("[AdminMemberController] searchMap : {}", searchMap);
 		
 		Map<String, Object> memberListAndPaging = memberService.selectMemberList(searchMap, page);
 		model.addAttribute("paging", memberListAndPaging.get("paging"));
@@ -59,8 +59,8 @@ public class MemberController {
 	@GetMapping("/detail")
 	public String selectMemberDetail(@RequestParam String id, Model model) {
 		
-		MemberDTO memberDetail = memberService.selectMemberDetail(id);
-		log.info("[MemberController] memberDetail : {}", memberDetail);
+		AdminMemberDTO memberDetail = memberService.selectMemberDetail(id);
+		log.info("[AdminMemberController] memberDetail : {}", memberDetail);
 		
 		model.addAttribute("member", memberDetail);
 		
@@ -70,8 +70,8 @@ public class MemberController {
 	  @GetMapping("/edit/{id}")
 	    public String editForm(@PathVariable("id") String id, Model model) {
 			
-			MemberDTO memberDetail = memberService.selectMemberDetail(id);
-			log.info("[MemberController] memberDetail : {}", memberDetail);
+			AdminMemberDTO memberDetail = memberService.selectMemberDetail(id);
+			log.info("[AdminMemberController] memberDetail : {}", memberDetail);
 			
 			model.addAttribute("member", memberDetail);
 			
@@ -80,7 +80,7 @@ public class MemberController {
 	  
 	
 	  @PostMapping("/edit")
-	  public String updateMember(@ModelAttribute("member") MemberDTO member){
+	  public String updateMember(@ModelAttribute("member") AdminMemberDTO member){
 	 
 		  memberService.updateMember(member);
 		  

@@ -3,7 +3,7 @@ package com.greedy.bookshop.admin.member.model.service;
 import java.util.Map;
 
 
-import com.greedy.bookshop.admin.member.model.dto.MemberDTO;
+import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 
 
 
@@ -12,9 +12,9 @@ public interface MemberService {
 
 	Map<String, Object> selectMemberList(Map<String, String> searchMap, int page);
 
-	MemberDTO selectMemberDetail(String id);
+	AdminMemberDTO selectMemberDetail(String id);
 
-	void updateMember(MemberDTO member);
+	void updateMember(AdminMemberDTO member);
 	
 
 	

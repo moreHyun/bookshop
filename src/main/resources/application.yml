@@ -7,6 +7,21 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: C##BOOKSHOP
     password: BOOKSHOP
+    
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 128MB
+      max-request-size: 128MB
+      location: /Users/yeodahyun/Documents/bookshop
 
 mybatis:
   mapper-locations: mappers/**/*.xml
+  
+# log level 
+logging:
+  level:
+# root level - 전역 설정
+    root: info
+# package level - 지역 설정
+    '[com.greedy.bookshop.main.member.service]': trace
