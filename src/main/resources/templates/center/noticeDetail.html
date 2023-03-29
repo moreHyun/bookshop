@@ -36,7 +36,6 @@
 </header>
 
 <body>
-
     <div id="wrap">
         <section>
             <div class="all-contents">
@@ -59,53 +58,41 @@
                         </li>
                     </ul>
                 </div>
-                <!-- 메인 콘텐츠 부분 -->
+                
                 <div class="board_wrap">
                     <div class="board_title">
                         <p>공지사항</p>
                     </div>
-                    <div class="board_list_wrap">
-                        <div class="board_list">
-                            <div class="top">
-                                <div class="num">번호</div>
-                                <div class="title">제목</div>
-                                <div class="writer">글쓴이</div>
-                                <div class="date">작성일</div>
-                                <div class="count">조회</div>
+                    <div class="board_view_wrap">
+                        <div class="board_view"
+                        	 th:each="notice : ${ noticeDetail }">
+                            <div th:text="${ notice.noticeTitle }" class="title"></div>
+                            <div class="info">
+                                <dl>
+                                    <dt>번호</dt>
+                                    <dd th:text="${ notice.noticeCode }"></dd>
+                                </dl>
+                                <dl>
+                                    <dt>글쓴이</dt>
+                                    <dd th:text="${ notice.userName }"></dd>
+                                </dl>
+                                <dl>
+                                    <dt>작성일</dt>
+                                    <dd th:text="${#dates.format(notice.noticeDateCreate, 'YYYY-MM-dd')}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt>조회</dt>
+                                    <dd th:text="${ notice.noticeHit}"></dd>
+                                </dl>
                             </div>
-                            <div th:each="notice : ${ noticeList }"
-                            	 th:onclick="|location.href='/center/notice/detail?no=${notice.noticeCode}'|">
-                                <div th:text="${ notice.noticeCode }" class="num"></div>
-                                <div th:text="${ notice.noticeTitle }" class="title"><a href="gonzi2.html"></a></div>
-                                <div th:text="${ notice.userName }" class="writer"></div>
-                                <div th:text="${#dates.format(notice.noticeDateCreate, 'MM-dd')}"class="date"></div>
-                                <div th:text="${ notice.noticeHit }" class="count"></div>
-                            </div>
+                            <div th:text="${ notice.noticeContent }" class="cont"></div>
                         </div>
-                        <!-- 페이징 바 -->
-                        <div class="board_page">
-                         	<th:block
-			                 th:if="${ paging.searchCondition == null || paging.searchCondition.isEmpty() || paging.searchValue == null || paging.searchValue.isEmpty()}">
-			                 <!-- 맨 앞으로 이동 -->
-                             <button th:onclick="'location.href=\'/center/notice/list?page=1\''" class="bt first"><<</button>
-                             <!--  이전 페이지로 이동 -->
-                             <button th:onclick="'location.href=\'/center/notice/list?page=' + @{${paging.page - 1}} + '\''" class="bt prev"
-                             		 th:disabled="${ paging.page <= 1 }"><</button>
-                             <!-- 숫자 버튼 -->
-                             <th:block
-				               th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-                             <button th:onclick="'location.href=\'/center/notice/list?page=' + @{${page}} + '\''" class="num on"
-                                     th:text="${ page }" th:disabled="${ paging.page eq page }"></button>
-                              </th:block>       
-                             <!-- 다음 페이지로 이동 -->
-                             <button th:onclick="'location.href=\'/center/notice/list?page=' + @{${paging.page + 1}} + '\''" class="bt next"
-                                     th:disabled="${ paging.page >= paging.maxPage }">></button>
-                             <!-- 맨 끝으로 이동 -->
-                             <button th:onclick="'location.href=\'/center/notice/list?page=' + @{${paging.maxPage}} + '\''">>></button>     
-                            </th:block>  
+                        <div class="bt_wrap">
+                            <a th:onclick="'location.href=\'/center/notice/list\''" class="on">목록</a>
                         </div>
                     </div>
                 </div>
+            </div>
 
         </section>
     </div>
@@ -119,7 +106,7 @@
                     <span>|</span>
                     <span>새로운 소식이 없어요.</span>
                     <a href="./notice.html">
-                        <img src="/image/right.png" alt="더보기">
+                        <img src="../image/right.png" alt="더보기">
                     </a>
                 </div>
             </div>
@@ -136,7 +123,7 @@
             <div class="footer-copyright">
                 <div>
                     <div class="footer-logo">
-                        <img src="/image/책장옆.png">
+                        <img src="../image/책장옆.png">
                     </div>
                     <div class="footer-sns">
                         <div class="footer-sns1"><img src="/image/twitter.png"></div>
