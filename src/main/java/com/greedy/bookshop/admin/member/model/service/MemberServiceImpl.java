@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.greedy.bookshop.admin.member.common.paging.Pagenation;
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
-import com.greedy.bookshop.admin.member.model.dao.MemberMapper;
+import com.greedy.bookshop.admin.member.model.dao.AdminMemberMapper;
 import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +25,10 @@ import lombok.extern.slf4j.Slf4j;
  * 메소드 동작시 Exception이 발생하면 전체 트랜잭션을 롤백하고 정상 수행 시에는 commit하는 동작이 일어난다. */
 public class MemberServiceImpl implements MemberService {
 	
-	private final MemberMapper memberMapper; //의존성 주입 코드
+	private final AdminMemberMapper memberMapper; //의존성 주입 코드
 	
 	@Autowired
-	public MemberServiceImpl(MemberMapper memberMapper) {
+	public MemberServiceImpl(AdminMemberMapper memberMapper) {
 		this.memberMapper = memberMapper;
 	} //의존성 주입~~
 
