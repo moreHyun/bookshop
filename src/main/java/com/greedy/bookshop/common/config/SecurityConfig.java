@@ -63,7 +63,7 @@ public class SecurityConfig {
                 /* JSESSIONID 쿠키 삭제 */
                 .deleteCookies("JSESSIONID")
                 /* 로그아웃 후 랜딩 페이지 */
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/main")
                 .and()
                 /* 예외 처리 */
                 .exceptionHandling()
