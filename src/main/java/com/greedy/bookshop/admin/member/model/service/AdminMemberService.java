@@ -8,7 +8,7 @@ import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 
 
 
-public interface MemberService {
+public interface AdminMemberService {
 
 	Map<String, Object> selectMemberList(Map<String, String> searchMap, int page);
 

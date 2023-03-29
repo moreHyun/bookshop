@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
-import com.greedy.bookshop.admin.member.model.service.MemberService;
+import com.greedy.bookshop.admin.member.model.service.AdminMemberService;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,13 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 public class AdminMemberController {
 	
-	private MemberService memberService;
+	private AdminMemberService adminMemberService;
 
 
 	@Autowired
-	public AdminMemberController(MemberService memberService) {
+	public AdminMemberController(AdminMemberService adminMemberService) {
 
-		this.memberService = memberService;
+		this.adminMemberService = adminMemberService;
 		
 	}
 	
@@ -49,7 +50,7 @@ public class AdminMemberController {
 		
 		log.info("[AdminMemberController] searchMap : {}", searchMap);
 		
-		Map<String, Object> memberListAndPaging = memberService.selectMemberList(searchMap, page);
+		Map<String, Object> memberListAndPaging = adminMemberService.selectMemberList(searchMap, page);
 		model.addAttribute("paging", memberListAndPaging.get("paging"));
 		model.addAttribute("memberList", memberListAndPaging.get("memberList"));
 		
@@ -59,7 +60,7 @@ public class AdminMemberController {
 	@GetMapping("/detail")
 	public String selectMemberDetail(@RequestParam String id, Model model) {
 		
-		AdminMemberDTO memberDetail = memberService.selectMemberDetail(id);
+		AdminMemberDTO memberDetail = adminMemberService.selectMemberDetail(id);
 		log.info("[AdminMemberController] memberDetail : {}", memberDetail);
 		
 		model.addAttribute("member", memberDetail);
@@ -70,7 +71,7 @@ public class AdminMemberController {
 	  @GetMapping("/edit/{id}")
 	    public String editForm(@PathVariable("id") String id, Model model) {
 			
-			AdminMemberDTO memberDetail = memberService.selectMemberDetail(id);
+			AdminMemberDTO memberDetail = adminMemberService.selectMemberDetail(id);
 			log.info("[AdminMemberController] memberDetail : {}", memberDetail);
 			
 			model.addAttribute("member", memberDetail);
@@ -82,7 +83,7 @@ public class AdminMemberController {
 	  @PostMapping("/edit")
 	  public String updateMember(@ModelAttribute("member") AdminMemberDTO member){
 	 
-		  memberService.updateMember(member);
+		  adminMemberService.updateMember(member);
 		  
 			    	
 	    	return "redirect:/member/list";

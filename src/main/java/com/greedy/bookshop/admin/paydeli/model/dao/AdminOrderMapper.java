@@ -6,14 +6,19 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
-import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
+
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 
 
 @Mapper
 public interface AdminOrderMapper {
 
 
+	int selectOrderTotalCount(Map<String, String> searchMap);
 
+	List<AdminOrderDTO> selectOrderList(SelectCriteria selectCriteria);
+
+	AdminOrderDTO selectOrderDetail(int orderCode);
 	
 
 }
