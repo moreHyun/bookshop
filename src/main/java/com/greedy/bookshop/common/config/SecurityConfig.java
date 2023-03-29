@@ -41,6 +41,7 @@ public class SecurityConfig {
                 /* hasRole 안에 전달하는 값은 "ROLE_" 가 자동으로 붙는다. */
                 .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/member/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/member/regist").authenticated()
                 /* 위에 서술 된 내용 외의 모든 요청은 허가함 (인증 되지 않은 사용자도 요청 가능) */
                 .anyRequest().permitAll()
@@ -57,7 +58,7 @@ public class SecurityConfig {
                 /* 로그아웃 설정 */
                 .logout()
                 /* 로그아웃 주소 */
-                .logoutRequestMatcher(new AntPathRequestMatcher("/main/main"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/main"))
                 /* 세션 만료 */
                 .invalidateHttpSession(true)
                 /* JSESSIONID 쿠키 삭제 */

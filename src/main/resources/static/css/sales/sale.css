@@ -1,0 +1,101 @@
+.body
+{
+    height: 100vh;
+    width: 100%;
+}
+
+.category
+{
+    margin: 10px 0px 30px 30px;
+}
+
+.categoryTable
+{
+    float: left;
+    margin-left: 10px;
+    margin-right: 50px;
+    width: 200px;
+    height: 580px;
+    margin-top: 50px;
+}
+
+.Kcategory
+{
+    position: relative;
+    margin-left: 10px;
+
+}
+
+.Ecategory
+{
+    position: relative;
+    margin-left: 10px;
+}
+
+.Kcategory > div
+{
+    height: 30px;
+    width: 70px;
+    margin: 1%;
+    font-size: 15px;
+}
+
+.Ecategory > div
+{
+    height: 30px;
+    width: 70px;
+    margin: 1%;
+    font-size: 15px;
+}
+
+.categoryTypeSale
+{
+    margin-left: 190px;
+    margin-top: 20px;
+    width: 88%;
+    height: 650px;
+    border: 2px solid black;
+}
+
+
+.SaleList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.product-item
+{
+    width: calc(100% / 5);
+    height: 250px;
+    margin-bottom: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.product-item img
+{
+    width: 80%;
+    height: 80%;
+    margin-right: 20px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.product-item h2
+{
+
+    font-size: 18px;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+}
+
+.product-item p
+{
+    font-size: 14px;
+    margin: 5px 0 0 0;
+}

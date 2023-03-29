@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+/*---------------------공통----------------------------*/
+* {
+    font-family: 'Dancing Script', cursive; 
+    font-family: 'Questrial', sans-serif;
+}
+
+/* nav 로고 */
+.nav_logo {
+    width: 70px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+/* nav 메뉴 */
+.main-nav {
+    display: flex;
+    list-style-type: none;
+    font-size: 20px;
+    margin-top : 20px;
+}
+
+.main-nav a {
+    color : black;
+    font-size: 15px;
+    margin-right: 50px;
+    text-decoration-line :none;
+    font-weight: bolder;
+}
+
+.main-nav a:hover {
+    
+    font-weight: 800;
+    color:white;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #CDE990;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    width: auto;
+    
+}
+
+/* 상단이동버튼 */
+.topbtn {
+    position :fixed;
+    top: 90%;
+    left: 95%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    z-index : 2;
+}
+
+
+/* 사이드바 */
+.sub-menu {
+    border: 1px solid rgb(223, 217, 217);
+    border-radius: 10px;
+    margin-top: 80px;
+    margin-left: 70px;
+    width: 160px;
+    height: 350px;
+    vertical-align:middle;
+    position: fixed;
+}
+
+.sub-menu li {
+    margin-top: 50px;
+    text-decoration :none;
+    list-style-type: none;
+    text-align: center;
+}
+
+.sub-menu li :hover{
+    background-color: #CDE990;
+    color: #fff;
+}
+
+.sub-menu li a {
+    padding: 15px 20px;
+    text-decoration :none;
+    color: black;
+    font-weight: bolder;
+}
+
+
+/* 탑메뉴 */
+
+.top-menu {
+    top: 180px;
+    left: 400px;
+    width: 350px;
+    text-decoration :none;
+    list-style-type: none;
+    position: absolute;
+}
+
+.top-menu th {
+    font: bold;
+}
+
+.top-menu th a {
+    padding: 15px 20px;
+    text-decoration :none;
+    color: black;
+}
+
+.top-menu th :hover {
+    background-color: #CDE990;
+    color: #fff;
+}
+
+/*---------------------공통 끝----------------------------*/
+
+
+/*------------------로그인(현우)---------------------*
+
+/* 로그인창 */
+.login_main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-bottom: 100px;
+}
+
+.login_container {
+    width: 450px;
+    margin-top: 50px;
+}
+
+.login_logo {
+    width: 250px;
+}
+
+#login {
+    width: 100%;
+    background-color: #AACB73;
+    border-color: transparent;
+    color: white;
+}
+
+.account {
+    display: block;
+    margin-bottom: 10px;
+    width: 450px;
+    height: 35px;
+    padding: 6px;
+    border: 1px solid #444444;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+#alert {
+    border-color: transparent;
+}
+
+/* 로그인창 footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #D0D0D0;
+}
+
+.wrapper {
+    margin: 15px auto; 
+    text-align:center;
+}
+
+
+/*-------------------회원관리(현우)------------------*/
+
+/* 목차 */
+.subtitle {
+    display: flex;
+    margin-top: 55px;
+    margin-left: 30%;
+    width: 130px;
+    justify-content: space-between;
+    font-weight: bolder;   
+}
+
+.fa-stop {
+    padding-top: 4.3px;
+    color: #AACB73;
+}
+
+.subtitle_line {
+    width: 700px;
+    height: 3px;
+    background-color: black;
+    margin-left:30%;
+    margin-top: 15px;
+}
+
+/* 상세 회원정보 폼 */
+
+.user_info_container {
+    margin-left:37%;
+    margin-top: 50px;
+    width:600px;
+    justify-content: space-between; 
+}
+
+label {
+	display:inline-block;
+	width:80px;
+}
+
+.shortinfo {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 20px;
+    padding: 6px;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+
+.longinfo {
+    margin-bottom: 10px;
+    width: 400px;
+    height: 20px;
+    padding: 6px;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+
+.info_btn {
+    text-align: center;
+    margin-right: 175px;
+    margin-top:50px;
+}
+
+.btn_1 {
+    width: 70px;
+    height: 25px;
+    background-color: #AACB73;
+    border-radius: 20px;
+    color: white;
+    display :inline-block;
+    margin-left: 25px;
+    font-size: smaller;
+}
+

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.mypage.model.dao.MypageMapper">
+	
+	<resultMap type="com.greedy.bookshop.mypage.model.dto.OrderDTO" id="orderResultMap">
+        <id property="orderCode" column="ORDER_CODE"/>
+        <result property="orderTotalAmount" column="ORDER_TOTAL_AMOUNT"/>
+        <result property="deliveryPrice" column="DELIVERY_PRICE"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderStatus" column="ORDER_STATUS"/>
+        <result property="orderRecipient" column="ORDER_RECIPIENT"/>
+        <result property="orderRecipientPhone" column="ORDER_RECIPIENT_PHONE"/>
+        <result property="orderDestinationNickname" column="ORDER_DESTINATION_NICKNAME"/>
+        <result property="orderPostalCode" column="ORDER_POSTAL_CODE"/>
+        <result property="orderAddress" column="ORDER_ADDRESS"/>
+        <result property="orderDetailedAddress" column="ORDER_DETAILED_ADDRESS"/>
+        <result property="orderMeno" column="ORDER_MEMO"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="bookName" column="BOOK_NAME"/>
+        <result property="productQuantity" column="PRODUCT_QUANTITY"/>
+        <result property="price" column="PRICE"/>
+        <result property="refundDate" column="REFUND_DATE"/>
+        <result property="refundStatus" column="REFUND_STATUS"/>
+    </resultMap>
+
+	<select id="selectPayCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM TBL_ORDER
+       	JOIN TBL_USER USING(USER_CODE)
+		WHERE ORDER_STATUS = '결제완료'
+        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+	</select>
+	
+	<select id="selectReadyCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM TBL_ORDER
+       	JOIN TBL_USER USING(USER_CODE)
+		WHERE ORDER_STATUS = '배송준비'
+        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+	</select>
+	
+	<select id="selectCompleteCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM TBL_ORDER
+       	JOIN TBL_USER USING(USER_CODE)
+		WHERE ORDER_STATUS = '배송완료'
+        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+	</select>
+	
+	<select id="selectOrderCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM(SELECT
+                    ORDER_DATE,
+                    BOOK_NAME,
+					PRODUCT_QUANTITY,
+					TO_NUMBER(PRODUCT_QUANTITY) * TO_NUMBER(BOOK_PRICE),
+					ORDER_STATUS
+			  FROM TBL_USER
+			  JOIN TBL_ORDER USING(USER_CODE)
+			  JOIN TBL_ORDER_DETAIL USING(ORDER_CODE)
+			  JOIN TBL_BOOK USING(BOOK_CODE)
+			  WHERE USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+              ORDER BY ORDER_DATE DESC)
+	</select>
+	<select id="selectOrderList" resultMap="orderResultMap">
+		SELECT
+               ORDER_DATE,
+               BOOK_NAME,
+               PRODUCT_QUANTITY,
+               PRICE,
+               ORDER_STATUS
+        FROM (
+               SELECT 
+ 						ROWNUM RNUM,
+                        ORDER_DATE,
+   					    BOOK_NAME,
+    					PRODUCT_QUANTITY,
+    					PRICE,
+    					ORDER_STATUS
+  				FROM (
+    					SELECT
+      							ORDER_DATE,
+     							BOOK_NAME,
+      							PRODUCT_QUANTITY,
+      							TO_NUMBER(PRODUCT_QUANTITY) * TO_NUMBER(BOOK_PRICE) PRICE,
+      							ORDER_STATUS
+    							FROM TBL_USER
+   							    JOIN TBL_ORDER USING(USER_CODE)
+    							JOIN TBL_ORDER_DETAIL USING(ORDER_CODE)
+    							JOIN TBL_BOOK USING(BOOK_CODE)
+    							WHERE USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+    							ORDER BY ORDER_DATE DESC
+  							) 
+  			 <![CDATA[	
+  				WHERE ROWNUM <= #{ endRow }
+						  ]]>) 
+				WHERE RNUM >= #{ startRow }
+	</select>
+	
+	<select id="selectYesCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM TBL_REFUND
+        JOIN TBL_USER USING(USER_CODE)
+		WHERE REFUND_STATUS = 'Y'
+        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+	</select>
+	
+	<select id="selectNoCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM TBL_REFUND
+        JOIN TBL_USER USING(USER_CODE)
+		WHERE REFUND_STATUS = 'N'
+        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+	</select>
+	
+	<select id="selectRefundCount" resultType="_int">
+		SELECT
+               COUNT(*)
+        FROM(SELECT
+                       B.REFUND_DATE,
+                       E.BOOK_NAME,
+                       TO_NUMBER(D.PRODUCT_QUANTITY) * TO_NUMBER(E.BOOK_PRICE) PRICE,
+                       B.REFUND_STATUS
+              FROM TBL_USER A
+              JOIN TBL_REFUND B ON(A.USER_CODE = B.USER_CODE)
+              JOIN TBL_ORDER C ON(B.ORDER_CODE = C.ORDER_CODE)
+              JOIN TBL_ORDER_DETAIL D ON(C.ORDER_CODE = D.ORDER_CODE)
+              JOIN TBL_BOOK E ON(D.BOOK_CODE = E.BOOK_CODE)
+              WHERE A.USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+              ORDER BY B.REFUND_DATE DESC)
+	</select>
+	
+	<select id="selectRefundList" resultMap="orderResultMap">
+		SELECT
+    			REFUND_DATE,
+    			BOOK_NAME,
+    			PRICE,
+    			REFUND_STATUS
+		FROM(
+				SELECT
+    					ROWNUM RNUM,
+    					REFUND_DATE,
+    					BOOK_NAME,
+    					PRICE,
+    					REFUND_STATUS
+				FROM(
+						SELECT
+    							B.REFUND_DATE,
+   								E.BOOK_NAME,
+    							TO_NUMBER(D.PRODUCT_QUANTITY) * TO_NUMBER(E.BOOK_PRICE) PRICE,
+    							B.REFUND_STATUS
+						FROM TBL_USER A
+						JOIN TBL_REFUND B ON(A.USER_CODE = B.USER_CODE)
+						JOIN TBL_ORDER C ON(B.ORDER_CODE = C.ORDER_CODE)
+						JOIN TBL_ORDER_DETAIL D ON(C.ORDER_CODE = D.ORDER_CODE)
+						JOIN TBL_BOOK E ON(D.BOOK_CODE = E.BOOK_CODE)
+						WHERE A.USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+						ORDER BY B.REFUND_DATE DESC
+ 						)
+ 						<![CDATA[	
+   						 WHERE ROWNUM <= #{ endRow }
+											 ]]>)
+						 WHERE RNUM >= #{ startRow }
+	</select>
+
+
+
+
+
+
+
+
+</mapper>
