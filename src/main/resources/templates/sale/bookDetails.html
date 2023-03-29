@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <title>상세 책 정보</title>
     <link rel="stylesheet" type="text/css" href="/css/sales/bookDerails.css">
-    <script type="text/javascript" src="/static/js/sales/bookDetails.js"></script>
 </head>
 <body>
 <header>
@@ -14,7 +13,7 @@
     <div class="product-detail-image" th:each="f : ${file}" th:if="${f.fileType} == 'TITLE'">
         <img th:src="${f.fileMainPath}" alt="책 이미지"/>
     </div>
-    <div class="product-detail-info">
+    <div class="product-detail-info" th:value="${book}">
         <h2 th:text="${book.bookName}"></h2>
         <p th:text="저자 + ' : ' + ${book.bookAuthor}">저자: 히가시노 게이고</p>
         <th:block th:if="${book.bookDiscount < 0}">
@@ -25,12 +24,22 @@
         <p th:text="${book.bookDiscount} + %"></p>
         <p th:text="결제 금액 + ${book.bookTotalPrice} + 원"></p>
         </th:block>
-        <p th:text="${book.bookInventory} + 권"></p>
+        <p th:text="재고 + ' : ' + ${book.bookInventory} + 권"></p>
         <div class="button-container">
             <button class="Like-to-cart">찜하기</button>
             <button id="add-to-cart">장바구니 담기</button>
             <button class="buy-now">구매하기</button>
         </div>
+        <script>
+            document.getElementById("add-to-cart").addEventListener("click", function ()
+            {
+                let f = document.createElement('form');
+
+                f.name = 'from';
+                f.method = 'post';
+
+            })
+        </script>
     </div>
     <div class="SubImage">
         <th:block th:each="f :${file}" th:if="${f.fileType} == 'SUB'">
@@ -47,6 +56,7 @@
         </ul>
     </div>
 </div>
+<script src="/js/sales/bookDetails.js"></script>
 </body>
 <footer class="footer">
     <div th:replace="/main/footer.html"></div>
