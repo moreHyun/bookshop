@@ -10,7 +10,7 @@ import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 
 
 @Mapper
-public interface MemberMapper {
+public interface AdminMemberMapper {
 
 
 	int selectTotalCount(Map<String, String> searchMap);
