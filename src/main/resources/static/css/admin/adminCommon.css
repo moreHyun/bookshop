@@ -76,23 +76,26 @@
     text-align: center;
 }
 
-/*.sub-menu li :hover,
-.sub-menu li.action{
-    background-color: #CDE990;
-    color: #fff;
-} */
 
-.clickmenu :hover,
-.clickmenu :active {
-    background-color: #CDE990;
-    color: #fff;
-}
-
+ 
 .sub-menu li a {
     padding: 15px 20px;
     text-decoration :none;
     color: black;
     font-weight: bolder;
+}
+
+.sub-menu li a:hover{
+    background-color: #CDE990;
+    color: #fff;
+    font-weight: 400;
+} 
+
+/* 현재 페이지에 대한 활성화 효과 */
+.sub-menu li a.active {
+  background-color: #CDE990;
+    color: #fff;
+    font-weight: 400;
 }
 
 
