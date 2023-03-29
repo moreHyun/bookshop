@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/책장옆 복사본.png">
+    <link href="/css/admin/product.css" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/d2714aa12c.js" crossorigin="anonymous"></script>
+    <script src="/js/admin/product.js" async> </script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	  
+	<!-- Datepicker 라이브러리 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datepicker/1.11.5/jquery-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datepicker/1.11.5/jquery-datepicker.min.css">
+	
+    
+    <title>책장 옆</title>
+
+</head>
+<body>
+    
+    <header class="page_header wrapper">
+        <a href="">
+            <img class="nav_logo" src="/image/책장옆.png" alt="HOME">
+        </a>
+        <!-- 버튼으로 해야 할지? -->
+        <nav>
+            <ul class="main_nav">
+                <li><a href="">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 사이드 바 -->
+    
+    <aside>
+        <table class="sub_menu">
+            <td>
+                <li><a class="" href="#">&nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="product_management">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="" href="#">결제/배송 관리</a></li>
+                <li><a class="" href="Notice.html">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
+            </td>
+        </table>
+    </aside>
+
+    <!-- 탑 메뉴 -->
+    <table class="top_menu">
+        <tr>
+            <th><a class="current_page" href="Product_select_update.html">상품 조회/수정</a></th>
+            <th><a href="../../admin/product/regist">&nbsp;&nbsp;&nbsp;상품 등록&nbsp;&nbsp;&nbsp;</a></th>
+        </tr>
+    </table>
+
+    <!-- 상단이동버튼 -->
+    <img class="topbtn" src="/image/topbtn.svg" ></img>   
+
+    
+    <form class="product_info" action="/admin/product/list" method="GET" enctype="multipart/form-data">
+        <div class="div_width_top">
+            <label class="label_title">검색어</label><br>
+            <div>
+            	<label class="label_title">상품번호</label>
+                <input type="text" id="code" class="longinfo">
+                <span></span>
+      		</div>
+            <div>
+            	<label class="label_title">상품명</label>
+                <input type="text" id="name" class="longinfo">
+                <span></span>
+      		</div>
+      		<div>
+            	<label class="label_title">작가명</label>
+                <input type="text" id="author" class="longinfo">
+                <span></span>
+      		</div>
+        </div>
+            
+            <br>
+        <div class="div_width">
+            <label class="label_title">판매상태</label>
+            <label>
+                <input type="checkbox" name="allStatus" id="salesStatus" class="checkboxinfo">
+                전체
+                <span></span>
+            </label>
+            <label>
+                <input type="checkbox" name="onSales" id="salesStatus" class="checkboxinfo" value="Y" checked="checked">
+                판매중
+                <span></span>
+            </label>
+            <label>
+                <input type="checkbox" name="suspendend" id="salesStatus" class="checkboxinfo" value="N">
+                판매중지
+                <span></span>
+            </label>
+        </div>
+        
+        <!-- 전체 체크 -->
+        <script>
+        
+	        $(document).ready(function() {
+	        	  $('#salesStatus').click(function() {
+	        	    var isChecked = $(this).prop('checked');
+	        	    $('input[type="checkbox"].checkboxinfo').prop('checked', isChecked);
+	        	  });
+	        	});
+        
+        </script>
+
+        <br>
+        
+        <div class="div_width">
+            
+             <label class="label_title">카테고리</label>
+            
+            <label>
+			  <select name="largeCategory" class="large_select" id="category">
+			    <!-- <option>대분류</option> -->
+			    <option value="category1">국내</option>
+			    <option value="category2">외국</option>
+			  </select>
+			</label>
+			
+			<label>
+			  <select name="subCategory" class="sub_select" id="categoryCode">
+				<!-- <option>소분류</option> -->
+			    <option value="category3">소설</option>
+			    <option value="category5">자기개발</option>
+			    <option value="category7">시/에세이</option>
+			    <option value="category9">인문/사회</option>
+			    <option value="category11">경제/경영</option>
+			    <option value="category13">컴퓨터/IT</option>
+			    <option value="category15">만화</option>
+			  </select>
+			</label>
+			
+			<script>
+			  const categorySelect = document.querySelector('#category');
+			  const categoryCodeSelect = document.querySelector('#categoryCode');
+			
+			  categorySelect.addEventListener('change', () => {
+			    // '국내'가 선택되었을 경우
+			    if (categorySelect.value === 'category1') {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="3">소설</option>
+			        <option value="5">자기개발</option>
+			        <option value="7">시/에세이</option>
+			        <option value="9">인문/사회</option>
+			        <option value="11">경제/경영</option>
+			        <option value="13">컴퓨터/IT</option>
+			        <option value="15">만화</option>
+			      `;
+			    }
+			    // '외국'이 선택되었을 경우
+			    else if (categorySelect.value === 'category2') {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="4">소설</option>
+			        <option value="6">자기개발</option>
+			        <option value="8">시/에세이</option>
+			        <option value="10">인문/사회</option>
+			        <option value="12">경제/경영</option>
+			        <option value="14">컴퓨터/IT</option>
+			        <option value="16">만화</option>
+			      `;
+			    }
+			  });
+			</script>
+            
+        </div>
+
+            <br>
+            
+        <div class="info_btn">
+             <button id="selectBtn" class="btn_1">검색</button>
+        </div>
+        
+        
+        <script>
+        
+	        document.addEventListener("DOMContentLoaded", function() {
+	        	  // DOMContentLoaded 이벤트가 발생한 이후에 실행될 코드 작성
+	        	  const productForm = document.querySelector("#productForm");
+	        	  if (productForm) {
+	        	    productForm.addEventListener("submit", function(event) {
+	        	      // submit 이벤트 핸들러 작성
+	        	    });
+	        	  }
+	        	});
+        
+        </script>
+
+        <br>
+        
+        <div class="div_width">
+        	 <label class="label_title">상품목록</label>
+        	 <div id="result">
+        	 <table>
+			  <thead>
+			    <tr>
+			      <th>상품명</th>
+			      <th>가격</th>
+			      <th>작가명</th>
+			      <th>재고</th>
+			      <th>카테고리</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <!-- 조회 결과가 동적으로 생성됩니다. -->
+			  </tbody>
+			 </table>
+        	 </div>
+        </div>
+        
+        <!-- 조회 결과를 보여주는 테이블 -->
+
+		<!-- 수정을 위한 입력 필드 -->
+		<div class="info_btn">
+		  <input type="number" id="code" name="code" placeholder="상품번호" readonly>
+		  <input type="text" id="name" name="name" placeholder="상품명">
+		  <input type="number" id="price" name="price" placeholder="가격">
+		  <input type="text" id="author" name="author" placeholder="작가명">
+		  <input type="number" id="inventory" name="inventory" placeholder="재고">
+		  <input type="text" id="categoryCode" name="categoryCode" placeholder="카테고리">
+		  <button id="updateBtn" class="btn_1">수정항목저장</button>
+		</div>
+		
+        <!-- 상품 조회 버튼 -->
+        <script>
+        
+		$(document).ready(function() {
+			$("#selectBtn").on("click", function() {
+				    var formData = {
+				    	bookCode: $("#code").val(),
+				    	bookName: $("#name").val(),
+						bookAuthor: $("#author").val(),
+						categoryCode: $("#categoryCode").val(),
+						salesStatus: $("input[name='radioinfo']:checked").val(), // radio 버튼에서 체크된 값을 가져오기
+				  	};
+
+				  $.ajax({
+				    type: "GET",
+				    url: "/admin/product/list",
+				    data: formData,
+				    success: function(data) {
+				      // 서버로부터 받아온 데이터를 출력하는 코드
+				      console.log(data); // 콘솔에 데이터 출력
+				      var resultTable = $("#result table tbody"); // 테이블 요소를 가져옴
+				      resultTable.empty(); // 기존에 있던 내용 삭제
+				      for (var i = 0; i < data.length; i++) {
+				        // 테이블에 데이터 추가
+				        var tr = $("<tr>");
+				        tr.append($("<td>").text(data[i].name));
+				        tr.append($("<td>").text(data[i].author));
+				        tr.append($("<td>").text(data[i].categoryCode));
+				        resultTable.append(tr);
+				      }
+				    },
+				    error: function() {
+				      alert("조회에 실패했습니다.");
+				    }
+				  });
+				});
+			
+        
+		</script>
+<!-- 		<script>
+
+			if (productForm) {
+				  productForm.addEventListener("submit", function(event) {
+				    event.preventDefault(); // 기본 동작 방지
+				    var name = document.querySelector("input[name='name']").value;
+				    var price = document.querySelector("input[name='price']").value;
+				    var author = document.querySelector("input[name='author']").value;
+				    var inventory = document.querySelector("input[name='inventory']").value;
+				    var salesStatus = document.querySelector("input[name='salesStatus']").value;
+				    var categoryCode = document.querySelector("input[name='categoryCode']").value;
+
+				    $.ajax({
+				      type: "POST",
+				      url: "/admin/product/list",
+				      data: {
+				        name: name,
+				        price: price,
+				        author: author,
+				        inventory: inventory,
+				        salesStatus: salesStatus,
+				        categoryCode: categoryCode
+				      },
+				      success: function(data) {
+				        alert("상품이 수정되었습니다.");
+				      },
+				      error: function() {
+				        alert("상품 수정에 실패했습니다.");
+				      }
+				    });
+				  });
+				}
+		</script> -->
+        
+        <br>
+
+     </form>
+     <br><br><br><br><br><br><br><br><br><br>
+ 
+
+   </body>
+</html>
+
+
