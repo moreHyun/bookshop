@@ -1,22 +1,23 @@
 * {
-    font-family: 'NanumBarunGothic';
+    font-family: 'Dancing Script', cursive; 
+    font-family: 'Questrial', sans-serif;
 }
 
 #wrap {
-    min-height: 100vh;
+    min-height: 50vh;
     position: relative;
     width: 100%;
-    margin-bottom: 100px;
 }
 
 section { padding-top: 80px; }
 
-footer {
+footer
+{
+    margin-top: 50px;
     width: 100%;
     left: 0;
-    height: 180px;
+    height: 20px;
     bottom: 0px;
-    position: absolute;
 }
 
 .largeFooter .footer-notice {
