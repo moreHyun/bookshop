@@ -67,8 +67,12 @@ public class AuthenticationService implements UserDetailsService {
         return new CustomUser(member, authorities);
     }
 
+	public MemberDTO register(MemberDTO memberDTO) {
+		return null;
+	}
 
 
+    
 
 
 
