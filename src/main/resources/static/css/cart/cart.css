@@ -1,0 +1,129 @@
+.body
+{
+    margin-bottom: 20px;
+}
+.nav-container
+{
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.product-checkbox
+{
+    margin-left: 40px;
+    border-right: 1px solid #ccc;
+}
+
+#delete-selected-btn
+{
+    margin-left: 85%;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cart-container {
+    margin-top: 50px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #ccc;
+}
+
+.item-info img {
+    margin-right: 10px;
+}
+
+.item-quantity input
+{
+    width: 50px;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.item-price,
+.item-total
+{
+    border-right: 1px solid #ccc;
+}
+.item-price p,
+.item-total p {
+    font-weight: bold;
+}
+
+.item-delete button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-summary {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.card {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cart-summary button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.cart-summary button:first-child {
+    background-color: #f44336;
+    margin-right: 10px;
+}
