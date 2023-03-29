@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.sales.model.dao.BookMapper">
+
+    <resultMap id="BookResultMap" type="com.greedy.bookshop.sales.model.dto.BookDTO">
+        <id property="bookCode" column="BOOK_CODE"/>
+        <result property="bookName" column="BOOK_NAME"/>
+        <result property="bookPrice" column="BOOK_PRICE"/>
+        <result property="bookAuthor" column="BOOK_AUTHOR"/>
+        <result property="bookPublisher" column="BOOK_PUBLISHER"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="bookInventory" column="BOOK_INVENTORY"/>
+        <result property="SalesStatus" column="SALES_STATUS"/>
+        <result property="bookHit" column="BOOK_HIT"/>
+        <result property="bookISBN" column="BOOK_ISBN"/>
+        <result property="bookTranslator" column="BOOK_TRANSLATOR"/>
+        <result property="bookInteoduction" column="BOOK_INTRODUCTION"/>
+        <result property="bookDiscount" column="BOOK_DISCOUNT"/>
+        <result property="bookTotalPrice" column="BOOK_TOTALPRICE"/>
+    </resultMap>
+
+    <resultMap id="FileResultMap" type="com.greedy.bookshop.sales.model.dto.FileDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileMainPath" column="FILE_MAIN_PATH"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="fileCategoryCode" column="FILE_CATEGORY_CODE"/>
+        <result property="noticeCode" column="NOTICE_CODE"/>
+        <result property="faqCode" column="FAQ_CODE"/>
+        <result property="askCode" column="ASK_CODE"/>
+        <result property="bookCode" column="BOOK_CODE"/>
+    </resultMap>
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(B.BOOK_CODE)
+        FROM TBL_BOOK B
+        <if test="type == 'category'">
+            WHERE B.CATEGORY_CODE = #{value}
+            AND B.SALES_STATUS = 'Y'
+        </if>
+        <if test="type == 'search'">
+            WHERE B.NAME LIKE '%' || #{value} || '%' AND B.SALES_STATUS = 'Y'
+        </if>
+    </select>
+
+    <select id="selcetBookList" resultMap="BookResultMap">
+        SELECT
+        B.*
+        FROM TBL_BOOK B
+        <where>
+            <if test="searchType == 'search'">
+                B.BOOK_NAME LIKE '%' || #{searchValue} || '%'
+            </if>
+            <if test="searchType == 'category'">
+                B.CATEGORY_CODE = #{searchValue}
+            </if>
+            AND B.SALES_STATUS = 'Y'
+        </where>
+        ORDER BY B.BOOK_CODE
+    </select>
+
+    <select id="searchFile" resultMap="FileResultMap">
+        SELECT
+            FILE_CODE,
+            FILE_MAIN_PATH,
+            FILE_TYPE,
+            FILE_CATEGORY_CODE,
+            BOOK_CODE
+        FROM TBL_FILE
+        WHERE BOOK_CODE = #{searchValue}
+    </select>
+
+    <select id="selcetBookDetail" resultMap="BookResultMap">
+        SELECT
+            *
+        FROM TBL_BOOK
+        WHERE BOOK_CODE = #{no}
+    </select>
+
+    <select id="selectFileDetail" resultMap="FileResultMap">
+        SELECT
+            FILE_CODE,
+            FILE_MAIN_PATH,
+            FILE_TYPE,
+            FILE_CATEGORY_CODE,
+            BOOK_CODE
+        FROM TBL_FILE
+        WHERE BOOK_CODE = #{no}
+    </select>
+
+
+
+
+
+
+
+
+
+    <select id="selcetAllBook" resultMap="BookResultMap">
+        SELECT
+            *
+        FROM TBL_BOOK
+        WHERE SALES_STATUS = 'Y'
+        ORDER BY BOOK_CODE
+    </select>
+
+    <select id="selcetAllFile" resultMap="FileResultMap">
+        SELECT
+            FILE_CODE,
+            FILE_MAIN_PATH,
+            FILE_TYPE,
+            FILE_NAME,
+            FILE_CATEGORY_CODE,
+            NOTICE_CODE,
+            FAQ_CODE,
+            ASK_CODE,
+            BOOK_CODE
+        FROM TBL_FILE
+        WHERE BOOK_CODE IS NOT NULL
+        ORDER BY FILE_CODE
+    </select>
+
+
+
+
+
+
+
+    <select id="selectBookCategory" resultMap="BookResultMap">
+        SELECT
+            BOOK_CODE
+            ,BOOK_NAME
+            ,BOOK_PRICE
+            ,BOOK_AUTHOR
+            ,BOOK_PUBLISHER
+            ,CATEGORY_CODE
+            ,BOOK_INVENTORY
+            ,SALES_STATUS
+            ,BOOK_HIT
+            ,BOOK_ISBN
+            ,BOOK_TRANSLATOR
+            ,BOOK_INTRODUCTION
+            ,BOOK_DISCOUNT
+            ,BOOK_TOTALPRICE
+        FROM TBL_BOOK
+        WHERE CATEGORY_CODE = #{c}
+        AND SALES_STATUS = 'Y'
+    </select>
+
+    <select id="selectFileCategory" resultMap="FileResultMap">
+        SELECT
+            *
+        FROM TBL_FILE
+        WHERE BOOK_CODE = #{b}
+    </select>
+
+    <insert id="insertBook">
+        INSERT
+        INTO TBL_BOOK
+        (
+         BOOK_CODE
+        , BOOK_NAME
+        , BOOK_PRICE
+        , BOOK_AUTHOR
+        , BOOK_PUBLISHER
+        , CATEGORY_CODE
+        , BOOK_INVENTORY
+        , SALES_STATUS
+        , BOOK_HIT
+        , BOOK_ISBN
+        , BOOK_TRANSLATOR
+        , BOOK_INTRODUCTION
+        )
+        VALUES
+            (
+                SEQ_BOOK.NEXTVAL
+               , #{bookName}
+               , #{bookPrice}
+               , #{bookAuthor}
+               , #{bookPublisher}
+               , #{categoryCode}
+               , #{bookInventory}
+               , #{SalesStatus}
+               , #{bookHit}
+               , #{bookISBN}
+               , #{bookTranslator}
+               , #{bookInteoduction}
+               )
+    </insert>
+
+    <insert id="insertFile">
+        INSERT
+        INTO TBL_FILE
+            (
+                FILE_CODE,
+                FILE_MAIN_PATH,
+                FILE_TYPE,
+                FILE_NAME,
+                FILE_CATEGORY_CODE,
+                NOTICE_CODE,
+                FAQ_CODE,
+                ASK_CODE,
+                BOOK_CODE
+            )
+        VALUES
+            (
+                SEQ_FILE.NEXTVAL,
+                #{fileMainPath},
+                #{fileType},
+                #{fileName},
+                4,
+                null,
+                null,
+                null,
+                #{bookList.bookCode}
+            )
+    </insert>
+
+
+
+</mapper>
+

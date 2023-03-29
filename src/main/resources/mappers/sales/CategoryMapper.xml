@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.sales.model.dao.CategoryMapper">
+
+    <resultMap id="categoryResultMap" type="com.greedy.bookshop.sales.model.dto.CategoryDTO">
+        <id property="subCategoryCode" column="SUB_CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="topCategoryCode" column="TOP_CATEGORY_CODE"/>
+    </resultMap>
+
+    <select id="selcetAllCategory" resultMap="categoryResultMap">
+        SELECT
+            *
+        FROM TBL_CATEGORY
+        WHERE TOP_CATEGORY_CODE IS NOT NULL
+        ORDER BY SUB_CATEGORY_CODE
+    </select>
+
+    <select id="selectTopCategoryName" resultType="string">
+        SELECT
+            B.CATEGORY_NAME
+        FROM TBL_CATEGORY A
+        JOIN TBL_CATEGORY B ON A.TOP_CATEGORY_CODE = B.SUB_CATEGORY_CODE
+        WHERE A.SUB_CATEGORY_CODE = #{c}
+    </select>
+
+    <select id="selectSubCategoryName" resultType="string">
+        SELECT
+            A.CATEGORY_NAME
+        FROM TBL_CATEGORY A
+                 JOIN TBL_CATEGORY B ON A.TOP_CATEGORY_CODE = B.SUB_CATEGORY_CODE
+        WHERE A.SUB_CATEGORY_CODE = #{c}
+    </select>
+</mapper>
+
