@@ -34,7 +34,6 @@
         <a href="">
             <img class="nav_logo" src="/image/책장옆.png" alt="HOME">
         </a>
-        <!-- 버튼으로 해야 할지? -->
         <nav>
             <ul class="main_nav">
                 <li><a href="">로그아웃</a></li>
@@ -48,7 +47,7 @@
             <td>
                 <li><a class="" href="#">&nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a class="product_management">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a class="" href="#">결제/배송 관리</a></li>
+                <li><a class="" href="#">주문/배송 관리</a></li>
                 <li><a class="" href="Notice.html">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
             </td>
         </table>
@@ -72,22 +71,22 @@
             
             <label>
 			  <select name="largeCategory" class="large_select" id="category">
-			    <!-- <option>대분류</option> -->
-			    <option value="category1">국내</option>
-			    <option value="category2">외국</option>
+			    <option value="">대분류</option>
+			    <option value="1">국내</option>
+			    <option value="2">외국</option>
 			  </select>
 			</label>
 			
 			<label>
-			  <select name="subCategory" class="sub_select" id="categoryCode">
-				<!-- <option>소분류</option> -->
-			    <option value="category3">소설</option>
-			    <option value="category5">자기개발</option>
-			    <option value="category7">시/에세이</option>
-			    <option value="category9">인문/사회</option>
-			    <option value="category11">경제/경영</option>
-			    <option value="category13">컴퓨터/IT</option>
-			    <option value="category15">만화</option>
+			  <select name="categoryCode" class="sub_select" id="categoryCode">
+				<option value="">소분류</option>
+			    <option value="3">소설</option>
+			    <option value="5">자기개발</option>
+			    <option value="7">시/에세이</option>
+			    <option value="9">인문/사회</option>
+			    <option value="11">경제/경영</option>
+			    <option value="13">컴퓨터/IT</option>
+			    <option value="15">만화</option>
 			  </select>
 			</label>
 			
@@ -97,7 +96,7 @@
 			
 			  categorySelect.addEventListener('change', () => {
 			    // '국내'가 선택되었을 경우
-			    if (categorySelect.value === 'category1') {
+			    if (categorySelect.value === '1') {
 			      categoryCodeSelect.innerHTML = `
 			        <option value="3">소설</option>
 			        <option value="5">자기개발</option>
@@ -109,7 +108,7 @@
 			      `;
 			    }
 			    // '외국'이 선택되었을 경우
-			    else if (categorySelect.value === 'category2') {
+			    else if (categorySelect.value === '2') {
 			      categoryCodeSelect.innerHTML = `
 			        <option value="4">소설</option>
 			        <option value="6">자기개발</option>
@@ -121,11 +120,11 @@
 			      `;
 			    }
 			    // '대분류'가 선택되었을 경우
-/*  			    else {
+  			    else {
 			      categoryCodeSelect.innerHTML = `
-			        <option>소분류</option>
+			        <option value="">소분류</option>
 			      `;
-			    } */
+			    }
 			  });
 			</script>
             
@@ -135,7 +134,7 @@
 
         <div class="div_width">
             <label class="label_title">상품명*</label>
-                <input type="text" id="name" class="longinfo">
+                <input type="text" id="bookName" name="bookName" class="longinfo">
                 <span></span>
         </div>
 
@@ -146,11 +145,11 @@
             <label class="label_title">판매가*</label>
             <div class="major_info">
 	            <label class="label_title">기본가*</label>
-	            <input type="text" id="price" class="shortinfo">
+	            <input type="text" id="bookPrice" name="bookPrice" class="shortinfo">
 	                <span></span>
 	            <label>
 	                할인률
-	                <input type="text" id="discount" class="shortinfo" value="0">
+	                <input type="text" id="bookDiscount" name="bookDiscount" class="shortinfo" value="0">
 	                <span>원</span>
 	                &nbsp;&nbsp;또는
 	                <input type="text" id="discountPercentage" class="shortinfo" value="0">
@@ -160,38 +159,38 @@
 	            <label class="label_title">
 	            	최종가격
 	            </label>
-	            	<input type="text" id="totalPrice" class="shortinfo" value="0" readonly>
+	            	<input type="text" id="bookTotalPrice" name="bookTotalPrice" class="shortinfo" value="0" readonly>
             </div>
         </div>
         
          <script>
         
      // 판매가 입력 시 할인율 계산
-        document.getElementById('price').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value);
-            const discount = parseInt(document.getElementById('discount').value);
-            if (!isNaN(price) && !isNaN(discount)) {
-                const discountPercentage = (discount / price) * 100;
+        document.getElementById('bookPrice').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value);
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountPercentage = (bookDiscount / bookPrice) * 100;
                 document.getElementById('discountPercentage').value = discountPercentage.toFixed(0);
             }
         });
 
         // 할인율 입력 시 할인가 계산
         document.getElementById('discountPercentage').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value);
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
             const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
-            if (!isNaN(price) && !isNaN(discountPercentage)) {
-                const discountAmount = (price * (discountPercentage / 100)).toFixed(0);
-                document.getElementById('discount').value = discountAmount;
+            if (!isNaN(bookPrice) && !isNaN(discountPercentage)) {
+                const discountAmount = (bookPrice * (discountPercentage / 100)).toFixed(0);
+                document.getElementById('bookDiscount').value = discountAmount;
             }
         });
 
         // 할인가 입력 시 할인율 계산
-        document.getElementById('discount').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value);
-            const discountAmount = parseInt(document.getElementById('discount').value);
-            if (!isNaN(price) && !isNaN(discountAmount)) {
-                const discountPercentage = ((discountAmount / price) * 100).toFixed(0);
+        document.getElementById('bookDiscount').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const discountAmount = parseInt(document.getElementById('bookDiscount').value);
+            if (!isNaN(bookPrice) && !isNaN(discountAmount)) {
+                const discountPercentage = ((discountAmount / bookPrice) * 100).toFixed(0);
                 document.getElementById('discountPercentage').value = discountPercentage;
             }
         });
@@ -210,12 +209,12 @@
         
      // 할인율이나 할인 가격이 변경될 때마다 최종 가격 계산
         function calculateTotalPrice() {
-            const price = parseInt(document.getElementById('price').value);
-            const discount = parseInt(document.getElementById('discount').value);
-            const totalPriceElement = document.getElementById('totalPrice');
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value);
+            const totalPriceElement = document.getElementById('bookTotalPrice');
             
-            if (!isNaN(price) && !isNaN(discount)) {
-                const discountedPrice = price - discount;
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountedPrice = bookPrice - bookDiscount;
                 if (discountedPrice < 0) {
                     totalPriceElement.value = 0;
                 } else {
@@ -225,7 +224,7 @@
         }
 
         // 할인율이나 할인 가격이 변경될 때마다 최종 가격 계산
-        document.getElementById('discount').addEventListener('input', calculateTotalPrice);
+        document.getElementById('bookDiscount').addEventListener('input', calculateTotalPrice);
         document.getElementById('discountPercentage').addEventListener('input', calculateTotalPrice);
         
      // 판매가, 할인가, 최종가격에 쉼표 추가
@@ -235,43 +234,43 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        document.getElementById('price').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value.replace(/,/g, ''));
-            const discount = parseInt(document.getElementById('discount').value.replace(/,/g, ''));
-            if (!isNaN(price) && !isNaN(discount)) {
-                const discountPercentage = (discount / price) * 100;
+        document.getElementById('bookPrice').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountPercentage = (bookDiscount / bookPrice) * 100;
                 document.getElementById('discountPercentage').value = discountPercentage.toFixed(0);
             }
-            document.getElementById('price').value = numberWithCommas(price);
-            document.getElementById('discount').value = numberWithCommas(discount);
-            const totalPrice = price - discount;
-            document.getElementById('totalPrice').value = numberWithCommas(totalPrice);
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            document.getElementById('bookDiscount').value = numberWithCommas(bookDiscount);
+            const bookTotalPrice = bookPrice - bookDiscount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
         });
 
         document.getElementById('discountPercentage').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value.replace(/,/g, ''));
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
             const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
-            if (!isNaN(price) && !isNaN(discountPercentage)) {
-                const discountAmount = (price * (discountPercentage / 100)).toFixed(0);
-                document.getElementById('discount').value = numberWithCommas(discountAmount);
+            if (!isNaN(bookPrice) && !isNaN(discountPercentage)) {
+                const discountAmount = (bookPrice * (discountPercentage / 100)).toFixed(0);
+                document.getElementById('bookDiscount').value = numberWithCommas(discountAmount);
             }
-            document.getElementById('price').value = numberWithCommas(price);
-            const discount = parseInt(document.getElementById('discount').value.replace(/,/g, ''));
-            const totalPrice = price - discount;
-            document.getElementById('totalPrice').value = numberWithCommas(totalPrice);
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            const bookTotalPrice = bookPrice - bookDiscount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
         });
 
-        document.getElementById('discount').addEventListener('input', function() {
-            const price = parseInt(document.getElementById('price').value.replace(/,/g, ''));
-            const discountAmount = parseInt(document.getElementById('discount').value.replace(/,/g, ''));
-            if (!isNaN(price) && !isNaN(discountAmount)) {
-                const discountPercentage = ((discountAmount / price) * 100).toFixed(0);
+        document.getElementById('bookDiscount').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
+            const discountAmount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            if (!isNaN(bookPrice) && !isNaN(discountAmount)) {
+                const discountPercentage = ((discountAmount / bookPrice) * 100).toFixed(0);
                 document.getElementById('discountPercentage').value = discountPercentage;
             }
-            document.getElementById('price').value = numberWithCommas(price);
-            document.getElementById('discount').value = numberWithCommas(discountAmount);
-            const totalPrice = price - discountAmount;
-            document.getElementById('totalPrice').value = numberWithCommas(totalPrice);
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            document.getElementById('bookDiscount').value = numberWithCommas(discountAmount);
+            const bookTotalPrice = bookPrice - discountAmount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
         });
         
         </script>
@@ -283,13 +282,12 @@
 		<!-- 재고 수량 입력 -->
         <div class="div_width">
             <label class="label_title">재고수량*</label>
-            <input type="text" id="inventory" class="shortinfo">
+            <input type="text" id="bookInventory" name="bookInventory" class="shortinfo">
                 <span>개</span>
-            </label>
         </div>
         
         <script>
-			document.getElementById('inventory').addEventListener('input', function() {
+			document.getElementById('bookInventory').addEventListener('input', function() {
 			    var value = this.value.replace(/,/g, '');
 			    if (!isNaN(value)) {
 			        value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -305,11 +303,11 @@
         <!-- 상품 판매상태 체크 -->
          <div class="div_width">
             <label class="label_title">판매상태</label>
-            <input type="radio" id="salesStatus" name="radioinfo" value="Y" checked="checked">
+            <input type="radio" id="salesStatus" name="salesStatus" value="Y" checked="checked">
             판매중
                 <span></span>
             <label>
-                <input type="radio" id="salesStatus" name="radioinfo" value="N">
+                <input type="radio" id="salesStatus" name="salesStatus" value="N">
                 판매중지
                 <span></span>
             </label>
@@ -321,12 +319,12 @@
         <div class="div_width">
             <label class="label_title">상품 주요정보</label>
             <div class="major_info">
-                <label class="label_title">ISBN*</label><input type="text" id="isbn" class="longinfo"><br>
+                <label class="label_title">ISBN*</label><input type="text" id="bookIsbn" name="bookIsbn" class="longinfo"><br>
                 <!-- <label class="label_title">ISNB-10</label><input type="text" id="ISNB-10" class="longinfo"><br> -->
                 <!-- <label class="label_title">출간일</label><input type="text" id="pub_date" class="shortinfo"> -->
-                <label class="label_title">출판사</label><input type="text" id="publisher" class="longinfo"><br>
-                <label class="label_title">작가명*</label><input type="text" id="author" class="longinfo"><br>
-                <label class="label_title">번역자</label><input type="text" id="translator" class="longinfo"><br>
+                <label class="label_title">출판사</label><input type="text" id="bookPublisher" name="bookPublisher" class="longinfo"><br>
+                <label class="label_title">작가명*</label><input type="text" id="bookAuthor" name="bookAuthor" class="longinfo"><br>
+                <label class="label_title">번역자</label><input type="text" id="bookTranslator" name="bookTranslator" class="longinfo"><br>
             </div>
         </div>
         
@@ -366,7 +364,7 @@
         <div class="div_width">
             <label class="label_title">상세설명</label>
 			<br>
-			<textarea name="introduction" id="introduction" class="detailbox"></textarea>
+			<textarea name="bookIntroduction" id="bookIntroduction" class="detailbox"></textarea>
         
 <!--         <script>
 			
@@ -398,19 +396,19 @@
 	$(document).ready(function() {
 	  $("#registBtn").on("click", function() {
 	    var formData = {
-		    bookName: $("#name").val(),
-		    bookPrice: parseInt($("#price").val().replace(",", "")),
-		    bookAuthor: $("#author").val(),
-		    bookPublisher: $("#publisher").val(),
+		    bookName: $("#bookName").val(),
+		    bookPrice: parseInt($("#bookPrice").val().replace(",", "")),
+		    bookAuthor: $("#bookAuthor").val(),
+		    bookPublisher: $("#bookPublisher").val(),
 		    categoryCode: $("#categoryCode").val(),
-		    bookInventory: parseInt($("#inventory").val().replace(",", "")),
+		    bookInventory: parseInt($("#bookInventory").val().replace(",", "")),
 		    salesStatus: $("input[name='radioinfo']:checked").val(), // radio 버튼에서 체크된 값을 가져오기
-		    bookHit: $("#hit").val(),
-		    bookIsbn: $("#isbn").val(),
-		    bookTranslator: $("#translator").val(),
-		    bookIntroduction: $("#introduction").val(),
-		    bookDiscount: parseInt($("#discount").val().replace(",", "")),
-		    bookTotalPrice: parseInt($("#totalPrice").val().replace(",", ""))
+		    bookHit: $("#bookHit").val(),
+		    bookIsbn: $("#bookIsbn").val(),
+		    bookTranslator: $("#bookTranslator").val(),
+		    bookIntroduction: $("#bookIntroduction").val(),
+		    bookDiscount: parseInt($("#bookDiscount").val().replace(",", "")),
+		    bookTotalPrice: parseInt($("#bookTotalPrice").val().replace(",", ""))
 	    };
 	
 	    $.ajax({
@@ -419,7 +417,7 @@
 	        url: "/admin/product/regist",
 	        data: formData,
 	        success: function(result) {
-	          alert("등록되었습니다.");
+	          alert("등록되었습니다.");	
 	        },
 	        error: function(e) {
 	          console.log("ERROR: ", e);

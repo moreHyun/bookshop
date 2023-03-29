@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.bookshop.admin.product.model.dao.AdminProductMapper;
 import com.greedy.bookshop.admin.product.model.dto.BookDTO;
-import com.greedy.bookshop.admin.product.model.dto.BookSearchDTO;
+import com.greedy.bookshop.admin.product.model.dto.BookSearchCriteria;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Log4j
+@Slf4j
 public class AdminProductServiceImpl implements AdminProductService{
 	
 	@Autowired
@@ -32,19 +32,11 @@ public class AdminProductServiceImpl implements AdminProductService{
 	
     // 상품 조회 페이지
     @Override
-    public List<BookSearchDTO> getBookList(Integer bookCode, String bookName, String bookAuthor, Integer categoryCode,
-			String salesStatus) {
+    public List<BookDTO> getBookList(BookSearchCriteria bookSearchCriteria) {
     	log.info("(service)getBookList........");
     	
-        return adminProductMapper.getBookList(categoryCode, salesStatus, salesStatus, categoryCode, salesStatus);
+        return adminProductMapper.getBookList(bookSearchCriteria);
     }
     
-    // 상품 수정 기능
-    @Override
-    public void updateBook(BookSearchDTO book) {
-    	log.info("(service)updateBook........");
-    	
-    	adminProductMapper.updateBook(book);
-    }
 }
 
