@@ -17,7 +17,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-@RequestMapping("web/sale")
+@RequestMapping("/sale")
 public class SalePageController {
     private final SalePageService salePageService;
 
@@ -61,7 +61,7 @@ public class SalePageController {
         model.addAttribute("categoryList",category);
         log.info("model" + model + "\n");
 
-        return "web/sale/salepage";
+        return "/sale/salepage";
     }
 
     @GetMapping("/bookDetails")
@@ -73,7 +73,7 @@ public class SalePageController {
         model.addAttribute("file",m.get("file"));
         log.info("model" + model);
 
-        return "/web/sale/bookDetails";
+        return "/sale/bookDetails";
     }
 
     private List<CategoryDTO> FindSideNav()
