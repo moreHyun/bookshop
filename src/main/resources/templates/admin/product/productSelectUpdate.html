@@ -47,7 +47,7 @@
             <td>
                 <li><a class="" href="#">&nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a class="product_management">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a class="" href="#">결제/배송 관리</a></li>
+                <li><a class="" href="#">주문/배송 관리</a></li>
                 <li><a class="" href="Notice.html">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
             </td>
         </table>
@@ -65,22 +65,22 @@
     <img class="topbtn" src="/image/topbtn.svg" ></img>   
 
     
-    <form class="product_info" action="/admin/product/list" method="GET" enctype="multipart/form-data">
+    <form class="product_info" action="/admin/product/list" method="GET">
         <div class="div_width_top">
             <label class="label_title">검색어</label><br>
             <div>
             	<label class="label_title">상품번호</label>
-                <input type="text" id="code" class="longinfo">
+                <input type="text" id="code" name="bookCode" class="longinfo">
                 <span></span>
       		</div>
             <div>
             	<label class="label_title">상품명</label>
-                <input type="text" id="name" class="longinfo">
+                <input type="text" id="name" name="bookName" class="longinfo">
                 <span></span>
       		</div>
       		<div>
             	<label class="label_title">작가명</label>
-                <input type="text" id="author" class="longinfo">
+                <input type="text" id="author" name="bookAuthor" class="longinfo">
                 <span></span>
       		</div>
         </div>
@@ -89,17 +89,17 @@
         <div class="div_width">
             <label class="label_title">판매상태</label>
             <label>
-                <input type="checkbox" name="allStatus" id="salesStatus" class="checkboxinfo">
+                <input type="checkbox" name="salesStatus" id="salesStatus" class="checkboxinfo" value="">
                 전체
                 <span></span>
             </label>
             <label>
-                <input type="checkbox" name="onSales" id="salesStatus" class="checkboxinfo" value="Y" checked="checked">
+                <input type="checkbox" name="salesStatus" id="salesStatus" class="checkboxinfo" value="Y">
                 판매중
                 <span></span>
             </label>
             <label>
-                <input type="checkbox" name="suspendend" id="salesStatus" class="checkboxinfo" value="N">
+                <input type="checkbox" name="salesStatus" id="salesStatus" class="checkboxinfo" value="N">
                 판매중지
                 <span></span>
             </label>
@@ -125,22 +125,22 @@
             
             <label>
 			  <select name="largeCategory" class="large_select" id="category">
-			    <!-- <option>대분류</option> -->
-			    <option value="category1">국내</option>
-			    <option value="category2">외국</option>
+			    <option value="">대분류</option>
+			    <option value="1">국내</option>
+			    <option value="2">외국</option>
 			  </select>
 			</label>
 			
 			<label>
 			  <select name="subCategory" class="sub_select" id="categoryCode">
-				<!-- <option>소분류</option> -->
-			    <option value="category3">소설</option>
-			    <option value="category5">자기개발</option>
-			    <option value="category7">시/에세이</option>
-			    <option value="category9">인문/사회</option>
-			    <option value="category11">경제/경영</option>
-			    <option value="category13">컴퓨터/IT</option>
-			    <option value="category15">만화</option>
+				<option value="">소분류</option>
+			    <option value="3">소설</option>
+			    <option value="5">자기개발</option>
+			    <option value="7">시/에세이</option>
+			    <option value="9">인문/사회</option>
+			    <option value="11">경제/경영</option>
+			    <option value="13">컴퓨터/IT</option>
+			    <option value="15">만화</option>
 			  </select>
 			</label>
 			
@@ -150,7 +150,7 @@
 			
 			  categorySelect.addEventListener('change', () => {
 			    // '국내'가 선택되었을 경우
-			    if (categorySelect.value === 'category1') {
+			    if (categorySelect.value === '1') {
 			      categoryCodeSelect.innerHTML = `
 			        <option value="3">소설</option>
 			        <option value="5">자기개발</option>
@@ -162,7 +162,7 @@
 			      `;
 			    }
 			    // '외국'이 선택되었을 경우
-			    else if (categorySelect.value === 'category2') {
+			    else if (categorySelect.value === '2') {
 			      categoryCodeSelect.innerHTML = `
 			        <option value="4">소설</option>
 			        <option value="6">자기개발</option>
@@ -171,6 +171,12 @@
 			        <option value="12">경제/경영</option>
 			        <option value="14">컴퓨터/IT</option>
 			        <option value="16">만화</option>
+			      `;
+			    }
+				// '대분류'가 선택되었을 경우
+  			    else {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="">소분류</option>
 			      `;
 			    }
 			  });
@@ -184,38 +190,41 @@
              <button id="selectBtn" class="btn_1">검색</button>
         </div>
         
-        
-        <script>
-        
-	        document.addEventListener("DOMContentLoaded", function() {
-	        	  // DOMContentLoaded 이벤트가 발생한 이후에 실행될 코드 작성
-	        	  const productForm = document.querySelector("#productForm");
-	        	  if (productForm) {
-	        	    productForm.addEventListener("submit", function(event) {
-	        	      // submit 이벤트 핸들러 작성
-	        	    });
-	        	  }
-	        	});
-        
-        </script>
-
         <br>
         
         <div class="div_width">
         	 <label class="label_title">상품목록</label>
-        	 <div id="result">
+        	 <div class="" id="result">
         	 <table>
 			  <thead>
 			    <tr>
-			      <th>상품명</th>
-			      <th>가격</th>
-			      <th>작가명</th>
-			      <th>재고</th>
-			      <th>카테고리</th>
+			      <th class="list_title">상품명</th>
+			      <th class="list_title">출판사</th>
+			      <th class="list_title">작가명</th>
+			      <th class="list_title">번역자명</th>
+			      <th class="list_title">원가</th>
+			      <th class="list_title">할인가</th>
+			      <th class="list_title">최종가격</th>
+			      <th class="list_title">재고</th>
+			      <th class="list_title">ISBN</th>
+			      <th class="list_title">카테고리</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <!-- 조회 결과가 동적으로 생성됩니다. -->
+			    
+			    <tr th:each="book : ${ bookSearchList }">
+			    	<td class="label_name" th:text="${ book.bookName }"></td>
+			    	<td class="label_pat" th:text="${ book.bookPublisher }"></td>
+			    	<td class="label_pat" th:text="${ book.bookAuthor }"></td>
+			    	<td class="label_pat" th:text="${ book.bookTranslator }"></td>
+			    	<td class="label_price" th:text="${ book.bookPrice }"></td>
+			    	<td class="label_price" th:text="${ book.bookDiscount }"></td>
+			    	<td class="label_price" th:text="${ book.bookTotalPrice }"></td>
+			    	<td class="label_price" th:text="${ book.bookInventory }"></td>
+			    	<td class="label_price" th:text="${ book.bookIsbn }"></td>
+			    	<td class="label_price" th:text="${ book.categoryCode }"></td>
+			    </tr>
+			    
 			  </tbody>
 			 </table>
         	 </div>
@@ -224,7 +233,7 @@
         <!-- 조회 결과를 보여주는 테이블 -->
 
 		<!-- 수정을 위한 입력 필드 -->
-		<div class="info_btn">
+<!-- 		<div class="info_btn">
 		  <input type="number" id="code" name="code" placeholder="상품번호" readonly>
 		  <input type="text" id="name" name="name" placeholder="상품명">
 		  <input type="number" id="price" name="price" placeholder="가격">
@@ -232,7 +241,7 @@
 		  <input type="number" id="inventory" name="inventory" placeholder="재고">
 		  <input type="text" id="categoryCode" name="categoryCode" placeholder="카테고리">
 		  <button id="updateBtn" class="btn_1">수정항목저장</button>
-		</div>
+		</div> -->
 		
         <!-- 상품 조회 버튼 -->
         <script>

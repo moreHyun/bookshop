@@ -3,20 +3,22 @@
 <mapper namespace="com.greedy.bookshop.admin.product.model.dao.AdminProductMapper">
 
 <resultMap id="bookResultMap" type="com.greedy.bookshop.admin.product.model.dto.BookDTO">
-	<id property="code" column="BOOK_CODE"/>
-    <result property="name" column="BOOK_NAME"/>
-    <result property="price" column="BOOK_PRICE"/>
-    <result property="author" column="BOOK_AUTHOR"/>
-    <result property="publisher" column="BOOK_PUBLISHER"/>
+
+	<id property="bookCode" column="BOOK_CODE"/>
+    <result property="bookName" column="BOOK_NAME"/>
+    <result property="bookPrice" column="BOOK_PRICE"/>
+    <result property="bookAuthor" column="BOOK_AUTHOR"/>
+    <result property="bookPublisher" column="BOOK_PUBLISHER"/>
+
     <result property="categoryCode" column="CATEGORY_CODE"/>
-    <result property="inventory" column="BOOK_INVENTORY"/>
+    <result property="bookInventory" column="BOOK_INVENTORY"/>
     <result property="salesStatus" column="SALES_STATUS"/>
-    <result property="hit" column="BOOK_HIT"/>
-    <result property="isbn" column="BOOK_ISBN"/>
-    <result property="translator" column="BOOK_TRANSLATOR"/>
-    <result property="introduction" column="BOOK_INTRODUCTION"/>
-    <result property="discount" column="BOOK_DISCOUNT"/>
-    <result property="totalPrice" column="BOOK_TOTALPRICE"/>
+    <result property="bookHit" column="BOOK_HIT"/>
+    <result property="bookIsbn" column="BOOK_ISBN"/>
+    <result property="bookTranslator" column="BOOK_TRANSLATOR"/>
+    <result property="bookIntroduction" column="BOOK_INTRODUCTION"/>
+    <result property="bookDiscount" column="BOOK_DISCOUNT"/>
+    <result property="bookTotalPrice" column="BOOK_TOTALPRICE"/>
 </resultMap>
 
 	<!-- 상품 등록 -->
@@ -59,9 +61,25 @@
   	</insert>
 	
    	<!-- 상품 조회 -->
- 	<select id="getBookList" parameterType="java.util.Map" resultType="com.greedy.bookshop.admin.product.model.dto.BookSearchDTO">
+
+ 	<select id="getBookList" resultMap="bookResultMap">
+
     SELECT *
     FROM TBL_BOOK
+    <where>
+    	<if test="bookCode != null">
+    	BOOK_CODE = #{ bookCode }
+    	</if>
+    	<if test="bookName != null">
+    	AND BOOK_NAME LIKE '%' || #{ bookName } || '%'
+    	</if>
+    	<if test="bookAuthor != null">
+    	AND BOOK_AUTHOR LIKE '%' || #{ bookAuthor } || '%'
+    	</if>
+    	<if test="subCategory != null">
+    	AND CATEGORY_CODE = #{ subCategory }
+    	</if>
+    </where>
     ORDER BY BOOK_CODE DESC
     
  	</select>
