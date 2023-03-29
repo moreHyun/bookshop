@@ -1,0 +1,105 @@
+* {
+    font-family: 'Dancing Script', cursive; 
+    font-family: 'Questrial', sans-serif;
+}
+
+input::-ms-input-placeholder { color:#a8a8a8; }
+input::-webkit-input-placeholder { color:#a8a8a8; }
+input::-moz-placeholder { color:#a8a8a8; }
+
+body {
+    width: 100%;
+}
+
+header {
+    height: 75px;
+    color: darkgreen;
+    background: #ffffff;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;   
+}
+
+header .left .logo > img {
+    width: 50px;
+    height: 40px;
+    padding: 30px;
+}
+
+header .search {
+    height: 35px;
+    width: 400px;
+    background: #ffffff;
+    border: 1px solid gray;
+    border-radius: 15px 15px 15px 15px;
+}
+
+header .search input {
+    font-size: 12px;
+    width: 355px;
+    padding: 10px;
+    margin-top: 2px;
+    border: 0px;
+    outline: none;
+    float: left;
+    border-radius: 15px 15px 15px 15px;
+}
+
+header .search button {
+    width: 25px;
+    height: 100%;
+    border: 0px;
+    background: white;
+    border-radius: 15px 15px 15px 15px;
+    outline: none;
+    float: right;
+    text-align: center;
+}
+
+header .search button > img {
+    width: 13px;
+    height: 13px;
+}
+
+header .right ul li {
+    display: flex;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.right ul li a {
+    text-decoration: none;
+    list-style-type: none;
+    color: darkgreen;
+    font-size: 16px;
+}
+
+.right ul li ::after {
+    display: block;
+    content: "";
+    height: 6px;
+    border-bottom: solid 2px #CDE990;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.right ul li :hover::after {
+    transform: scaleX(1);
+}
+
+@media(max-width:702px) {
+    .right ul li a { font-size: 12px; }
+
+    header .search {
+        width: 300px;
+    }
+
+    header .search input {
+        width: 200px;
+    }
+    
+}
