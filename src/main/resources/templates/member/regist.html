@@ -20,7 +20,7 @@
                 <table style="margin: 0 auto">
                     <tr>
                         <td style="width: 120px">이메일 </td>
-                        <td><input type="text" maxlength="13" name="memberId" id="memberId" required></td>
+                        <td><input type="email" name="id" id="id" required></td>
                         <td style="width: 100px"><input type="button" value="중복확인" id="duplicationCheck"></td>
                         <!-- <div class="success-message hide">사용하실 수 있는 이메일(아이디) 입니다.</div>
                         <div class="failure-message hide">사용하실 수 없는 이메일(아이디) 입니다.</div> -->
@@ -28,12 +28,12 @@
 
                     <tr>
                         <td>비밀번호</td>
-                        <td><input type="password" minlength="8" maxlength="16" name="memberPwd" id=memberPwd required></td>
+                        <td><input type="password" minlength="8" maxlength="16" name="pwd" id="pwd" required></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>비밀번호확인</td>
-                        <td><input type="password" minlength="8" maxlength="16" name="memberPwd2" id=memberPwd2 required></td>
+                        <td><input type="password" minlength="8" maxlength="16" name="pwd2" id="pwd2" required></td>
                         <td></td>
                     </tr>
 
@@ -53,11 +53,7 @@
 
                     <!-- <div class="miss-phone hide">중복된 전화 번호 입니다.</div> -->
 
-                    <tr>
-                        <td>이메일 </td>
-                        <td><input type="email" name="email"></td>
-                        <td></td>
-                    </tr>
+                    
                     <tr>
                         <td>우편번호</td>
                         <td><input type="text" name="zipCode" id="zipCode" readonly></td>
