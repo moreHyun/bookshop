@@ -10,6 +10,7 @@
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 	<script type="text/javascript" src="/js/admin/member.js"></script>
+
     
     <title>책장 옆</title>
 
@@ -30,16 +31,17 @@
         
         <aside>
             <ul class="sub-menu">  
-                <li><a class="usermenu" href="/member/list"> &nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="active" href="/member/list"> &nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a class="clickmenu" href="#">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a class="paymenu" href="#">결제/배송 관리</a></li>
+                <li><a class="paydelimenu" href="/order/list">결제/배송 관리</a></li>
                 <li><a class="csmenu" href="#">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
             </ul>
         </aside>
     
+  
         
         <!-- 상단이동버튼 -->
-        <img class="topbtn" src="../image/topbtn.svg" ></img>   
+        <img class="topbtn" src="../image/topbtn.svg" onclick="scrollToTop();"></img>   
             
         <!-- 회원 조건 검색-->
         	<div class=searchform>

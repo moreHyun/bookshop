@@ -23,5 +23,10 @@ public final class AdminOrderDTO {
 	
 	private OrderMemberDTO id;
 	
+	private AdminDeliveryDTO deliveryCode;
+	private AdminDeliveryDTO deliveryStatus;
+	private AdminDeliveryDTO invoiceNumber;
+	private AdminDeliveryDTO purchaseDate;
+	
 	
 }

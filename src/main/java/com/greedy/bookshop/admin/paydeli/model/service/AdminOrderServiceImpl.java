@@ -1,4 +1,4 @@
-package com.greedy.bookshop.admin.member.model.service;
+package com.greedy.bookshop.admin.paydeli.model.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,37 +8,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.greedy.bookshop.admin.member.common.paging.Pagenation;
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
-import com.greedy.bookshop.admin.member.model.dao.AdminMemberMapper;
-import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
+import com.greedy.bookshop.admin.paydeli.model.dao.AdminOrderMapper;
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@Service("memberService") //빈 네임 등록
+@Service("adminOrderService") //빈 네임 등록
 @Transactional
 /* @Transactional 어노테이션이 붙은 클래스 내부의 메소드는 모두 transaction 관리가 된다.
  * @Transactional 어노테이션은 메소드 레벨로 분리해서 작성할 수도 있다.
  * 메소드 동작시 Exception이 발생하면 전체 트랜잭션을 롤백하고 정상 수행 시에는 commit하는 동작이 일어난다. */
-public class MemberServiceImpl implements MemberService {
+public class AdminOrderServiceImpl implements AdminOrderService {
 	
-	private final AdminMemberMapper memberMapper; //의존성 주입 코드
+	private final AdminOrderMapper adminOrderMapper; //의존성 주입 코드
 	
 	@Autowired
-	public MemberServiceImpl(AdminMemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
+	public AdminOrderServiceImpl(AdminOrderMapper adminOrderMapper) {
+		this.adminOrderMapper = adminOrderMapper;
 	} //의존성 주입~~
 
 
+
 	@Override
-	public Map<String, Object> selectMemberList(Map<String, String> searchMap, int page) {
-		
+	public Map<String, Object> selectOrderList(Map<String, String> searchMap, int page) {
 		//1. 전체 회원 수 확인 (검색어가 있는 경우 포함) -> 페이징 처리 계산을 위해서
-		int totalCount = memberMapper.selectTotalCount(searchMap);
-		log.info("[MemberService] totalCount : {}", totalCount);
+		int totalCount = adminOrderMapper.selectOrderTotalCount(searchMap);
+		log.info("[AdminOrderService] totalCount : {}", totalCount);
 		
 		/*한 페이지에 보여줄 회원의 수*/
 		int limit = 5;
@@ -51,30 +50,23 @@ public class MemberServiceImpl implements MemberService {
 		log.info("[MemberService] selectCriteria : {}", selectCriteria);
 		
 		/*3. 요청 페이지와 검색 기준에 맞는 게시글을 조회해온다.*/
-		List<AdminMemberDTO> memberList = memberMapper.selectMemberList(selectCriteria);
-		log.info("[MemberService] memberList : {}", memberList);
+		List<AdminOrderDTO> orderList = adminOrderMapper.selectOrderList(selectCriteria);
+		log.info("[AdminOrderService] orderList : {}", orderList);
 
-		Map<String, Object> memberListAndPaging = new HashMap<>();
-		memberListAndPaging.put("paging", selectCriteria);
-		memberListAndPaging.put("memberList", memberList);
+		Map<String, Object> orderListAndPaging = new HashMap<>();
+		orderListAndPaging.put("paging", selectCriteria);
+		orderListAndPaging.put("orderList", orderList);
 		
-		return memberListAndPaging;
-		
+		return orderListAndPaging;
 	}
 
-	
+
 
 	@Override
-	public AdminMemberDTO selectMemberDetail(String id) {
+	public AdminOrderDTO selectOrderDetail(int orderCode) {
 		
-		return memberMapper.selectMemberDetail(id);
+		return adminOrderMapper.selectOrderDetail(orderCode);
 	}
-
-	 @Override
-	    public void updateMember(AdminMemberDTO member) {
-	        memberMapper.updateMember(member);
-	    }
-	 
 
 
 	
