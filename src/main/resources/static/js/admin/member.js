@@ -1,25 +1,17 @@
-document.querySelector(".topbtn").addEventListener("click", (e) => {
-    e.preventDefault();
-     window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-});
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-/*
-    if(document.getElementById("updateMember")) {
-        const $update = document.getElementById("updateMember");
-        $update.onclick = function() {
-            location.href = "/member/edit";
-        }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var currentPath = window.location.pathname;
+  var menuLinks = document.querySelectorAll(".sub-menu a");
+
+  menuLinks.forEach(function(link) {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active"); // 'active' 클래스를 추가하는 부분
     }
-    
-    
-        if(document.getElementById("deleteMember")) {
-        const $update = document.getElementById("deleteMember");
-        $update.onclick = function() {
-            location.href = "/member/delete/{id}";
-        }
-    }*/
 
+  });
+});

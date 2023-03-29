@@ -2,7 +2,6 @@
 
 @import url("/css/admin/adminCommon.css");
 
-/* 검색창*/
 
 .searchform{
 
@@ -23,13 +22,15 @@ input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: none;
     width: 20px; height: 20px; background: url('/image/circle-xmark-regular.svg') center center no-repeat;
     cursor: pointer;
-}
 
+}
 
 .search {
 	height: 30px;
     width: 200px;
 	background-color: #F1F1F1;
+
+
 }
 
 .sb {
@@ -42,7 +43,7 @@ input[type=search]::-webkit-search-cancel-button {
 	
 }
 
-/* 조회 테이블*/
+/*조회 본문*/
 
 table {
 
@@ -86,9 +87,9 @@ thead {
 	padding-top: 50px;
 }
 
-/*---회원 상세 정보---*/
 
-/* 목차 */
+
+/* 상세 조회 목차 */
 .subtitle {
     display: flex;
     margin-top: 55px;
@@ -97,6 +98,8 @@ thead {
     justify-content: space-between;
     font-weight: bolder;   
 }
+
+
 
 .fa-stop {
     color: #AACB73;
@@ -112,8 +115,28 @@ thead {
     margin-bottom: 30px;
 }
 
+.subtitle_line2 {
+	text-align: left;
+	width: 700px;
+    height: 3px;
+    background-color: black;
+    margin-left:0;
+    margin-top: 15px;
+    margin-bottom: 30px;
+	
+}
+
 /*본문*/
+
 .container  {
+	
+	width:400px;
+	margin-left: 35%;
+    margin-top: 20px;
+	margin-bottom : 20px;
+}
+
+.container2  {
 	
 	width:400px;
 	margin-left: 35%;
@@ -128,6 +151,7 @@ thead {
   flex-wrap: wrap;
   align-items: center; /* 레이블과 <p> 요소의 수직 정렬을 맞춤 */
 }
+
 
 .content {
   display: flex;
@@ -158,12 +182,55 @@ thead {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
 }
-/*버튼*/
+
+
+/*
+
+.container  {
+	
+	width:700px;
+	margin-left: 27%;
+    margin-top: 20px;
+	margin-bottom : 20px;
+}
+
+.container2 {
+	width:700px;
+	margin-left: 27%;
+    margin-top: 20px;
+	margin-bottom : 20px;
+	
+}
+
+.text-center {
+   justify-content: space-between;
+   width:350px;
+   
+}
+   
+p {
+	padding-left:20px;
+	padding-top:5px;
+	border: 1px solid #D0D0D0;
+	border-radius: 5px;
+	height:30px;
+	background-color:#D0D0D0;
+	width: 250px;
+	display: inline-block;
+}
+
+label {
+	
+	margin:10px;
+	width: 100px;
+
+}
+*/
 
 .row2 {
   display: flex;
   text-align:center;
-  margin-left: 20%;
+  margin-left: 30%;
   margin-top: 50px;
   margin-bottom: 50px;
   
@@ -181,60 +248,6 @@ thead {
 	
 }
 
-/*---회원 정보 수정 ---*/
-
-.container2 {
-	
-	width:700px;
-	margin-left: 35%;
-    margin-top: 20px;
-	margin-bottom : 20px;
-}
-
-.my-3 label {
-	width:100px;
-	display:inline-block;
-	
-}
 
 
-.my-3 input {
-	
-	width:310px;
-	background-color:#F1F1F1;
-	border: 1px solid #F1F1F1;
-	border-radius: 5px;
-	padding-top:5px;
-	padding-left:10px;
-	margin-bottom:10px;
-	height:30px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-
-}
-
-.my-3 select {
-	width:310px;
-	background-color:#F1F1F1;
-	border: 1px solid #F1F1F1;
-	border-radius: 5px;
-	padding-top:5px;
-	padding-left:10px;
-	margin-bottom:10px;
-	height:30px;
-	cursor: pointer;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-	
-	
-}
-
-.row_btn2 {
-	width: 70px;
-    height: 36px;
-    margin-left: 120px;
-    margin-top:50px;
-    background-color: #AACB73;
-    border-radius: 20px;
-    color: #fff;
-	
-}
 

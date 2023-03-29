@@ -10,7 +10,6 @@
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 	<script type="text/javascript" src="/js/admin/member.js"></script>
-
     
     <title>책장 옆</title>
 
@@ -31,29 +30,28 @@
         
         <aside>
             <ul class="sub-menu">  
-                <li><a class="active" href="/member/list"> &nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="usermenu" href="/member/list"> &nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a class="clickmenu" href="#">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a class="paydelimenu" href="/order/list">결제/배송 관리</a></li>
+                <li><a class="active" href="/order/list">결제/배송 관리</a></li>
                 <li><a class="csmenu" href="#">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
             </ul>
         </aside>
     
-  
         
         <!-- 상단이동버튼 -->
-        <img class="topbtn" src="../image/topbtn.svg" onclick="scrollToTop();"></img>   
+        <img class="topbtn" src="../image/topbtn.svg" ></img>   
             
         <!-- 회원 조건 검색-->
         	<div class=searchform>
-        	<form id="searchForm" action="/member/list" method="get"
+        	<form id="searchForm" action="/order/list" method="get"
 			style="display: inline-block">
 			<select id="searchCondition" name="searchCondition">
+				<option value="orderCode"
+					th:selected="${ paging.searchCondition eq 'orderCode'}">주문번호</option>
 				<option value="id"
-					th:selected="${ paging.searchCondition eq 'id'}">ID</option>
-				<option value="name"
-					th:selected="${ paging.searchCondition eq 'name'}">이름</option>
-				<option value="phone"
-					th:selected="${ paging.searchCondition eq 'phone'}">연락처</option>
+					th:selected="${ paging.searchCondition eq 'id'}">주문회원</option>
+				<option value="orderStatus"
+					th:selected="${ paging.searchCondition eq 'orderStatus'}">상태</option>
 			</select> <input class="search" type="search" id="searchValue" name="searchValue" placeholder="검색어를 입력하세요."
 				th:value="${ paging.searchValue }">
 			<button class="sb" type="submit">조회</button>
@@ -65,18 +63,20 @@
  <table id="rwd-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>이름</th>
-      <th>연락처</th>
+      <th>주문일자</th>
+      <th>주문번호</th>
+      <th>주문회원</th>
+      <th>상태</th>
     </tr>
   </thead>
 
   <tbody>
-  		<tr th:each="member : ${ memberList }"
-  			th:onclick="|location.href='@{detail(id=${member.id})}'|">
-  			<td th:text="${ member.id }"></td>
-			<td th:text="${ member.name }"></td>
-			<td th:text="${ member.phone }"></td>
+  		<tr th:each="order : ${ orderList }"
+  			th:onclick="|location.href='@{detail(orderCode=${order.orderCode})}'|">
+  			<td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+  			<td th:text="${ order.orderCode }"></td>
+			<td th:text="${ order.id.id}"></td>
+			<td th:text="${ order.orderStatus }"></td>
 		</tr>
   </tbody>
 
@@ -90,60 +90,60 @@
 			th:if="${ paging.searchCondition != null and paging.searchValue != null }">
 			<!-- 맨 앞으로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=1&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">&lt;&lt;</button>
+				th:onclick="'location.href=\'/order/list?page=1&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">&lt;&lt;</button>
 
 			<!-- 이전 페이지로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.page - 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.page - 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
 				th:disabled="${ paging.page <= 1 }">&lt;</button>
 
 			<!-- 숫자 버튼 -->
 			<th:block
 				th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
 				<button
-					th:onclick="'location.href=\'/member/list?page=' + @{${page}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+					th:onclick="'location.href=\'/order/list?page=' + @{${page}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
 					th:text="${ page }" th:disabled="${ paging.page eq page }">
 				</button>
 			</th:block>
 
 			<!-- 다음 페이지로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.page + 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${searchValue}} + '\''"
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.page + 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${searchValue}} + '\''"
 				th:disabled="${ paging.page >= paging.maxPage }">></button>
 
 			<!-- 맨 끝으로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.maxPage}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.maxPage}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
 
 		</th:block>
 
 		<th:block
 			th:if="${ paging.searchCondition == null || paging.searchCondition.isEmpty() || paging.searchValue == null || paging.searchValue.isEmpty()}">
 			<!-- 맨 앞으로 이동 -->
-			<button th:onclick="'location.href=\'/member/list?page=1\''">&lt;&lt;</button>
+			<button th:onclick="'location.href=\'/order/list?page=1\''">&lt;&lt;</button>
 
 			<!-- 이전 페이지로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.page - 1}} + '\''"
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.page - 1}} + '\''"
 				th:disabled="${ paging.page <= 1 }">&lt;</button>
 
 			<!-- 숫자 버튼 -->
 			<th:block
 				th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
 				<button
-					th:onclick="'location.href=\'/member/list?page=' + @{${page}} + '\''"
+					th:onclick="'location.href=\'/order/list?page=' + @{${page}} + '\''"
 					th:text="${ page }" th:disabled="${ paging.page eq page }">
 				</button>
 			</th:block>
 
 			<!-- 다음 페이지로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.page + 1}} + '\''"
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.page + 1}} + '\''"
 				th:disabled="${ paging.page >= paging.maxPage }">></button>
 
 			<!-- 맨 끝으로 이동 -->
 			<button
-				th:onclick="'location.href=\'/member/list?page=' + @{${paging.maxPage}} + '\''">>></button>
+				th:onclick="'location.href=\'/order/list?page=' + @{${paging.maxPage}} + '\''">>></button>
 		</th:block>
 
 	</div>
