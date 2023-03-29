@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.greedy.bookshop.center.dto.NoticeDTO;
-import com.greedy.bookshop.center.service.NoticeService;
+import com.greedy.bookshop.center.model.dto.NoticeDTO;
+import com.greedy.bookshop.center.model.service.NoticeService;
 
 import lombok.extern.slf4j.Slf4j;
 

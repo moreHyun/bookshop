@@ -11,10 +11,10 @@ import com.greedy.bookshop.admin.product.model.dao.AdminProductMapper;
 import com.greedy.bookshop.admin.product.model.dto.BookDTO;
 import com.greedy.bookshop.admin.product.model.dto.BookSearchDTO;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Log4j
+@Slf4j
 public class AdminProductServiceImpl implements AdminProductService{
 	
 	@Autowired

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.greedy.bookshop.mypage.service.MypageService;
+import com.greedy.bookshop.mypage.model.service.MypageService;
 
 import lombok.extern.slf4j.Slf4j;
 

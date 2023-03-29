@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.greedy.bookshop.center.common.Pagenation;
 import com.greedy.bookshop.center.common.SelectCriteria;
-import com.greedy.bookshop.center.dao.NoticeMapper;
-import com.greedy.bookshop.center.dto.NoticeDTO;
+import com.greedy.bookshop.center.model.dao.NoticeMapper;
+import com.greedy.bookshop.center.model.dto.NoticeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

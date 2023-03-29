@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.greedy.bookshop.center.common.SelectCriteria;
-import com.greedy.bookshop.center.dto.NoticeDTO;
+import com.greedy.bookshop.center.model.dto.NoticeDTO;
 
 @Mapper
 public interface NoticeMapper {

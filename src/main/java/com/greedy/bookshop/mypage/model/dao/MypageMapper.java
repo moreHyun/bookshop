@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.greedy.bookshop.center.common.SelectCriteria;
-import com.greedy.bookshop.mypage.dto.OrderDTO;
+import com.greedy.bookshop.mypage.model.dto.OrderDTO;
 
 @Mapper
 public interface MypageMapper {

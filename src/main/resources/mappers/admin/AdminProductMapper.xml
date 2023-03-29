@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.greedy.bookshop.admin.member.model.dao.AdminProductMapper">
+<mapper namespace="com.greedy.bookshop.admin.product.model.dao.AdminProductMapper">
 
-<resultMap id="bookResultMap" type="com.greedy.bookshop.admin.member.model.dto.BookDTO">
+<resultMap id="bookResultMap" type="com.greedy.bookshop.admin.product.model.dto.BookDTO">
 	<id property="code" column="BOOK_CODE"/>
     <result property="name" column="BOOK_NAME"/>
     <result property="price" column="BOOK_PRICE"/>
@@ -59,7 +59,7 @@
   	</insert>
 	
    	<!-- 상품 조회 -->
- 	<select id="getBookList" parameterType="java.util.Map" resultType="com.greedy.bookshop.admin.member.model.dto.BookSearchDTO">
+ 	<select id="getBookList" parameterType="java.util.Map" resultType="com.greedy.bookshop.admin.product.model.dto.BookSearchDTO">
     SELECT *
     FROM TBL_BOOK
     ORDER BY BOOK_CODE DESC
