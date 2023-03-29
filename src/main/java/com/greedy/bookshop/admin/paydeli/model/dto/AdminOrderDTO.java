@@ -13,9 +13,9 @@ public final class AdminOrderDTO {
 	private Date orderDate;
 	private String orderStatus;
 	private String orderRecipient;
-	private int orderRecipientphone;
+	private String orderRecipientphone;
 	private String destinationNickname;
-	private int postalCode;
+	private String postalCode;
 	private String address;
 	private String detailedAddress;
 	private String orderMemo;

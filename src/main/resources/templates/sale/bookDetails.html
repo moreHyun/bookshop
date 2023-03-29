@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>상세 책 정보</title>
-    <link rel="stylesheet" type="text/css" href="/css/bookDerails.css">
-    <script type="text/javascript" src="/static/js/bookDetails.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/sales/bookDerails.css">
+    <script type="text/javascript" src="/static/js/sales/bookDetails.js"></script>
 </head>
 <body>
 <header>
-    <div class="nav" th:replace="web/common/nav.html"></div>
+    <div class="nav" th:replace="/main/nav.html"></div>
 </header>
 <div class="product-detail">
     <div class="product-detail-image" th:each="f : ${file}" th:if="${f.fileType} == 'TITLE'">
@@ -49,6 +49,6 @@
 </div>
 </body>
 <footer class="footer">
-    <div th:replace="web/common/footer.html"></div>
+    <div th:replace="/main/footer.html"></div>
 </footer>
 </html>
