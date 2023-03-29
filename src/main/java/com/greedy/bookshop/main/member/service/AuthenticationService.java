@@ -77,7 +77,7 @@ public class AuthenticationService implements UserDetailsService {
 
     public MemberDTO register(MemberDTO memberDTO) {
         if (memberMapper.findMemberById(memberDTO.getId()) != null) {
-            throw new RuntimeException("Username already exists.");
+            throw new RuntimeException("이미 사용중인 이메일 입니다.");
         }
 
         memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
@@ -86,7 +86,7 @@ public class AuthenticationService implements UserDetailsService {
         if (result == 1) {
             return memberDTO;
         } else {
-            throw new RuntimeException("Failed to register member.");
+            throw new RuntimeException("회원 가입에 실패하셨습니다. 다시 시도해 보세요.");
         }
     }
 
