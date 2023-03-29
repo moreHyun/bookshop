@@ -17,12 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/member/login")
+@RequestMapping("/member")
 public class MemberController
 {
 
     @GetMapping("/login")
-    public void loginForm() {}
+    public String loginForm() {
+    	
+    	
+    	return "member/login/login";
+    }
 
     @GetMapping("/mypage")
     public void mypage(@AuthenticationPrincipal CustomUser user) {

@@ -4,6 +4,10 @@
     <meta charset="UTF-8"/>
     <title>상세 책 정보</title>
     <link rel="stylesheet" type="text/css" href="/css/sales/bookDerails.css">
+    <script>
+        const m = '[[${message}]]';
+        m && alert(m);
+    </script>
 </head>
 <body>
 <header>
@@ -33,11 +37,22 @@
         <script>
             document.getElementById("add-to-cart").addEventListener("click", function ()
             {
+                let b = '[[${book.bookCode}]]';
                 let f = document.createElement('form');
-
                 f.name = 'from';
                 f.method = 'post';
+                f.action = '/cart/regist';
 
+                var input = document.createElement('input');
+                input.setAttribute("type","number");
+                input.setAttribute("name","bookCode")
+                input.setAttribute("value",b);
+
+                f.appendChild(input);
+
+                document.body.appendChild(f);
+
+                f.submit();
             })
         </script>
     </div>
