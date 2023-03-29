@@ -1,10 +1,18 @@
 package com.greedy.bookshop.main.member.service;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.greedy.bookshop.main.member.dao.MemberMapper;
 import com.greedy.bookshop.main.member.dto.MemberDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@SuppressWarnings("unused")
+@Slf4j
+@Service
+@ComponentScan(basePackages = {"com.greedy.bookshop.main.member.dao"})
 public class MemberService {
 	
 	private final MemberMapper memberMapper;
