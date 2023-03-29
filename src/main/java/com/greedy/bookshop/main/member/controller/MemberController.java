@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 public class MemberController {
 
-    @GetMapping("/login")
+    @GetMapping("/member/login")
     public void loginForm() {}
 
     @GetMapping("/mypage")
@@ -35,7 +35,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/regist")
     public ResponseEntity<?> register(@RequestBody MemberDTO memberDTO) {
         try {
             MemberDTO createdMember = memberService.register(memberDTO);

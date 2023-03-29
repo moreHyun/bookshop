@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/image/책장옆 복사본.png">
-    <link rel="stylesheet" th:href="/src/main/resources/static/css/common/footer.css">
-    <link rel="stylesheet" th:href="/src/main/resources/static/css/common/nav.css">
-    <link rel="stylesheet" th:href="/src/main/resources/static/css/common/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/main.css">
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <title>nav</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
@@ -17,36 +16,36 @@
 
 <header>
     <div class="left">
-        <a href="/">
+        <a th:href="@{/}">
         <div class="logo"><img src="/image/책장옆.png" alt="logo"></div>
         </a>
     </div>
     <div class="search">
         <input type="text" placeholder="찾고 싶은 책을 검색해 보세요!">
-        <button class="search_img"><img src="/image/search.png"></button>
+        <button class="search_img"><img src="../image/search.png"></button>
     </div>
     <div class="right">
         <nav>
             <ul>
                 <li><a>책 창고</a></li>
-                <li><a href="/html/login.html">로그인</a></li>
+                <li><a href="/member/login.html">로그인</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
 <body>
-	<form action="/main/main" method="post">
+	<form action="main" method="post">
   <div class="slider">
     <input type="radio" name="slide" id="slide1" checked>
     <input type="radio" name="slide" id="slide2">
     <input type="radio" name="slide" id="slide3">
     <input type="radio" name="slide" id="slide4">
     <ul id="imgholder" class="imgs">
-        <li><img src="/src/main/resources/static/image/slide1.jpeg"></li>
-        <li><img src="/src/main/resources/static/image/slide2.jpeg"></li>
-        <li><img src="/src/main/resources/static/image/slide3.jpeg"></li>
-        <li><img src="/src/main/resources/static/image/slide4.jpeg"></li>
+        <li><img src="../image/slide1.jpeg"></li>
+        <li><img src="../image/slide2.jpeg"></li>
+        <li><img src="../image/slide3.jpeg"></li>
+        <li><img src="../image/slide4.jpeg"></li>
     </ul>
     <div class="bullets">
         <label for="slide1">&nbsp;</label>
@@ -67,7 +66,7 @@
               <span>|</span>
               <span>새로운 소식이 없어요.</span>
               <a>
-                <img src="/image/right.png" alt="더보기">
+                <img src="../image/right.png" alt="더보기">
               </a>
             </div>
           </div>
@@ -86,9 +85,9 @@
               <div class="footer-logo">
                 <img src="/image/책장옆.png"></div>
               <div class="footer-sns">
-                <div class="footer-sns1"><img src="/image/twitter.png"></div>
-                <div class="footer-sns2"><img src="/image/instagram.png"></div>
-                <div class="footer-sns3"><img src="/image/youtube.png"></div>
+                <div class="footer-sns1"><img src="../image/twitter.png"></div>
+                <div class="footer-sns2"><img src="../image/instagram.png"></div>
+                <div class="footer-sns3"><img src="../image/youtube.png"></div>
               </div>
             </div>
             <br>

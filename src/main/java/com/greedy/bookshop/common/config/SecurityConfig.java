@@ -57,7 +57,7 @@ public class SecurityConfig {
                 /* 로그아웃 설정 */
                 .logout()
                 /* 로그아웃 주소 */
-                .logoutRequestMatcher(new AntPathRequestMatcher("/main/main"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/main"))
                 /* 세션 만료 */
                 .invalidateHttpSession(true)
                 /* JSESSIONID 쿠키 삭제 */
