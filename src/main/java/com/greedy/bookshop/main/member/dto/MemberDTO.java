@@ -16,6 +16,7 @@ public class MemberDTO {
     private Date pwdChangedDatetime;				//회원비밀번호변경일자
     private String pwdExpDate;						//회원비밀번호만료일자
     private String name;							//회원이름
+    private String phone;							//회원전화번호
     private Date registDatetime;					//회원가입일시
     private int accumLoginCount;					//누적로그인횟수
     private int loginFailedCount;					//로그인연속실패횟수

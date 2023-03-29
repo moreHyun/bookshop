@@ -39,23 +39,99 @@
               , A.USER_ID
               , A.USER_PWD
               , A.USER_NAME
-              , A.USER_REGIST_DATETIME
-              , A.ACC_SECESSION_DATETIME
-              , A.ACC_SECESSION_YN
+              , A.CREATE_USER_DATE
               , B.USER_CODE REF_USER_CODE
-              , B.USER_ROLE_CODE REF_USER_ROLE_CODE
               , C.USER_ROLE_CODE REF_USER_ROLE_CODE2
               , C.ROLE_NAME
               , C.ROLE_DESC
         FROM    TBL_USER A
         LEFT    JOIN TBL_USER_ROLE B ON (A.USER_CODE = B.USER_CODE)
-        LEFT    JOIN TBL_AUTHORITY C ON (B.USER_ROLE_CODE = C.USER_ROLE_CODE)
+        LEFT    JOIN TBL_AUTHORITY C ON (B.USER_CODE = C.USER_ROLE_CODE)
+        WHERE A.USER_ID = #{ username }
     </select>
+    
+<!--        private int no;									//회원번호
+    private String id;								//회원아이디
+    private String pwd;								//회원비밀번호
+    private String tempPwdYn;						//임시비밀번호여부
+    private Date pwdChangedDatetime;				//회원비밀번호변경일자
+    private String pwdExpDate;						//회원비밀번호만료일자
+    private String name;							//회원이름
+    private String phone;							//회원전화번호
+    private Date registDatetime;					//회원가입일시
+    private int accumLoginCount;					//누적로그인횟수
+    private int loginFailedCount;					//로그인연속실패횟수
+    private Date accSecessionDatetime;				//계정탈퇴일시
+    private String accSecessionYn;	-->
     
     <insert id="insertMember" parameterType="com.greedy.bookshop.main.member.dto.MemberDTO">
         INSERT INTO TBL_MEMBER (no, id, pwd, temp_pwd_yn, pwd_changed_datetime, pwd_exp_date, name, regist_datetime, accum_login_count, login_failed_count, acc_secession_datetime, acc_secession_yn)
         VALUES (SEQ_MEMBER_NO.NEXTVAL, #{id}, #{pwd}, #{tempPwdYn}, #{pwdChangedDatetime}, #{pwdExpDate}, #{name}, #{registDatetime}, #{accumLoginCount}, #{loginFailedCount}, #{accSecessionDatetime}, #{accSecessionYn})
     </insert>
+    
+    <select id="selectMemberById" resultType="string">
+        SELECT
+               USER_CODE
+          FROM TBL_USER
+         WHERE USER_STATUS = 'Y'
+           AND USER_ID = #{ id }
+    </select>
+
+	
+	<insert id="insertMemberRole">
+		INSERT
+          INTO TBL_USER_ROLE
+        (
+          USER_CODE
+        , AUTHORITY_CODE
+        )
+        VALUES
+        (
+          SEQ_MEMBER_NO.CURRVAL
+        , 1
+        )
+	</insert>
+
+    <select id="selectEncryptedPwd" resultType="string">
+        SELECT
+               USER_PWD
+          FROM TBL_USER
+         WHERE USER_STATUS = 'Y'
+           AND USER_ID = #{ id }
+	</select>
+
+	<select id="selectMember">
+		SELECT
+			   USER_CODE
+		     , USER_ID
+		     , USER_NAME
+		     , USER_PHONE
+		     , CREATE_USER_DATE
+		     , USER_ROLE_CODE
+		     , USER_STATUS
+		 FROM  TBL_USER A
+		WHERE  USER_STATUS = 'Y'
+		  AND  USER_ID = #{ id }
+	</select>
+
+    <update id="updateMember">
+        UPDATE 
+              TBL_USER 
+          SET USER_NAME = #{ name }
+            , USER_PHONE = #{ phone }
+        WHERE USER_STATUS = 'Y'
+          AND USER_CODE = #{ no }
+    </update>
+
+    <update id="deleteMember">
+        UPDATE 
+              TBL_USER
+          SET USER_STATUS = 'N'
+        WHERE USER_STATUS = 'Y'
+          AND USER_ID = #{ id }
+    </update>
+
+
 </mapper>
 
 

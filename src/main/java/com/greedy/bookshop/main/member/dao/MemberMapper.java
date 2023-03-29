@@ -11,5 +11,15 @@ public interface MemberMapper {
     MemberDTO findMemberById(String username);
     
     int insertMember(MemberDTO member); // 회원가입 insert
+    
+    String selectMemberById(String memberId);
+    
+    int insertMemberRole();
+
+    int updateMember(MemberDTO member);
+
+    int deleteMember(MemberDTO member);
+
+
 }
 
