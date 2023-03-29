@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.greedy.bookshop.main.member.dao.MemberMapper;
@@ -18,36 +19,23 @@ import com.greedy.bookshop.main.member.dto.MemberRoleDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j	// Lombok에서 제공하는 어노테이션으로 log라는 이름으로 필드 선언을 제공한다.
+@Slf4j
 @Service
 @ComponentScan(basePackages = {"com.greedy.bookshop.main.member.dao"})
 public class AuthenticationService implements UserDetailsService {
 
-    //private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
 
     private final MemberMapper memberMapper;
 
     public AuthenticationService(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
+		this.memberMapper1 = null;
+		this.passwordEncoder = null;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        /* System.out을 사용하기 보다는 Log 출력을 사용하는 것이 성능상 좋다.
-         * Log4j <-> Logback (Slf4j - 추상체)
-         * Logback이 스프링 부트의 기본 설정이다.
-         *
-         * log level
-         * 1. error : 요청을 처리하는 중 오류가 발생
-         * 2. warn : 처리 가능한 문제, 향후 시스템 에러의 원인이 될 수 있는 경고성 메세지
-         * 3. info : 상태 변경과 같은 정보성 로그
-         * 4. debug : 프로그램을 디버깅 하기 위한 용도
-         * 5. trace : 디버그보다 훨씬 상세한 정보
-         *
-         * 기본 로그 레벨은 info 레벨로 설정 되어 있어 info 이하의 레벨은 출력 되지 않는다.
-         * application.yml 파일에서 log level을 변경할 수 있다.
-         * */
         System.out.println("username : " + username);
 
         log.error("username : {}", username);
@@ -77,7 +65,29 @@ public class AuthenticationService implements UserDetailsService {
         return new CustomUser(member, authorities);
     }
 
+    private final MemberMapper memberMapper1;
+    private final PasswordEncoder passwordEncoder;
 
+    public AuthenticationService(MemberMapper memberMapper1, PasswordEncoder passwordEncoder) {
+        this.memberMapper = null;
+		this.memberMapper1 = memberMapper1;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public MemberDTO register(MemberDTO memberDTO) {
+        if (memberMapper.findMemberById(memberDTO.getId()) != null) {
+            throw new RuntimeException("Username already exists.");
+        }
+
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+        int result = memberMapper.insertMember(memberDTO);
+
+        if (result == 1) {
+            return memberDTO;
+        } else {
+            throw new RuntimeException("Failed to register member.");
+        }
+    }
 
 
 
