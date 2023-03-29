@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.greedy.bookshop.admin.member.common.paging.Pagenation;
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
-import com.greedy.bookshop.admin.member.model.dto.MemberDTO;
 import com.greedy.bookshop.admin.paydeli.model.dao.AdminOrderMapper;
 import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 

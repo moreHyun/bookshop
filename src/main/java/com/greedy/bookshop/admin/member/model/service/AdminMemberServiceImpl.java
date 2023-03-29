@@ -18,18 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@Service("memberService") //빈 네임 등록
+@Service("adminMemberService") //빈 네임 등록
 @Transactional
 /* @Transactional 어노테이션이 붙은 클래스 내부의 메소드는 모두 transaction 관리가 된다.
  * @Transactional 어노테이션은 메소드 레벨로 분리해서 작성할 수도 있다.
  * 메소드 동작시 Exception이 발생하면 전체 트랜잭션을 롤백하고 정상 수행 시에는 commit하는 동작이 일어난다. */
-public class MemberServiceImpl implements MemberService {
+public class AdminMemberServiceImpl implements AdminMemberService {
 	
-	private final AdminMemberMapper memberMapper; //의존성 주입 코드
+	private final AdminMemberMapper adminMemberMapper; //의존성 주입 코드
 	
 	@Autowired
-	public MemberServiceImpl(AdminMemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
+	public AdminMemberServiceImpl(AdminMemberMapper adminMemberMapper) {
+		this.adminMemberMapper = adminMemberMapper;
 	} //의존성 주입~~
 
 
@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	public Map<String, Object> selectMemberList(Map<String, String> searchMap, int page) {
 		
 		//1. 전체 회원 수 확인 (검색어가 있는 경우 포함) -> 페이징 처리 계산을 위해서
-		int totalCount = memberMapper.selectTotalCount(searchMap);
+		int totalCount = adminMemberMapper.selectTotalCount(searchMap);
 		log.info("[MemberService] totalCount : {}", totalCount);
 		
 		/*한 페이지에 보여줄 회원의 수*/
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("[MemberService] selectCriteria : {}", selectCriteria);
 		
 		/*3. 요청 페이지와 검색 기준에 맞는 게시글을 조회해온다.*/
-		List<AdminMemberDTO> memberList = memberMapper.selectMemberList(selectCriteria);
+		List<AdminMemberDTO> memberList = adminMemberMapper.selectMemberList(selectCriteria);
 		log.info("[MemberService] memberList : {}", memberList);
 
 		Map<String, Object> memberListAndPaging = new HashMap<>();
@@ -67,12 +67,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public AdminMemberDTO selectMemberDetail(String id) {
 		
-		return memberMapper.selectMemberDetail(id);
+		return adminMemberMapper.selectMemberDetail(id);
 	}
 
 	 @Override
 	    public void updateMember(AdminMemberDTO member) {
-	        memberMapper.updateMember(member);
+		 adminMemberMapper.updateMember(member);
 	    }
 	 
 
