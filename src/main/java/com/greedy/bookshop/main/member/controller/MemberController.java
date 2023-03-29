@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greedy.bookshop.main.member.dto.CustomUser;
 import com.greedy.bookshop.main.member.dto.MemberDTO;
-import com.greedy.bookshop.main.member.service.AuthenticationService;
+import com.greedy.bookshop.main.member.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,16 +29,16 @@ public class MemberController {
         log.info("로그인 유저 정보 : {}", user);
     }
     
-    private final AuthenticationService authenticationService;
+    private final MemberService memberService;
 
-    public MemberController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody MemberDTO memberDTO) {
         try {
-            MemberDTO createdMember = authenticationService.register(memberDTO);
+            MemberDTO createdMember = memberService.register(memberDTO);
             return ResponseEntity.ok(createdMember);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
