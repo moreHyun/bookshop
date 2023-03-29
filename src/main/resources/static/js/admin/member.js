@@ -15,3 +15,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   });
 });
+
+
+function validateInput() {
+    const userPhone = document.getElementById('invoiceNumber');
+    const userPhoneValue = userPhone.value.trim();
+    const regex = /^\d{8}$/;
+    const errorMessage = document.getElementById('error-message');
+
+    if (!regex.test(userPhoneValue)) {
+        errorMessage.textContent = '송장번호는 8자리 숫자만 입력해주세요.';
+    } else {
+        errorMessage.textContent = '';
+    }
+}

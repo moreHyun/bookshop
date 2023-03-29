@@ -18,12 +18,12 @@
  </head>
     <header class="page-header">
         <a href="">
-            <img class="nav_logo" src="../image/책장옆.png" alt="HOME">
+            <img class="nav_logo" src="/image/책장옆.png" alt="HOME">
         </a>
         <!-- 버튼으로 해야 할지? -->
         <nav>
             <ul class="main-nav">
-                <li><a href="로그인.html">로그아웃</a></li>
+                <li><a href="/member/login" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li>
             </ul>
         </nav>
     </header>
@@ -34,17 +34,17 @@
         <ul class="sub-menu">
             <li><a href="/member/list">&nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
             <li><a href= "/member/list.html">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-            <li><a class="active" href= "/order/list">결제/배송 관리</a></li>
+            <li><a class="active" href= "/order/list">주문/배송 관리</a></li>
             <li><a href="/member/list.html">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
         </ul>
     </aside>
 
     <!-- 상단이동버튼 -->
-    <img class="topbtn" src="../image/topbtn.svg" ></img> 
+    <img class="topbtn" src="/image/topbtn.svg" onclick="scrollToTop();" ></img> 
 
     <div class="subtitle">
         <i class="fa-solid fa-stop"></i>
-      <a>회원 정보 수정</a>
+      <a>배송 정보 수정</a>
     </div>
     
     <hr class="subtitle_line"/>
@@ -56,68 +56,72 @@
 
     <!-- 상품 상세 내용-->
     <div class="text-center">
-        <form th:object="${member}" th:action="@{/member/edit}" method="post">
+        <form th:object="${order}" th:action="@{/order/edit}" method="post">
             <div class="my-3">
-                <label form="id">회원ID</label>
-                <input type="text" style="color: #9e9e9e" id="id" name="id" th:field="*{id}"/>
+                <label form="deliveryCode">배송번호</label>
+                <input type="text" style="color: #9e9e9e" id="id" name="id" th:field="*{deliveryCode.deliveryCode}"/>
             </div>
 
             <div class="my-3">
-                <label form="userName">이름</label>
-                <input type="text" id="userName" name="userName"  th:field="*{name}"/>
+                <label form="userName">주문회원</label>
+                <input type="text" style="color: #9e9e9e" id="userName" name="userName"  th:field="*{id.id}"/>
             </div>
             <div class="my-3">
-                <label form="userNo">생년월일</label>
-                <input style="color: #9e9e9e" type="text" id="userNo" name="userNo" th:field="*{no}"/>
+                <label form="userNo">수령인</label>
+                <input type="text" id="userNo" name="userNo" th:field="*{orderRecipient}"/>
             </div>
               <div class="my-3">
                 <label form="userPhone">연락처</label>
-               <input type="text" id="userPhone" name="userPhone" th:field="*{phone}"/>
-
+               <input type="text" id="userPhone" name="userPhone" th:field="*{orderRecipientphone}"/>
+            </div>
+            <div class="my-3">
+                <label form="userPhone">수령처</label>
+               <input type="text" id="userPhone" name="userPhone" th:field="*{destinationNickname}"/>
+            </div>
+            <div class="my-3">
+                <label form="userPhone">우편번호</label>
+               <input type="text" id="userPhone" name="userPhone" th:field="*{postalCode}"/>
+            </div>
+            <div class="my-3">
+                <label form="userPhone">주소</label>
+               <input type="text" id="userPhone" name="userPhone" th:field="*{address}"/>
+            </div>
+            <div class="my-3">
+                <label form="userPhone">상세주소</label>
+               <input type="text" id="userPhone" name="userPhone" th:field="*{detailedAddress}"/>
+            </div>
+            <div class="my-3">
+                <label form="userPhone">배송메세지</label>
+               <input type="text" id="userPhone" name="userPhone" th:field="*{orderMemo}"/>
             </div>
             
-            <!-- 보류
-            <div class="my-3">
-                <label form="quantity">계정생성일</label>
-                <input style="color: #9e9e9e" type="text" id="quantity" name="quantity" th:text="${member.createUserDate}">
-            </div>
-            <div class="my-3">
-                <label form="quantity">계정삭제일</label>
-                <input type="text" id="quantity" name="quantity" th:text="${member.deleteUserDate}">
-            </div> -->
 
             <div class="my-3">
-                <label form="userGrade">회원등급</label>
-                <select  id="userGrade" name="userGrade" th:field="*{gradecode}">
-  					<option value="1">1</option>
- 				    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                <label form="userGrade">상태</label>
+                <select  id="userGrade" name="userGrade" th:field="*{deliveryStatus}">
+  					<option value="배송준비">배송준비</option>
+ 				    <option value="배송중">배송중</option>
+                    <option value="배송완료">배송완료</option>
                 </select>
-              
-            </div>
-            <div class="my-3">
-                <label form="userRole">회원권한</label>
-                 <select  id="userRole" name="userRole" th:field="*{rolecode}">
-  					<option value="1">1</option>
- 				    <option value="2">2</option>
-                </select>
-            </div>
-            <div class="my-3">
-                <label form="userStatus">회원상태</label>
-                 <select  id="userStatus" name="userStatus" th:field="*{status}">
-  					<option value="Y">Y</option>
- 				    <option value="N">N</option>
-                </select>
+                </div>
                 
             <div class="my-3">
-                <label form="quantity">임시</label>
-                <input style="color: #9e9e9e" type="text" id="quantity" name="quantity" th:field="*{no}"/>
+              <label form="userPhone">송장번호</label>
+           		   <input type="text" id="invoiceNumber" name="userPhone" th:field="*{invoiceNumber}" oninput="validateInput()"/>
+           		  
+                    <div><span id="error-message" style="color: red; font-size: 8px;"></span></div>
             </div>
+              
+            <div class="my-3">
+                <label form="userPhone">구매확정일</label>
+          
+               <input type="text" id="userPhone" name="userPhone" th:field="*{purchaseDate}"/>
+            </div>
+                
 
     		<div class="row">
     		   <button class="row_btn2"
-                    th:onclick="|location.href='@{/member/list}'|"
+                    th:onclick="|location.href='@{/order/list}'|"
                     type="button">목록</button>
                    
                   <button class="row_btn" type="submit" id="updateMember" onclick="return confirm('수정 사항을 저장하시겠습니까?')">저장</button>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.greedy.bookshop.admin.member.model.dto.AdminMemberDTO;
 import com.greedy.bookshop.admin.member.model.service.AdminMemberService;
-
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -90,7 +90,7 @@ public class AdminMemberController {
 	    	
 	  }
 	 
-	  
+
 	 
 	  
 }

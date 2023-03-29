@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -64,6 +64,17 @@ public class AdminOrderController {
 		
 		return "admin/paydeli/detail";
 	}
+	
+	  @GetMapping("/edit/{orderCode}")
+	    public String editForm(@PathVariable("orderCode") int orderCode, Model model) {
+			
+		     AdminOrderDTO orderDetail = adminOrderService.selectOrderDetail(orderCode);
+			log.info("[AdminOrderController] orderDetail : {}", orderDetail);
+			
+			model.addAttribute("order", orderDetail);
+			
+			return "admin/paydeli/edit";
+	    }
 	 
 	  
 }
