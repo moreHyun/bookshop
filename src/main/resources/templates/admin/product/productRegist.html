@@ -141,9 +141,8 @@
 	            <label class="label_title">기본가*</label>
 	            <input type="hidden" id="bookPrice" name="bookPrice" class="shortinfo required">
 	            <input type="text" id="bookPrice2" class="shortinfo">
-	                <span></span>
 	            <label>
-	                할인률
+	                할인가
 	                <input type="hidden" id="bookDiscount" name="bookDiscount" class="shortinfo" value="0">
 	                <input type="text" id="bookDiscount2" class="shortinfo" value="0">
 	                <span>원</span>
@@ -161,19 +160,20 @@
         </div>
         
          <script>
-         
-         
    		 // 숫자 3자리마다 쉼표 추가하는 함수
          function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          }
-
+   		 
          // 할인율 및 최종 가격 계산하는 함수
          function calculate() {
              // 입력란에서 값을 가져와 쉼표를 제거하고 정수로 변환
              let bookPrice = parseInt(document.getElementById("bookPrice2").value.replace(/,/g, ""));
-             let bookDiscount = parseInt(document.getElementById("bookDiscount2").value.replace(/,/g, ""));
-             let discountPercentage = parseInt(document.getElementById("discountPercentage").value);
+			 let bookDiscount = parseInt(document.getElementById("bookDiscount2").value.replace(/,/g, ""));
+			 document.getElementById("bookPrice2").value = numberWithCommas(bookPrice);
+			 document.getElementById("bookDiscount2").value = numberWithCommas(bookDiscount);
+			 let discountPercentage = parseInt(document.getElementById("discountPercentage").value);
+			 document.getElementById("discountPercentage").value = discountPercentage;
              let bookTotalPrice = bookPrice - bookDiscount;
 
              // 할인율이 100을 초과한 경우 강제로 100으로 설정하고 할인 가격 및 최종 가격 다시 계산
@@ -189,10 +189,10 @@
              }
 
              // 판매가가 입력되지 않은 경우 경고 메시지 출력
-             if (isNaN(bookPrice)) {
+/*              if (isNaN(bookPrice)) {
                  alert("판매가를 입력해주세요.");
                  return;
-             }
+             } */
 
              // 할인 가격이 입력되지 않은 경우 할인율을 사용하여 계산
              if (isNaN(bookDiscount)) {
@@ -216,7 +216,6 @@
          document.getElementById("bookPrice2").addEventListener("input", calculate);
          document.getElementById("bookDiscount2").addEventListener("input", calculate);
          document.getElementById("discountPercentage").addEventListener("input", calculate);
-         
         </script>
         
 
