@@ -10,6 +10,11 @@
     display: none;
 }
 
+.right nav ul button {
+    text-align: center;
+    margin-right: 20px
+}
+
 ul.imgs{
     padding: 0;
     margin: 0;

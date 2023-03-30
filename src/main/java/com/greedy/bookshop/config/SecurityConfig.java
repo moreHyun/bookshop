@@ -1,6 +1,7 @@
 package com.greedy.bookshop.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,9 +33,10 @@ public class SecurityConfig {
         return http
         		.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/board/**", "/thumbnail/**", "/member/update", "/member/delete").hasRole("USER")
-                // 관리자만 사용 가능한 기능은 현재는 없음
-                .anyRequest().permitAll()
+                .antMatchers("/myPage/**", "/center/**", "/cart/**").hasRole("USER")
+				.antMatchers(HttpMethod.POST, "/center/**").hasRole("ADMIN")
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.anyRequest().permitAll()
                 .and()
                     .formLogin()
                     .loginPage("/member/login")             
@@ -48,7 +50,9 @@ public class SecurityConfig {
                     .deleteCookies("JSESSIONID")
                     .invalidateHttpSession(true)
                     .logoutSuccessUrl("/")
-                // 따라서 인가 오류 처리는 생략하였음
+				.and()
+				.exceptionHandling()
+				.accessDeniedPage("/error/denied")
     			.and()
     				.build();
     }

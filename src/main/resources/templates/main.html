@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/common/nav.css">
-    <link rel="stylesheet" href="/common/footer.css">
-    <link rel="stylesheet" href="/common/main.css">
+    <link rel="stylesheet" href="/css/common/nav.css">
+    <link rel="stylesheet" href="/css/common/footer.css">
+    <link rel="stylesheet" href="/css/common/main.css">
     <title>nav</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/event.js"></script>
+    <script src="/js/event.js"></script>
 
 </head>
 
@@ -27,7 +27,7 @@
     <div class="right">
         <nav>
             <ul>
-                <li><a>책 창고</a></li>
+                <li><a href="/sale/salepage.html">책 창고</a></li>
                 <th:block sec:authorize="isAuthenticated()">
                     <button onclick="location.href='/member/logout'">로그아웃</button>
                 </th:block>
@@ -39,10 +39,10 @@
     </div>
 
     <th:block sec:authorize="hasRole('USER')">
-    <button onclick="location.href='/mypage/orderhistory'">내 정보</button>
+    <button onclick="location.href='/myPage/mainview'">내 정보</button>
     </th:block>
     <th:block sec:authorize="hasRole('ADMIN')">
-        <button onclick="location.href='/admin/member/list'">관리자</button>
+        <button onclick="location.href='/admin/member/list">관리자</button>
     </th:block>
 
 </header>

@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/mypage")
+@RequestMapping("/myPage")
 public class MypageController {
 	
 	private final MypageService mypageService;
@@ -59,7 +59,7 @@ public class MypageController {
 		
 				
 		
-		return "mypage/orderhistory";
+		return "myPage/orderhistory";
 	}
 	
 	@GetMapping("/refundhistory")

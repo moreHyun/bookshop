@@ -140,6 +140,7 @@
 
 .login_logo {
     width: 250px;
+    align-items: center;
 }
 
 #login {
