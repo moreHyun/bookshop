@@ -29,3 +29,4 @@ function validateInput() {
         errorMessage.textContent = '';
     }
 }
+

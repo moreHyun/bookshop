@@ -132,5 +132,10 @@
         WHERE A.ORDER_CODE = #{ orderCode }
     </select>
    
+   <update id="updateDelivery" parameterType="com.greedy.bookshop.admin.paydeli.model.dto.AdminDeliveryDTO">
+    UPDATE TBL_DELIVERY
+    SET INVOICE_NUMBER = #{invoiceNumber}, DELIVERY_STATUS = #{deliveryStatus}
+    WHERE ORDER_CODE = #{orderCode}
+</update>
    	
 </mapper>

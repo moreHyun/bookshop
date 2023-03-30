@@ -107,8 +107,7 @@
                 
             <div class="my-3">
               <label form="userPhone">송장번호</label>
-           		   <input type="text" id="invoiceNumber" name="userPhone" th:field="*{invoiceNumber}" oninput="validateInput()"/>
-           		  
+           		   <input type="number" id="invoiceNumber" name="userPhone" th:field="*{invoiceNumber}" oninput="validateInput()"/>
                     <div><span id="error-message" style="color: red; font-size: 8px;"></span></div>
             </div>
               
