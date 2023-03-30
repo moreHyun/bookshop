@@ -1,6 +1,7 @@
 package com.greedy.bookshop.sales.controller;
 
 import com.greedy.bookshop.sales.model.dto.CartDTO;
+import com.greedy.bookshop.sales.model.dto.UserDTO;
 import com.greedy.bookshop.sales.service.CartPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -24,21 +27,24 @@ public class CartPageController
     }
 
     @GetMapping("/cart")
-    public void go() { }
-
-    @PostMapping("/regist")
-    public String cartRegist(@RequestParam long bookCode, Model model)
+    public String showCartList(Model model)
     {
-        log.info("CartController] bookCode : " + bookCode);
-        int r = cartPageService.insertCart(bookCode,1);
+        UserDTO user = new UserDTO();
+        user.setUserCode(1);
+        Map<String, Object> cart = cartPageService.selectUserCart(user.getUserCode());
+        model.addAttribute("user",user);
+        model.addAttribute("cart",cart.get("cart"));
+        model.addAttribute("book",cart.get("book"));
+        model.addAttribute("file",cart.get("file"));
 
-        if(r == 1)
+        for(int i = 0; i < cart.size(); i++)
         {
-            model.addAttribute("message","장바구니에 상품추가 완료");
+            log.info("Controller] model " + i + " : " + model);
         }
 
-        return "redirect:/sale/bookDetails?no=" + bookCode;
+        return "/cart/cart";
     }
+
 
 
 }

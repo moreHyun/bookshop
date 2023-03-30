@@ -1,14 +1,14 @@
 package com.greedy.bookshop.sales.controller;
 
 
+import com.greedy.bookshop.sales.model.dto.BookDTO;
 import com.greedy.bookshop.sales.model.dto.CategoryDTO;
 import com.greedy.bookshop.sales.service.SalePageService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
 import java.io.IOException;
@@ -83,7 +83,18 @@ public class SalePageController {
         return categoryList;
     }
 
+    @PostMapping("/regist")
+    public ResponseEntity<String> cartRegist(@RequestBody BookDTO bookCode, Model model)
+    {
+        log.info("g2");
+        log.info("CartController] bookCode : " + bookCode);
 
+        String m = salePageService.insertCart(bookCode.getBookCode(),1);
+
+
+
+        return ResponseEntity.ok(m);
+    }
 
 
 
