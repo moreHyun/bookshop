@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  var currentPath = window.location.pathname;
+  var menuLinks = document.querySelectorAll(".top-menu a");
+
+  menuLinks.forEach(function(link) {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active"); // 'active' 클래스를 추가하는 부분
+    }
+
+  });
+});
+
 
 function validateInput() {
     const userPhone = document.getElementById('invoiceNumber');

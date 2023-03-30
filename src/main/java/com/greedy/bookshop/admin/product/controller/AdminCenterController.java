@@ -34,5 +34,16 @@ public class AdminCenterController {
 	public String centerFaqRegistPage() {
 		return "admin/center/faqRegist";
 	}
+	
+	/*일대일 문의*/
+	@GetMapping("/inquiry")
+	public String centerInquiryList() {
+		return "admin/center/inquiry";
+	}
+	
+	@GetMapping("/inquiryEnd")
+	public String centerInquiryEnd() {
+		return "admin/center/inquiryEnd";
+	}
 
 }
