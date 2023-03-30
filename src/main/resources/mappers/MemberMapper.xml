@@ -6,8 +6,8 @@
 
 	<resultMap id="memberResultMap" type="com.greedy.bookshop.member.dto.MemberDTO">
 		<id property="memberNo" column="USER_CODE"/>
-		<result property="memberId" column="USER_ID"/>
-		<result property="memberPwd" column="USER_PWD"/>
+		<result property="username" column="USER_ID"/>
+		<result property="password" column="USER_PWD"/>
 		<result property="name" column="USER_NAME"/>
 		<result property="phone" column="USER_PHONE"/>
 		<result property="address" column="ADDRESS"/>

@@ -1,4 +1,4 @@
-package com.greedy.bookshop.main.member.controller;
+package com.greedy.bookshop.member.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class MainController {
+public class Maincontroller {
 
-    @GetMapping(value = {"/","/main"})
+    @GetMapping(value = {"/", "/main"})
     public String main() {
         return "main";
     }
@@ -17,5 +17,4 @@ public class MainController {
     public String redirectMain() {
         return "redirect:/";
     }
-
 }
