@@ -243,6 +243,10 @@ select::-ms-expand {
     display: none;
 }
 
+td {
+	padding: 5px 10px 5px 10px;
+}
+
 label {
 	display:inline-block;
     position: relative;

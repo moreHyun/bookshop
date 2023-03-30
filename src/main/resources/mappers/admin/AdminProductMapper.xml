@@ -3,13 +3,11 @@
 <mapper namespace="com.greedy.bookshop.admin.product.model.dao.AdminProductMapper">
 
 <resultMap id="bookResultMap" type="com.greedy.bookshop.admin.product.model.dto.BookDTO">
-
 	<id property="bookCode" column="BOOK_CODE"/>
     <result property="bookName" column="BOOK_NAME"/>
     <result property="bookPrice" column="BOOK_PRICE"/>
     <result property="bookAuthor" column="BOOK_AUTHOR"/>
     <result property="bookPublisher" column="BOOK_PUBLISHER"/>
-
     <result property="categoryCode" column="CATEGORY_CODE"/>
     <result property="bookInventory" column="BOOK_INVENTORY"/>
     <result property="salesStatus" column="SALES_STATUS"/>

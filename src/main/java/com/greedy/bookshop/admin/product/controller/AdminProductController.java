@@ -19,20 +19,20 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping
+@RequestMapping("/product")
 public class AdminProductController {
 	
 	@Autowired
 	private AdminProductService adminProductService;
 	
-	@GetMapping("/admin/product/regist")
+	@GetMapping("/regist")
 	public String productRegistPage() {
 		
 		return "admin/product/productRegist";
 	}
 	
 	/* 상품 등록 */
-	@PostMapping("/admin/product/regist")
+	@PostMapping("/regist")
 	public String productRegist(BookDTO book, RedirectAttributes rttr, Model model) {
 	    log.info("productRegistPOST...... : {}", book);
 
@@ -47,7 +47,7 @@ public class AdminProductController {
 	/* 상품 조회 및 수정 */
 	
 	// 상품 조회 페이지
-	@GetMapping("/admin/product/list")
+	@GetMapping("/list")
 	public String productSelectPage(BookSearchCriteria booksearchCriteria, Model model) {
 		
 		
@@ -58,7 +58,6 @@ public class AdminProductController {
 		
 		model.addAttribute("bookSearchList", bookSearchList);
 		
-	    // 요청 파라미터를 사용하는 메서드
 	    return "admin/product/productSelectUpdate";
 	}
 	
