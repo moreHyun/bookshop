@@ -1,44 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.greedy.bookshop.main.member.dao.MemberMapper">
-    
-    <resultMap id="loginMemberResultMap" type="com.greedy.bookshop.main.member.dto.MemberDTO">
-        <id property="no" column="USER_CODE"/>
-        <result property="id" column="USER_ID"/>
-        <result property="pwd" column="USER_PWD"/>
-        <result property="tempPwdYn" column="TEMP_PWD_YN"/>
-        <result property="pwdChangedDatetime" column="PWD_CHANGED_DATETIME"/>
-        <result property="pwdExpDate" column="PWD_EXP_DATE"/>
-        <result property="name" column="USER_NAME"/>
-        <result property="dateOfBirth" column="USER_NO"/>
-        <result property="phone" column="USER_PHONE"/>
-        <result property="registDatetime" column="CREATE_USER_DATE"/>
-        <result property="accSecessionDatetime" column="DELETE_USER_DATE"/>
-        <result property="accSecessionYn" column="USER_STATUS"/>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.member.dao.MemberMapper">
 
-        <collection property="memberRoleList" resultMap="memberRoleResultMap"/>
-
-    </resultMap>
-
-    <resultMap id="memberRoleResultMap" type="com.greedy.bookshop.main.member.dto.MemberRoleDTO">
-        <id property="memberNo" column="REF_USER_CODE"/>
-        <id property="authorityCode" column="REF_USER_ROLE_CODE"/>
-
-        <association property="authority" resultMap="authorityResultMap"/>
-    </resultMap>
-    
-    <resultMap id="authorityResultMap" type="com.greedy.bookshop.main.member.dto.AuthorityDTO">
-        <id property="code" column="REF_USER_ROLE_CODE2"/>
-        <result property="name" column="ROLE_NAME"/>
-        <result property="desc" column="ROLE_DESC"/>
-    </resultMap>
-
-    <select id="findMemberById" resultMap="loginMemberResultMap">
+	<resultMap id="memberResultMap" type="com.greedy.bookshop.member.dto.MemberDTO">
+		<id property="memberNo" column="USER_CODE"/>
+		<result property="memberId" column="USER_ID"/>
+		<result property="memberPwd" column="USER_PWD"/>
+		<result property="name" column="USER_NAME"/>
+		<result property="phone" column="USER_PHONE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="enrollDate" column="CREATE_USER_DATE"/>
+		<result property="memberStatus" column="USER_STATUS"/>
+		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.greedy.bookshop.member.dto.MemberRoleDTO" id="memberRoleResultMap">
+		<id property="memberNo" column="REF_USER_CODE"/>
+		<id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+		<association property="authority" resultMap="authorityResultMap"/>
+	</resultMap>
+	
+		<resultMap type="com.greedy.bookshop.member.dto.AuthorityDTO" id="authorityResultMap">
+		<id property="code" column="REF_AUTHORITY_CODE2"/>
+		<result property="name" column="AUTHORITY_NAME"/>
+		<result property="desc" column="AUTHORITY_DESC"/>
+	</resultMap>
+	
+	<select id="findByMemberId" resultMap="memberResultMap">
         SELECT
                 A.USER_CODE
               , A.USER_ID
               , A.USER_PWD
               , A.USER_NAME
+              , A.USER_PHONE
               , A.CREATE_USER_DATE
               , B.USER_CODE REF_USER_CODE
               , C.USER_ROLE_CODE REF_USER_ROLE_CODE2
@@ -49,34 +45,34 @@
         LEFT    JOIN TBL_AUTHORITY C ON (B.USER_CODE = C.USER_ROLE_CODE)
         WHERE A.USER_ID = #{ username }
     </select>
-    
-<!--        private int no;									//회원번호
-    private String id;								//회원아이디
-    private String pwd;								//회원비밀번호
-    private String tempPwdYn;						//임시비밀번호여부
-    private Date pwdChangedDatetime;				//회원비밀번호변경일자
-    private String pwdExpDate;						//회원비밀번호만료일자
-    private String name;							//회원이름
-    private String phone;							//회원전화번호
-    private Date registDatetime;					//회원가입일시
-    private int accumLoginCount;					//누적로그인횟수
-    private int loginFailedCount;					//로그인연속실패횟수
-    private Date accSecessionDatetime;				//계정탈퇴일시
-    private String accSecessionYn;	-->
-    
-    <insert id="insertMember" parameterType="com.greedy.bookshop.main.member.dto.MemberDTO">
-        INSERT INTO TBL_MEMBER (no, id, pwd, temp_pwd_yn, pwd_changed_datetime, pwd_exp_date, name, regist_datetime, accum_login_count, login_failed_count, acc_secession_datetime, acc_secession_yn)
-        VALUES (SEQ_MEMBER_NO.NEXTVAL, #{id}, #{pwd}, #{tempPwdYn}, #{pwdChangedDatetime}, #{pwdExpDate}, #{name}, #{registDatetime}, #{accumLoginCount}, #{loginFailedCount}, #{accSecessionDatetime}, #{accSecessionYn})
-    </insert>
-    
+
     <select id="selectMemberById" resultType="string">
         SELECT
-               USER_CODE
-          FROM TBL_USER
+               USER_ID
+          FROM TBL_USER 
          WHERE USER_STATUS = 'Y'
-           AND USER_ID = #{ id }
+           AND USER_ID = #{ username }
     </select>
 
+    <insert id="insertMember">
+        INSERT
+          INTO TBL_USER 
+        (
+          USER_CODE
+        , USER_ID
+        , USER_PWD
+        , USER_NAME
+        , USER_PHONE
+        )
+        VALUES
+        (
+          SEQ_USER_CODE.NEXTVAL
+        , #{ username }
+        , #{ password }
+        , #{ name }
+        , #{ phone }
+        )
+	</insert>
 	
 	<insert id="insertMemberRole">
 		INSERT
@@ -87,7 +83,7 @@
         )
         VALUES
         (
-          SEQ_MEMBER_NO.CURRVAL
+          SEQ_USER_CODE.CURRVAL
         , 1
         )
 	</insert>
@@ -97,7 +93,7 @@
                USER_PWD
           FROM TBL_USER
          WHERE USER_STATUS = 'Y'
-           AND USER_ID = #{ id }
+           AND USER_ID = #{ username }
 	</select>
 
 	<select id="selectMember">
@@ -107,11 +103,10 @@
 		     , USER_NAME
 		     , USER_PHONE
 		     , CREATE_USER_DATE
-		     , USER_ROLE_CODE
 		     , USER_STATUS
 		 FROM  TBL_USER A
 		WHERE  USER_STATUS = 'Y'
-		  AND  USER_ID = #{ id }
+		  AND  USER_ID = #{ username }
 	</select>
 
     <update id="updateMember">
@@ -120,27 +115,15 @@
           SET USER_NAME = #{ name }
             , USER_PHONE = #{ phone }
         WHERE USER_STATUS = 'Y'
-          AND USER_CODE = #{ no }
+          AND USER_CODE = #{ memberNo }
     </update>
 
     <update id="deleteMember">
         UPDATE 
-              TBL_USER
+              TBL_USER 
           SET USER_STATUS = 'N'
         WHERE USER_STATUS = 'Y'
-          AND USER_ID = #{ id }
+          AND USER_ID = #{ username }
     </update>
 
-
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
