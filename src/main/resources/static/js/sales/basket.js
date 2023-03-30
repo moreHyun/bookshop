@@ -27,18 +27,41 @@ function deleteSelected() {
 // 상품 수량을 변경할 때마다 총 상품 가격을 업데이트하는 함수
 function updateTotalPrice() {
   let items = document.getElementsByClassName("cart-item");
+  let total = 0;
+  let dprice = 0;
+  let dicount = 0;
   let totalPrice = 0;
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++)
+  {
     let quantity = parseInt(items[i].getElementsByClassName("product-quantity")[0].value);
     let price = parseInt(items[i].getElementsByClassName("item-price")[0].textContent.replace(",", "").replace("원", ""));
-    let total = quantity * price;
-    if (items[i].getElementsByClassName("product-checkbox")[0].checked) {
-      totalPrice += total;
+    if(document.querySelector("item-discount") && dicount > 0)
+    {
+      dicount = parseInt(items[i].getElementsByClassName("item-discount")[0].textContent.replace(",","").replace("%" , ""))
+      dprice = ((quantity * price) / dicount);
+    }
+    else
+    {
+      total = quantity * price;
+    }
+    if (items[i].getElementsByClassName("product-checkbox")[0].checked)
+    {
+      if(dprice > 1)
+        totalPrice += total - dprice;
+      else
+        totalPrice += total;
     }
     items[i].getElementsByClassName("item-total")[0].textContent = total.toLocaleString() + "원";
   }
+  if(totalPrice >= 13000)
+    delivery = 0;
+  else
+    delivery = 3000;
+
+  document.getElementById("delivery -price").textContent = delivery.toLocaleString();
   document.getElementById("total-price").textContent = totalPrice.toLocaleString();
-  document.getElementById("total-amount").textContent = (totalPrice + 3000).toLocaleString();
+  document.getElementById("discount-price").textContent = dprice.toLocaleString();
+  document.getElementById("total-amount").textContent = (totalPrice + delivery).toLocaleString();
 }
 
 
@@ -47,7 +70,8 @@ function checkout() {
   let items = document.getElementsByClassName("cart-item");
   let selectedItems = [];
   for (let i = 0; i < items.length; i++) {
-    if (items[i].getElementsByClassName("product-checkbox")[0].checked) {
+    if (items[i].getElementsByClassName("product-checkbox")[0].checked)
+    {
       let name = items[i].getElementsByClassName("item-info")[0].getElementsByTagName("p")[0].textContent;
       let price = items[i].getElementsByClassName("item-price")[0].textContent;
       let quantity = items[i].getElementsByClassName("product-quantity")[0].value;
@@ -66,6 +90,15 @@ document.getElementById("select-all-checkbox").addEventListener("change", functi
   }
   updateTotalPrice();
 });
+let itemClick = document.getElementsByClassName("item-checkbox");
+for (let i = 0; i < itemClick.length; i++)
+{
+  itemClick[i].addEventListener("change",function ()
+  {
+    updateTotalPrice();
+  })
+}
+
 document.getElementById("delete-selected-btn").addEventListener("click", function() {
   deleteSelected();
   updateTotalPrice();
