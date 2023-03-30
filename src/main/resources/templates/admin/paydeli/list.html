@@ -21,7 +21,7 @@
             </a>
             <nav>
                 <ul class="main-nav">
-                    <li><a href="로그인.html">로그아웃</a></li>
+                    <li><a href="/member/login" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,14 +32,14 @@
             <ul class="sub-menu">  
                 <li><a class="usermenu" href="/member/list"> &nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
                 <li><a class="clickmenu" href="#">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a class="active" href="/order/list">결제/배송 관리</a></li>
+                <li><a class="active" href="/order/list">주문/배송 관리</a></li>
                 <li><a class="csmenu" href="#">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
             </ul>
         </aside>
     
         
         <!-- 상단이동버튼 -->
-        <img class="topbtn" src="../image/topbtn.svg" ></img>   
+        <img class="topbtn" src="../image/topbtn.svg" onclick="scrollToTop();"></img>   
             
         <!-- 회원 조건 검색-->
         	<div class=searchform>

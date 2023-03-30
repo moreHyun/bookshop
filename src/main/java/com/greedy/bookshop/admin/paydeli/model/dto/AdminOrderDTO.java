@@ -2,6 +2,8 @@ package com.greedy.bookshop.admin.paydeli.model.dto;
 
 import java.util.Date;
 
+
+
 import lombok.Data;
 
 @Data
@@ -25,6 +27,8 @@ public final class AdminOrderDTO {
 	
 	private AdminDeliveryDTO deliveryCode;
 	private AdminDeliveryDTO deliveryStatus;
+	
+	
 	private AdminDeliveryDTO invoiceNumber;
 	private AdminDeliveryDTO purchaseDate;
 	

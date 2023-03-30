@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.greedy.bookshop.admin.member.common.paging.Pagenation;
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
 import com.greedy.bookshop.admin.paydeli.model.dao.AdminOrderMapper;
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminDeliveryDTO;
 import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +68,13 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		
 		return adminOrderMapper.selectOrderDetail(orderCode);
 	}
+	
+	@Override
+	public void updateDelivery(AdminDeliveryDTO delivery) {
+		 adminOrderMapper.updateDelivery(delivery);
+		
+	}
+
 
 
 	
