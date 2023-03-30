@@ -46,7 +46,7 @@
                     </h1>
                     <div class="grd-box">
                         <p class="txt">
-                            <a class="highlight">홍길동</a>님, 반갑습니다.
+                            <a class="highlight" th:text="${ #authentication.principal.name }"></a>님, 반갑습니다.
                         </p>
                     </div>
                 </div>
