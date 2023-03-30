@@ -6,8 +6,8 @@
 
 	<resultMap id="memberResultMap" type="com.greedy.bookshop.member.dto.MemberDTO">
 		<id property="memberNo" column="USER_CODE"/>
-		<result property="username" column="USER_ID"/>
-		<result property="password" column="USER_PWD"/>
+		<result property="memberId" column="USER_ID"/>
+		<result property="memberPwd" column="USER_PWD"/>
 		<result property="name" column="USER_NAME"/>
 		<result property="phone" column="USER_PHONE"/>
 		<result property="address" column="ADDRESS"/>
@@ -18,14 +18,14 @@
 	
 	<resultMap type="com.greedy.bookshop.member.dto.MemberRoleDTO" id="memberRoleResultMap">
 		<id property="memberNo" column="REF_USER_CODE"/>
-		<id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+		<id property="authorityCode" column="REF_USER_ROLE_CODE"/>
 		<association property="authority" resultMap="authorityResultMap"/>
 	</resultMap>
 	
 		<resultMap type="com.greedy.bookshop.member.dto.AuthorityDTO" id="authorityResultMap">
-		<id property="code" column="REF_AUTHORITY_CODE2"/>
-		<result property="name" column="AUTHORITY_NAME"/>
-		<result property="desc" column="AUTHORITY_DESC"/>
+		<id property="code" column="REF_USER_ROLE_CODE2"/>
+		<result property="name" column="ROLE_NAME"/>
+		<result property="desc" column="ROLE_DESC"/>
 	</resultMap>
 	
 	<select id="findByMemberId" resultMap="memberResultMap">
@@ -36,13 +36,13 @@
               , A.USER_NAME
               , A.USER_PHONE
               , A.CREATE_USER_DATE
-              , B.USER_CODE REF_USER_CODE
+              , B.USER_CODE REF_USER_ROLE_CODE
               , C.USER_ROLE_CODE REF_USER_ROLE_CODE2
               , C.ROLE_NAME
               , C.ROLE_DESC
         FROM    TBL_USER A
         LEFT    JOIN TBL_USER_ROLE B ON (A.USER_CODE = B.USER_CODE)
-        LEFT    JOIN TBL_AUTHORITY C ON (B.USER_CODE = C.USER_ROLE_CODE)
+        LEFT    JOIN TBL_AUTHORITY C ON (B.AUTHORITY_CODE = C.USER_ROLE_CODE)
         WHERE A.USER_ID = #{ username }
     </select>
 

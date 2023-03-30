@@ -57,5 +57,4 @@ window.onload = function() {
             location.href = "/member/delete";
         }
     }
-
-	/* ------------------------------------------------------------- */
+}

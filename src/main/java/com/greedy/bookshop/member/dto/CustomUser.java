@@ -23,7 +23,7 @@ public class CustomUser extends User {
     }
 
     private void setDetails(MemberDTO member) {
-        this.no = member.getNo();
+        this.no = member.getMemberNo();
         this.name = member.getName();
         this.registDate = member.getRegistDatetime();
     }
