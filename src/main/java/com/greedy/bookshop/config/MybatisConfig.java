@@ -1,4 +1,4 @@
-package com.greedy.bookshop.common.config;
+package com.greedy.bookshop.config;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;

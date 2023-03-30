@@ -1,4 +1,4 @@
-package com.greedy.bookshop.main.member.dto;
+package com.greedy.bookshop.member.dto;
 
 import lombok.Data;
 

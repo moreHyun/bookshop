@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="kor">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../image/책장옆 복사본.png">
     <link href="/css/login.css" rel="stylesheet" type="text/css">
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <title>로그인페이지</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/event.js"></script>
+
+    <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
+
     <style>
     html,
     body {
@@ -23,14 +32,15 @@
 </head>
 
 <header>
-    <a href="./home.html">Home</a>
+    <a href="/main.html">Home</a>
     <span>> Log in</span>
 </header>
 
 <body>
     
-    <form action="/member/login" method="post">
+    
     <div class="login_main">
+        <form id="loginForm" action="/member/login" method="post">
         <img class="login_logo" src="/image/책장옆.png">
         <div class="login_container">
             <input type="text" placeholder="아이디를 입력하세요." id="id" class="account">
@@ -47,6 +57,7 @@
                 </div>
             </div>
         </div>
+        </form>
 
         <div class="login_social">
             <img class="naver" src="/image/naver.png">
@@ -58,10 +69,9 @@
                 SNS 계정의 로그아웃 상태를 확인해 주세요.</p>
         </div>
         <div class="login_join">
-            <button id="loginJoin" class="account" onclick="window.open('regist.html')">회원가입</button>
+            <button id="regist" class="account">회원가입</button>
         </div>
     </div>
-    </form>
 
 
     <!----footer---->
