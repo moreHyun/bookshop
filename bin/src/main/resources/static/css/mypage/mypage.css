@@ -1,0 +1,470 @@
+/* 공통 */
+a{
+    text-decoration: none;
+    color: black;
+}
+
+li{
+    list-style: none;
+}
+
+
+/* 레이아웃 */
+.mypage-head{
+    display: flex;
+}
+
+.mypage-contents{
+    display: flex;
+}
+
+.area-over{
+    display: flex;
+}
+
+
+/* ---------헤드--------------------------------------- */
+
+.mypage-head h1 {
+    margin-left: 80px;
+}
+
+.grd-box {
+    margin-left: 130px;
+    padding-top: 10px;
+}
+
+.grd-box p {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.highlight {
+    color: #AACB73;
+}
+
+/* ----------사이드---------------------------------------- */
+
+.mypage-side > ul > li > h2 {
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+
+.mypage-side > ul > li > ul {
+    line-height: 2.5;
+}
+
+
+
+/* -----------내용-------------------------------------------*/
+.contents-right {
+    margin-left: 119px;
+    width: 42%;
+}
+
+a.btnMore {
+    padding-top: 10px;
+}
+
+.nodata {
+    text-align: center;
+    margin-top: 90px;
+    color: gray
+}
+
+/* 주문/배송 조회 */
+.mypage-step {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #F1F1F1;
+    min-height: 150px;
+    border-radius: 10px;
+    margin-top: 0px;
+}
+
+.mypage-step > li > em {
+    margin: auto;
+    padding-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.btnMore {
+    margin-top: 25px;
+}
+
+.title-area2 em {
+    font-size: 0.8rem;
+}
+
+.mypage-step > li > span {
+    font-weight: bold;
+}
+
+.title-area2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypage-step li {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 찜목록 */
+.title-area3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cate_prd_list {
+    min-height: 200px;
+    border-top: 1px solid;  
+    border-bottom: 1px solid lightgray;
+    margin-top: 0px;
+    padding-left: 50px;
+    
+
+}
+/* 1:1문의내역 및 리뷰작성내역*/
+.title-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nodataaa {  
+    min-height: 200px;
+    border-top: 1px solid;
+    border-bottom: 1px solid lightgray;
+    margin-top: 0px;
+    padding-left: 0px;
+    width: 380px;
+
+}
+
+.bottom-area{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-right{
+    width: 48%;
+}
+
+
+
+
+/* @@@@@@@@@@@@@@@ mypage11 @@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.cate_prd_list2 {
+    display: flex;
+    min-height: 200px;
+    border-top: 1px solid;  
+    border-bottom: 1px solid lightgray;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-left: 50px;
+    text-align: center;
+    
+}
+
+.yesdata{
+    margin-right: 100px;
+}
+
+.yesdata p {
+    font-size: 0.9rem;
+    color: gray;
+}
+
+
+.stit {
+    display: block;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:100%;
+
+}
+
+.stit strong {
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.stit a {
+    width: 0%;
+}
+
+
+.stit .data {
+    padding-top: 3px;
+}
+
+
+/* @@@@@@@@@@@@@@@ mypage2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+/* 구매기간 */
+.select_con ul {
+    display: flex;
+}
+
+.select_con li {
+    margin-right: 10px;
+}
+
+.select_con-left{
+ 
+}
+
+.search-period-container {
+    display: flex;
+}
+
+.button-right {
+    margin-left: auto;
+}
+
+.btnLookup {
+    height: 130px;
+    width: 100px;
+    border-radius: 0px 10px 10px 0px;
+    background: gray;
+    border: none;
+}
+
+.search-period {
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    min-height: 130px;
+}
+
+.select_con-left {
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.select-range {
+    margin-left: 50px;
+}
+
+.board-guide-test {
+    margin-top: 5px;
+}
+
+.board-guide-test span {
+    font-size: 0.8rem;
+
+}
+
+/* 주문 테이블*/
+
+.board-list-s {
+    border-top: 2px solid;
+    border-bottom: 1px solid;
+}   
+
+.history .nodata {
+    border-top: 1px solid;
+    height: 200px;
+}
+
+/* @@@@@@@@@@@@@@@@ mypage3 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.mypage3-block {
+    margin-left: 119px;
+    width: 42%;
+}
+
+/* @@@@@@@@@@@@@@@@@ editinfo @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.editinfo-contents {
+    margin-left: 119px;
+}
+
+.pwd-input {
+    display: flex;
+}
+
+.pwd_box {
+    margin-right: 10px;
+}
+
+.notification h4 {
+    margin-top: 0px;
+}
+
+.notification p {
+    margin-bottom: 0px;
+}
+
+.maingo a {
+    text-decoration: underline;
+    font-size: 0.8rem;
+}
+
+/* @@@@@@@@@@@@@@@@@@@ editinfo2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.member_info {
+    margin-left: 119px;
+    width: 60%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.editmem-body tr {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 50px;
+    
+}
+
+.editmem-body th {
+    border-right: 1px solid;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.editmem-body td {
+    padding-left: 20px;
+}
+
+
+.btn_secbtn_center {
+   margin-left: 300px;
+   margin-top: 20px;
+}
+
+.space{
+   width: 5px;
+   height: auto;
+   display: inline-block;
+}
+
+/* @@@@@@@@@@@@@@@@ memberdelete @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.memdelete-container {
+    margin-left: 119px;
+    width: 60%;
+}
+
+.title-area5{
+    border-bottom: 2px solid;
+}
+
+.secess-area {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    height: 250px;
+    padding-top: 50px;
+}
+
+.common2s-text {
+    text-align: center;
+    font-weight: bold;
+}
+
+.area1sButton{
+    text-align: center;
+}
+
+/* @@@@@@@@@@@@@@@ memberdelete2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.info-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-contents{
+    border-bottom: 1px solid;
+    height: 150px;
+}
+
+.btn_secbtn_center {
+    margin-left: 450px;
+}
+
+.id-input {
+    margin-bottom: 20px;
+}
+.id-input label {
+    margin-right: 40px;
+}
+
+.pwd-input label {
+    margin-right: 29px; 
+}
+
+/* @@@@@@@@@@@@@@@@@@ memdelete3 @@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+.delmessage p {
+    font-weight: 500;
+}
+
+/* @@@@@@@@@@@@@@@@@@ reviewinq @@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+.board-list-r {
+    margin-left: 119px;
+    width: 60%;
+    border-top: 2px solid;
+    border-bottom: 1px solid;
+}
+
+.chart-all {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+
+.chart-top {
+    margin-left: 119px;
+    width: 60%;
+}
+
+.chart-top p {
+    font-size : 1.5rem;
+    font-weight: bold;
+}
+
+/* @@@@@@@@@@@@@@@@@ addressregist @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+.board_page {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page button {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: 1px solid #000;
+    border-left: 0;
+    line-height: 100%;
+}
+
+.board_page button.bt {
+    padding-top: 5px;
+    font-size: 0.8rem;
+    letter-spacing: -1px;
+}
+
+.board_page button.num {
+    padding-top: 9px;
+    font-size: 1.1rem;
+}
+
+.board_page button.num.on {
+    border-color: #000;
+    color: #000;
+}
+
+.board_page button:first-child {
+    border-left: 1px solid #000;
+}

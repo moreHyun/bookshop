@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.sales.model.dao.CartMapper">
+
+    <resultMap id="cartResultMap" type="com.greedy.bookshop.sales.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="bookQuantity" column="BOOK_QUANTITY"/>
+        <result property="bookCode" column="BOOK_CODE"/>
+        <result property="itemStatus" column="ITEM_STATUS"/>
+        <result property="userCode" column="USER_CODE"/>
+    </resultMap>
+    
+    <insert id="insertCart">
+        INSERT
+        INTO TBL_CART
+            (
+             CART_CODE,
+             BOOK_QUANTITY,
+             BOOK_CODE,
+             ITEM_STATUS,
+             USER_CODE
+            )
+        VALUES
+            (
+             SEQ_CATE.NEXTVAL,
+             1,
+             #{bookCode},
+             'N',
+             #{userCode}
+            )
+    </insert>
+
+
+</mapper>
+

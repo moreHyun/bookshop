@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>sale</title>
+    <link rel="stylesheet" type="text/css" href="/css/sales/sale.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/footer.css">
+</head>
+<body>
+  <div th:replace="/main/nav.html"></div>
+
+    <div class="categoryTable">
+        <div class="Kcategory">
+            <h2>국내 도서</h2>
+            <div class="category" th:if="${category.getTopCategoryCode() == 1}" th:each="category : ${categoryList}">
+                <a th:href="@{/sale/salepage(categoryCode=${category.getSubCategoryCode()})}" th:text="${ category.getCategoryName() }"></a>
+            </div>
+        </div>
+        <div class="Ecategory">
+            <h2>외국 도서</h2>
+            <div class="category" th:if="${category.getTopCategoryCode() == 2}" th:each="category : ${categoryList}">
+                <a th:href="@{/sale/salepage(categoryCode=${category.getSubCategoryCode()})}"  th:text="${ category.getCategoryName() }"></a>
+            </div>
+        </div>
+    </div>
+  <div class="categoryTypeSale">
+      <h2 th:text="${categoryName}"></h2>
+          <div class="SaleList">
+              <div class="product-item" th:each="book : ${bookList}">
+                  <a th:onclick="|location.href='/sale/bookDetails?no=${book.BookCode}'|">
+                      <th:block calss ="imgbox" th:each="title : ${fileList}">
+                          <img class="saleImg"
+                               th:if="${title.fileType} == 'TITLE' and ${book.BookCode == title.BookCode}"
+                               th:src="${title.fileMainPath}" />
+                      </th:block>
+                      <p>
+                          No.<label th:text="${ book.getBookCode() }"></label>
+                          <span th:text="${book.getBookName()}"></span><br>
+                      </p>
+                      <div th:if="${book.getBookPrice() == book.getBookTotalPrice()}">
+                          <span  th:text="${book.getBookTotalPrice()} + 원"></span>
+                      </div>
+                      <div th:if="${book.getBookPrice()} > ${book.getBookTotalPrice()}">
+                          <span th:text="${book.getBookPrice()} , ${book.getBookDiscount()} + % 할인"></span>
+                          <span th:text="${book.getBookTotalPrice()} + 원"></span>
+                      </div>
+                  </a>
+              </div>
+      </div>
+  </div>
+
+  <!-- 페이징 바 -->
+  <div id="paging" align="center" style="margin-top: 20px;" th:if="${paging.maxPage} > 1">
+
+      <th:block>
+          <!-- 맨 앞으로 이동 -->
+          <button th:onclick="'location.href=\'/sale/salepage?categoryCode=' + @{${paging.searchValue}} + '&page=1&searchType=' + @{${paging.searchType}}'+ \''">&lt;&lt;</button>
+          <!-- 이전 페이지로 이동 -->
+          <button
+                  th:onclick="'location.href=\'/sale/salepage?categoryCode=' + @{${paging.searchValue}} +'&page=' + @{${paging.page - 1}} + '&searchType=' + @{${paging.searchType}}' + \''"
+                  th:disabled="${ paging.page <= 1 }">&lt;</button>
+
+          <!-- 숫자 버튼 -->
+          <th:block
+                  th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+              <button
+                      th:onclick="'location.href=\'/sale/salepage?categoryCode=' + @{${paging.searchValue}} +'&page=' + @{${page}} + '&searchType=' + @{${paging.searchType}}' + \''"
+                      th:text="${ page }" th:disabled="${ paging.page eq page }">
+              </button>
+          </th:block>
+
+          <!-- 다음 페이지로 이동 -->
+          <button
+                  th:onclick="'location.href=\'/sale/salepage?categoryCode=' + @{${paging.searchValue}} +'&page=' + @{${paging.page + 1}} + '&searchType=' + @{${paging.searchType}}'+\''"
+                  th:disabled="${ paging.page >= paging.maxPage }">></button>
+
+          <!-- 맨 끝으로 이동 -->
+          <button
+                  th:onclick="'location.href=\'/sale/salepage?categoryCode=' + @{${paging.searchValue}} +'&page=' + @{${paging.maxPage}} + '&searchType=' + @{${paging.searchType}}'+\''">>></button>
+
+
+      </th:block>
+
+
+
+  </div>
+
+
+</body>
+<footer>
+    <div class="footer" th:replace="/main/footer.html"></div>
+</footer>
+</html>

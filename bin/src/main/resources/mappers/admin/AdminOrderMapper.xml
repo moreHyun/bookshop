@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedy.bookshop.admin.paydeli.model.dao.AdminOrderMapper">
+
+	<resultMap id="orderResultMap" type="com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO">
+		<id property="orderCode" column="ORDER_CODE"/>
+		<result property="totalAmount" column="ORDER_TOTAL_AMOUNT"/>
+		<result property="deliveryPrice" column="DELIVERY_PRICE"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<result property="orderRecipient" column="ORDER_RECIPIENT"/>
+		<result property="orderRecipientphone" column="ORDER_RECIPIENT_PHONE"/>
+		<result property="destinationNickname" column="ORDER_DESTINATION_NICKNAME0"/>
+		<result property="postalCode" column="ORDER_POSTAL_CODE"/>
+		<result property="address" column="ORDER_ADDRESS"/>
+		<result property="detailedAddress" column="ORDER_DETAILED_ADDRESS"/>
+		<result property="orderMemo" column="ORDER_MEMO"/>
+		<result property="userCode" column="USER_CODE"/>
+		
+		<association property="id" resultMap="orderMemberResultMap"/>
+		<association property="deliveryCode" resultMap="adminDeliveryResultMap"/>
+		<association property="deliveryStatus" resultMap="adminDeliveryResultMap"/>
+		<association property="invoiceNumber" resultMap="adminDeliveryResultMap"/>
+		<association property="purchaseDate" resultMap="adminDeliveryResultMap"/>
+	</resultMap>
+	
+		<resultMap id="orderMemberResultMap" type="com.greedy.bookshop.admin.paydeli.model.dto.OrderMemberDTO">
+		<id property="code" column="USER_CODE"/>
+		<result property="id" column="USER_ID"/>
+		</resultMap>
+		
+		<resultMap id="adminDeliveryResultMap" type="com.greedy.bookshop.admin.paydeli.model.dto.AdminDeliveryDTO">
+		<id property="deliveryCode" column="DELIVERY_CODE"/>
+		<result property="deliveryStatus" column="DELIVERY_STATUS"/>
+		<result property="deliveryDate" column="DELIVERY_DATE"/>
+		<result property="invoiceNumber" column="INVOICE_NUMBER"/>
+		<result property="purchaseDate" column="PURCHASE_DATE"/>
+		</resultMap>
+		
+		
+		 <select id="selectOrderTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT 
+        	   COUNT(*)
+          FROM TBL_ORDER A
+        <if test="searchCondition == 'id'">
+            JOIN TBL_USER B ON (A.USER_CODE = B.USER_CODE)
+        </if>
+        <where>
+            <if test="searchCondition == 'orderCode'">
+                A.ORDER_CODE = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'id'">
+                B.USER_ID LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'orderStatus'">
+                A.ORDER_STATUS LIKE '%' || #{ searchValue } || '%'
+            </if>
+          
+        </where>
+    </select>
+
+    <select id="selectOrderList" resultMap="orderResultMap">
+        
+        SELECT 
+	           A.ORDER_DATE
+	         , A.ORDER_CODE
+	         , D.USER_ID
+	         , A.ORDER_STATUS
+          FROM (SELECT 
+                       ROWNUM RNUM
+                     , B.ORDER_DATE
+                     , B.ORDER_CODE
+			         , B.ORDER_STATUS
+			         , B.USER_CODE
+                  FROM (SELECT 
+                               C.ORDER_DATE
+                     		 , C.ORDER_CODE
+			                 , C.ORDER_STATUS
+			                 , C.USER_CODE
+                          FROM TBL_ORDER C
+        <if test="searchCondition == 'id'">
+            JOIN TBL_USER D ON (C.USER_CODE = D.USER_CODE)
+        </if>
+        <where>
+            <if test="searchCondition == 'orderCode'">
+                C.ORDER_CODE = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'id'">
+                D.USER_ID LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'orderStatus'">
+                C.ORDER_STATUS LIKE '%' || #{ searchValue } || '%'
+            </if>
+          
+        </where>
+        ORDER BY C.ORDER_DATE
+        ) B
+        <![CDATA[
+                  WHERE ROWNUM <= #{ endRow }
+                  ]]>
+        ) A
+        JOIN TBL_USER D ON (A.USER_CODE = D.USER_CODE)
+        WHERE A.RNUM >= #{ startRow }
+        ORDER BY 1 ASC
+    </select>
+    
+    
+        <select id="selectOrderDetail" resultMap="orderResultMap">
+        SELECT 
+               A.ORDER_CODE
+             , B.USER_ID
+             , A.ORDER_TOTAL_AMOUNT
+             , A.DELIVERY_PRICE
+             , A.ORDER_DATE
+             , A.ORDER_STATUS
+             , A.ORDER_RECIPIENT
+             , A.ORDER_RECIPIENT_PHONE
+             , A.ORDER_DESTINATION_NICKNAME0
+             , A.ORDER_POSTAL_CODE
+             , A.ORDER_ADDRESS
+             , A.ORDER_DETAILED_ADDRESS
+             , A.ORDER_MEMO
+             
+             , C.DELIVERY_CODE
+             , C.DELIVERY_STATUS
+             , C.INVOICE_NUMBER
+             , C.PURCHASE_DATE
+             
+        FROM TBL_ORDER A
+        JOIN TBL_USER B ON (A.USER_CODE = B.USER_CODE)
+        JOIN TBL_DELIVERY C ON (A.ORDER_CODE = C.ORDER_CODE)
+        WHERE A.ORDER_CODE = #{ orderCode }
+    </select>
+   
+   	
+</mapper>

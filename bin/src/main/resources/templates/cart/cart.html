@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/cart/cart.css">
+</head>
+<body>
+<header>
+    <div th:replace="/main/nav.html"></div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="cart-container">
+            <h2>장바구니</h2>
+            <div class="nav-container">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="select-all-checkbox">
+                        <label for="select-all-checkbox">전체 선택</label>
+                        <button id="delete-selected-btn">삭제</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="cart-item">
+                <div class="item-checkbox">
+                    <input type="checkbox" class="product-checkbox">
+                </div>
+                <div class="item-info">
+                    <img src="도서1.jpg" alt="도서1" width="50" height="50">
+                    <p>도서1</p>
+                </div>
+                <div class="item-price">
+                    <p>12,000원</p>
+                </div>
+                <div class="item-total">
+                    <p>24,000원</p>
+                </div>
+                <div class="item-quantity">
+                    <input type="number" min="1" value="1" class="product-quantity">
+                </div>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="card">
+                <div class="card-header">
+                    총 금액
+                </div>
+                <div class="card-body">
+                    <p>총 상품 금액: <span id="total-price">0</span>원</p>
+                    <p>배송비: 3,000원</p>
+                    <p>총 결제 금액: <span id="total-amount">0</span>원</p>
+                    <button id="checkout-btn">결제하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/sales/basket.js"></script>
+</body>
+<footer>
+    <div th:replace="/main/footer.html"></div>
+</footer>
+</html>

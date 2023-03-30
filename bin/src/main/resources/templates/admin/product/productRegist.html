@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/책장옆 복사본.png">
+    <link href="/css/admin/product.css" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/d2714aa12c.js" crossorigin="anonymous"></script>
+    <script src="/js/admin/product.js" async> </script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	  
+	<!-- Datepicker 라이브러리 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datepicker/1.11.5/jquery-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datepicker/1.11.5/jquery-datepicker.min.css">
+	
+	<!-- CKEditor 5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    
+    <title>책장 옆</title>
+
+</head>
+<body>
+    
+    <header class="page_header wrapper">
+        <a href="">
+            <img class="nav_logo" src="/image/책장옆.png" alt="HOME">
+        </a>
+        <nav>
+            <ul class="main_nav">
+                <li><a href="">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 사이드 바 -->
+    <aside>
+        <table class="sub_menu">
+            <td>
+                <li><a class="" href="#">&nbsp;&nbsp;&nbsp;회원 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="product_management">&nbsp;&nbsp;&nbsp;상품 관리&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="" href="#">주문/배송 관리</a></li>
+                <li><a class="" href="Notice.html">&nbsp;&nbsp;&nbsp;고객 센터&nbsp;&nbsp;&nbsp;</a></li>
+            </td>
+        </table>
+    </aside>
+
+    <!-- 탑 메뉴 -->
+        <table class="top_menu">
+            <tr>
+                <th><a href="../../admin/product/list">상품 조회/수정</a></th>
+                <th><a class="current_page" href="Product_regist.html">&nbsp;&nbsp;&nbsp;상품 등록&nbsp;&nbsp;&nbsp;</a></th>
+            </tr>
+        </table>
+
+    <!-- 상단이동버튼 -->
+    <img class="topbtn" src="/image/topbtn.svg" ></img>   
+
+    <!-- 카테고리 선택 -->
+    <form class="product_info" action="/admin/product/regist" method="POST" enctype="multipart/form-data">
+        <div class="div_width_top">
+            <label class="label_title">카테고리*</label>
+            
+            <label>
+			  <select name="largeCategory" class="large_select" id="category">
+			    <option value="">대분류</option>
+			    <option value="1">국내</option>
+			    <option value="2">외국</option>
+			  </select>
+			</label>
+			
+			<label>
+			  <select name="categoryCode" class="sub_select" id="categoryCode">
+				<option value="">소분류</option>
+			    <option value="3">소설</option>
+			    <option value="5">자기개발</option>
+			    <option value="7">시/에세이</option>
+			    <option value="9">인문/사회</option>
+			    <option value="11">경제/경영</option>
+			    <option value="13">컴퓨터/IT</option>
+			    <option value="15">만화</option>
+			  </select>
+			</label>
+			
+			<script>
+			  const categorySelect = document.querySelector('#category');
+			  const categoryCodeSelect = document.querySelector('#categoryCode');
+			
+			  categorySelect.addEventListener('change', () => {
+			    // '국내'가 선택되었을 경우
+			    if (categorySelect.value === '1') {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="3">소설</option>
+			        <option value="5">자기개발</option>
+			        <option value="7">시/에세이</option>
+			        <option value="9">인문/사회</option>
+			        <option value="11">경제/경영</option>
+			        <option value="13">컴퓨터/IT</option>
+			        <option value="15">만화</option>
+			      `;
+			    }
+			    // '외국'이 선택되었을 경우
+			    else if (categorySelect.value === '2') {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="4">소설</option>
+			        <option value="6">자기개발</option>
+			        <option value="8">시/에세이</option>
+			        <option value="10">인문/사회</option>
+			        <option value="12">경제/경영</option>
+			        <option value="14">컴퓨터/IT</option>
+			        <option value="16">만화</option>
+			      `;
+			    }
+			    // '대분류'가 선택되었을 경우
+  			    else {
+			      categoryCodeSelect.innerHTML = `
+			        <option value="">소분류</option>
+			      `;
+			    }
+			  });
+			</script>
+            
+        </div>
+
+        <br>
+
+        <div class="div_width">
+            <label class="label_title">상품명*</label>
+                <input type="text" id="bookName" name="bookName" class="longinfo">
+                <span></span>
+        </div>
+
+        <br>
+		
+		<!-- 판매가와 할인률 입력 -->
+        <div class="div_width">
+            <label class="label_title">판매가*</label>
+            <div class="major_info">
+	            <label class="label_title">기본가*</label>
+	            <input type="text" id="bookPrice" name="bookPrice" class="shortinfo">
+	                <span></span>
+	            <label>
+	                할인률
+	                <input type="text" id="bookDiscount" name="bookDiscount" class="shortinfo" value="0">
+	                <span>원</span>
+	                &nbsp;&nbsp;또는
+	                <input type="text" id="discountPercentage" class="shortinfo" value="0">
+	                <span>%</span>
+	            </label>
+	            <br>
+	            <label class="label_title">
+	            	최종가격
+	            </label>
+	            	<input type="text" id="bookTotalPrice" name="bookTotalPrice" class="shortinfo" value="0" readonly>
+            </div>
+        </div>
+        
+         <script>
+        
+     // 판매가 입력 시 할인율 계산
+        document.getElementById('bookPrice').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value);
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountPercentage = (bookDiscount / bookPrice) * 100;
+                document.getElementById('discountPercentage').value = discountPercentage.toFixed(0);
+            }
+        });
+
+        // 할인율 입력 시 할인가 계산
+        document.getElementById('discountPercentage').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
+            if (!isNaN(bookPrice) && !isNaN(discountPercentage)) {
+                const discountAmount = (bookPrice * (discountPercentage / 100)).toFixed(0);
+                document.getElementById('bookDiscount').value = discountAmount;
+            }
+        });
+
+        // 할인가 입력 시 할인율 계산
+        document.getElementById('bookDiscount').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const discountAmount = parseInt(document.getElementById('bookDiscount').value);
+            if (!isNaN(bookPrice) && !isNaN(discountAmount)) {
+                const discountPercentage = ((discountAmount / bookPrice) * 100).toFixed(0);
+                document.getElementById('discountPercentage').value = discountPercentage;
+            }
+        });
+
+        // 할인율 입력 시 0 ~ 100 사이의 값인지 확인
+        document.getElementById('discountPercentage').addEventListener('blur', function() {
+            const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
+            if (!isNaN(discountPercentage)) {
+                if (discountPercentage < 0) {
+                    document.getElementById('discountPercentage').value = 0;
+                } else if (discountPercentage > 100) {
+                    document.getElementById('discountPercentage').value = 100;
+                }
+            }
+        });
+        
+     // 할인율이나 할인 가격이 변경될 때마다 최종 가격 계산
+        function calculateTotalPrice() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value);
+            const totalPriceElement = document.getElementById('bookTotalPrice');
+            
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountedPrice = bookPrice - bookDiscount;
+                if (discountedPrice < 0) {
+                    totalPriceElement.value = 0;
+                } else {
+                    totalPriceElement.value = discountedPrice;
+                }
+            }
+        }
+
+        // 할인율이나 할인 가격이 변경될 때마다 최종 가격 계산
+        document.getElementById('bookDiscount').addEventListener('input', calculateTotalPrice);
+        document.getElementById('discountPercentage').addEventListener('input', calculateTotalPrice);
+        
+     // 판매가, 할인가, 최종가격에 쉼표 추가
+     
+     
+         function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        document.getElementById('bookPrice').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            if (!isNaN(bookPrice) && !isNaN(bookDiscount)) {
+                const discountPercentage = (bookDiscount / bookPrice) * 100;
+                document.getElementById('discountPercentage').value = discountPercentage.toFixed(0);
+            }
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            document.getElementById('bookDiscount').value = numberWithCommas(bookDiscount);
+            const bookTotalPrice = bookPrice - bookDiscount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
+        });
+
+        document.getElementById('discountPercentage').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
+            const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
+            if (!isNaN(bookPrice) && !isNaN(discountPercentage)) {
+                const discountAmount = (bookPrice * (discountPercentage / 100)).toFixed(0);
+                document.getElementById('bookDiscount').value = numberWithCommas(discountAmount);
+            }
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            const bookDiscount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            const bookTotalPrice = bookPrice - bookDiscount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
+        });
+
+        document.getElementById('bookDiscount').addEventListener('input', function() {
+            const bookPrice = parseInt(document.getElementById('bookPrice').value.replace(/,/g, ''));
+            const discountAmount = parseInt(document.getElementById('bookDiscount').value.replace(/,/g, ''));
+            if (!isNaN(bookPrice) && !isNaN(discountAmount)) {
+                const discountPercentage = ((discountAmount / bookPrice) * 100).toFixed(0);
+                document.getElementById('discountPercentage').value = discountPercentage;
+            }
+            document.getElementById('bookPrice').value = numberWithCommas(bookPrice);
+            document.getElementById('bookDiscount').value = numberWithCommas(discountAmount);
+            const bookTotalPrice = bookPrice - discountAmount;
+            document.getElementById('bookTotalPrice').value = numberWithCommas(bookTotalPrice);
+        });
+        
+        </script>
+        
+
+
+        <br>
+		
+		<!-- 재고 수량 입력 -->
+        <div class="div_width">
+            <label class="label_title">재고수량*</label>
+            <input type="text" id="bookInventory" name="bookInventory" class="shortinfo">
+                <span>개</span>
+        </div>
+        
+        <script>
+			document.getElementById('bookInventory').addEventListener('input', function() {
+			    var value = this.value.replace(/,/g, '');
+			    if (!isNaN(value)) {
+			        value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			        this.value = value;
+			    } else {
+			        this.value = '';
+			    }
+			});
+		</script>
+
+        <br>
+        
+        <!-- 상품 판매상태 체크 -->
+         <div class="div_width">
+            <label class="label_title">판매상태</label>
+            <input type="radio" id="salesStatus" name="salesStatus" value="Y" checked="checked">
+            판매중
+                <span></span>
+            <label>
+                <input type="radio" id="salesStatus" name="salesStatus" value="N">
+                판매중지
+                <span></span>
+            </label>
+       		</div>
+       		
+       		<br>
+       		
+		<!-- 상품 주요정보 입력 -->
+        <div class="div_width">
+            <label class="label_title">상품 주요정보</label>
+            <div class="major_info">
+                <label class="label_title">ISBN*</label><input type="text" id="bookIsbn" name="bookIsbn" class="longinfo"><br>
+                <!-- <label class="label_title">ISNB-10</label><input type="text" id="ISNB-10" class="longinfo"><br> -->
+                <!-- <label class="label_title">출간일</label><input type="text" id="pub_date" class="shortinfo"> -->
+                <label class="label_title">출판사</label><input type="text" id="bookPublisher" name="bookPublisher" class="longinfo"><br>
+                <label class="label_title">작가명*</label><input type="text" id="bookAuthor" name="bookAuthor" class="longinfo"><br>
+                <label class="label_title">번역자</label><input type="text" id="bookTranslator" name="bookTranslator" class="longinfo"><br>
+            </div>
+        </div>
+        
+<!--         <script>
+        $(function() {
+        	  $('#pub_date').datepicker({
+        	    dateFormat: 'yymmdd',
+        	    onSelect: function(dateText, inst) {
+        	      $(this).val(dateText);
+        	    }
+        	  });
+        	});
+        
+        </script> -->
+        </form>
+
+        <br>
+
+        <form id="uploadForm" class="uploadForm" enctype="multipart/form-data">
+	       	<div class="div_width">
+				  <label class="label_title">상품이미지</label>
+				  <br>
+				  <label class="label_image">대표이미지</label>
+				  <input type="file" name="mainImage">
+				  <button type="button" class="btn-add-img" onclick="uploadFile('mainImage')">등록</button>
+				  <span></span>
+				  <br>
+				  <label class="label_image">추가이미지</label>
+				  <input type="file" name="subImage">
+				  <button type="button" class="btn-add-img" onclick="uploadFile('subImage')">등록</button>
+				  <span></span>
+			</div>
+		</form>
+
+        <br>
+
+        <div class="div_width">
+            <label class="label_title">상세설명</label>
+			<br>
+			<textarea name="bookIntroduction" id="bookIntroduction" class="detailbox"></textarea>
+        
+<!--         <script>
+			
+			/* 위지윅 적용 */
+ 
+				/* 책 소개 */
+				ClassicEditor
+					.create(document.querySelector('#introduction'), {
+
+					})
+					.catch(error=>{
+						console.error(error);
+					});
+			
+		</script> -->
+		
+        </div>
+
+        <br>
+
+        <div class="info_btn">
+            <button id="registBtn" class="btn_1">등록</button>
+        </div>
+    <br><br><br><br><br><br><br><br><br><br>
+	 
+	<script>
+
+	/* 상품 등록 버튼 */
+	$(document).ready(function() {
+	  $("#registBtn").on("click", function() {
+	    var formData = {
+		    bookName: $("#bookName").val(),
+		    bookPrice: parseInt($("#bookPrice").val().replace(",", "")),
+		    bookAuthor: $("#bookAuthor").val(),
+		    bookPublisher: $("#bookPublisher").val(),
+		    categoryCode: $("#categoryCode").val(),
+		    bookInventory: parseInt($("#bookInventory").val().replace(",", "")),
+		    salesStatus: $("input[name='radioinfo']:checked").val(), // radio 버튼에서 체크된 값을 가져오기
+		    bookHit: $("#bookHit").val(),
+		    bookIsbn: $("#bookIsbn").val(),
+		    bookTranslator: $("#bookTranslator").val(),
+		    bookIntroduction: $("#bookIntroduction").val(),
+		    bookDiscount: parseInt($("#bookDiscount").val().replace(",", "")),
+		    bookTotalPrice: parseInt($("#bookTotalPrice").val().replace(",", ""))
+	    };
+	
+	    $.ajax({
+	        type: "POST",
+	        contentType: "application/x-www-form-urlencoded",
+	        url: "/admin/product/regist",
+	        data: formData,
+	        success: function(result) {
+	          alert("등록되었습니다.");	
+	        },
+	        error: function(e) {
+	          console.log("ERROR: ", e);
+	          alert("필수 입력사항을 확인해주세요.");
+	        }
+	    });
+	  });
+	});
+	
+	</script> 	
+	 
+	 
+   </body>
+</html>

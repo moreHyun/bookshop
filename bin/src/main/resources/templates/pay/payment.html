@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>구매 페이지</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/pay/pay.css">
+</head>
+<body>
+  <header>
+   <div th:replace="/main/nav.html"></div>
+  </header>
+  <div>
+    <div class="card-container">
+      <div class="address-card">
+        <h2>배송지 정보</h2>
+        <form>
+          <label for="name">이름:</label>
+          <input type="text" id="name" name="name"><br><br>
+          <label for="address">주소:</label>
+          <input type="text" id="address" name="address"><br><br>
+          <label for="phone">전화번호:</label>
+          <input type="tel" id="phone" name="phone"><br><br>
+          <input type="submit" value="배송지 정보 저장">
+        </form>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="product-card">
+        <h2>주문 상품 정보</h2>
+        <table>
+          <tr>
+            <th>제품 사진</th>
+            <th>제품 이름</th>
+            <th>제품 가격</th>
+          </tr>
+          <tr>
+            <td><img src="product1.jpg" alt="제품1"></td>
+            <td>제품1</td>
+            <td>10,000원</td>
+          </tr>
+          <tr>
+            <td><img src="product2.jpg" alt="제품2"></td>
+            <td>제품2</td>
+            <td>20,000원</td>
+          </tr>
+          <tr>
+            <td><img src="product3.jpg" alt="제품3"></td>
+            <td>제품3</td>
+            <td>30,000원</td>
+          </tr>
+        </table>
+        <div>
+          <button onclick="toggleTerms()">주문 상품 동의 안내서</button>
+          <div id="terms">
+            <p>주문 상품 동의 안내서 내용</p>
+          </div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <h3>결제 정보 요약</h3>
+        <div class="summary-row">
+          <p>상품 총가격:</p>
+          <p>60,000원</p>
+        </div>
+        <div class="summary-row">
+          <p>배송비:</p>
+          <p>3,000원</p>
+        </div>
+        <div class="summary-row">
+          <p>총 결제 금액:</p>
+          <p>63,000원</p>
+        </div>
+        <button>결제하기</button>
+        <input type="checkbox" id="confirm" name="confirm" value="agree">
+        <label for="confirm">결제 확인</label>
+      </div>
+      </div>
+    </div>
+    <div class="summary-card">
+      <h2>결제 정보</h2>
+      <div class="payment-methods">
+        <button class="payment-btn kakao">카카오페이</button>
+        <button class="payment-btn toss">토스</button>
+        <button class="payment-btn bank">무통장 입금</button>
+        <button class="payment-btn naver">네이버 페이</button>
+      </div>
+    </div>
+</body>
+<script>
+  function toggleTerms() {
+    const terms = document.getElementById("terms");
+    if (terms.style.display === "block") {
+      terms.style.display = "none";
+    } else {
+      terms.style.display = "block";
+    }
+  }
+  function togglePrivacy() {
+    const privacy = document.getElementById("privacy");
+    if (privacy.style.display === "block") {
+      privacy.style.display = "none";
+    } else {
+      privacy.style.display = "block";
+    }
+  }
+</script>
+<footer>
+  <div th:replace="/main/footer.html"></div>
+</footer>
+</html>
