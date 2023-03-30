@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminDeliveryDTO;
 import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 import com.greedy.bookshop.admin.paydeli.model.service.AdminOrderService;
 
@@ -75,6 +78,16 @@ public class AdminOrderController {
 			
 			return "admin/paydeli/edit";
 	    }
+	  
+	  @PostMapping("/edit")
+	  public String updateDelivery(@ModelAttribute("order") AdminDeliveryDTO delivery){
+	 
+		  adminOrderService.updateDelivery(delivery);
+		  
+			    	
+	    	return "redirect:/order/list";
+	    	
+	  }
 	 
 	  
 }

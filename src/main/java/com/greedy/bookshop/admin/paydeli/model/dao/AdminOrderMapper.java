@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.greedy.bookshop.admin.member.common.paging.SelectCriteria;
-
+import com.greedy.bookshop.admin.paydeli.model.dto.AdminDeliveryDTO;
 import com.greedy.bookshop.admin.paydeli.model.dto.AdminOrderDTO;
 
 
@@ -20,5 +20,6 @@ public interface AdminOrderMapper {
 
 	AdminOrderDTO selectOrderDetail(int orderCode);
 	
+	void updateDelivery(AdminDeliveryDTO delivery);
 
 }
