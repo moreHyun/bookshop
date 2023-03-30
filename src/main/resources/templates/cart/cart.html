@@ -10,7 +10,6 @@
 <header>
     <div th:replace="/main/nav.html"></div>
 </header>
-
 <main>
     <div class="container">
         <div class="cart-container">
@@ -24,24 +23,35 @@
                     </li>
                 </ul>
             </div>
+            <th:block th:each="cart,stat : ${cart}" th:if="${user.no} != null and ${cart.cartCode} > 0">
             <div class="cart-item">
                 <div class="item-checkbox">
                     <input type="checkbox" class="product-checkbox">
                 </div>
-                <div class="item-info">
-                    <img src="도서1.jpg" alt="도서1" width="50" height="50">
-                    <p>도서1</p>
+                <div class="item-info" th:if="${file.get(stat.index).getFileType()} == 'TITLE'">
+                    <img th:src="${file.get(stat.index).getFileMainPath()}" alt="도서1" width="50" height="50">
+                    <p th:text="${book.get(stat.index).getBookName()}"></p>
                 </div>
                 <div class="item-price">
-                    <p>12,000원</p>
+                    <p th:text="${book.get(stat.index).getBookPrice()} + 원"></p>
+                </div>
+                <div class="item-discount" th:if="${book.get(stat.index).getBookDiscount()} > 0">
+                    <p th:text="${book.get(stat.index).getBookDiscount()} + '%'"></p>
                 </div>
                 <div class="item-total">
-                    <p>24,000원</p>
+                    <p th:text="${book.get(stat.index).getBookTotalPrice()} + 원"></p>
                 </div>
                 <div class="item-quantity">
-                    <input type="number" min="1" value="1" class="product-quantity">
+                    <input type="number" min="1" th:value="${cart.BookQuantity}" class="product-quantity">
                 </div>
             </div>
+            </th:block>
+            <th:block th:if="${user.no} == null or ${cart.get(0).getCartCode} == null">
+                <div class="cart-item">
+                    <img src="/image/icon/youtube.png">
+                    <p align="ceter">등록 된 상품이 없습니다.</p>
+                </div>
+            </th:block>
         </div>
         <div class="cart-summary">
             <div class="card">
@@ -50,7 +60,8 @@
                 </div>
                 <div class="card-body">
                     <p>총 상품 금액: <span id="total-price">0</span>원</p>
-                    <p>배송비: 3,000원</p>
+                    <p>배송비: <span id="delivery -price">3000</span>원</p>
+                    <p>할인된 가격 : <span id="discount-price">0</span>원</p>
                     <p>총 결제 금액: <span id="total-amount">0</span>원</p>
                     <button id="checkout-btn">결제하기</button>
                 </div>

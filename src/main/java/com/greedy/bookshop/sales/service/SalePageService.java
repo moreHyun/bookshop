@@ -3,8 +3,10 @@ package com.greedy.bookshop.sales.service;
 import com.greedy.bookshop.common.paging.PageDTO;
 import com.greedy.bookshop.common.paging.Pagenation;
 import com.greedy.bookshop.sales.model.dao.BookMapper;
+import com.greedy.bookshop.sales.model.dao.CartMapper;
 import com.greedy.bookshop.sales.model.dao.CategoryMapper;
 import com.greedy.bookshop.sales.model.dto.BookDTO;
+import com.greedy.bookshop.sales.model.dto.CartDTO;
 import com.greedy.bookshop.sales.model.dto.CategoryDTO;
 import com.greedy.bookshop.sales.model.dto.FileDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +20,13 @@ public class SalePageService
 {
     private final CategoryMapper cMapper;
     private final BookMapper bMapper;
+    private final CartMapper cartMapper;
 
-    public SalePageService(CategoryMapper cMapper, BookMapper bMapper)
+    public SalePageService(CategoryMapper cMapper, BookMapper bMapper, CartMapper cartMapper)
     {
         this.cMapper = cMapper;
         this.bMapper = bMapper;
+        this.cartMapper = cartMapper;
     }
     
     public List<CategoryDTO> selectCategoryAll()
@@ -150,6 +154,26 @@ public class SalePageService
         m.put("file",file);
 
 
+
+        return m;
+    }
+
+    public String insertCart(long bookCode,long userCode)
+    {
+        CartDTO cart = cartMapper.selectCart(bookCode,userCode);
+        String m = "";
+        int r = 0;
+        if(cart == null)
+        {
+            r = cartMapper.insertCart(bookCode, userCode);
+        }
+        else
+            r = cartMapper.inneritem(bookCode,userCode,cart);
+
+        if(r == 1)
+        {
+           m = "장바구니에 상품추가 완료";
+        }
         return m;
     }
 }

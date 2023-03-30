@@ -102,8 +102,8 @@
                         <div class="table_header">
                             <h3 class="h3_tit">기본정보</h3>
                         </div>
+                       <form action="/mypage/userinfoupdate" method="post">
                         <div class="table_col">
-                            <form action="127.0.0.1:8080/mypage/update-user-info" method="po">
                             <table class="editmem-table">
                                 <colgroup>
                                     <col style="width: 35%">
@@ -113,7 +113,7 @@
                                     <tr class="input">
                                         <th scope="row">이름</th>
                                         <td>
-                                            <p class="msg_desc">홍*동</p>
+                                            <p class="msg_desc" th:text="${ #authentication.principal.name }"></p>
                                         </td>
                                     </tr>
                                     <tr class="input">
@@ -124,7 +124,8 @@
                                             <div class="email_write" style="width:415px;">
                                                 <span class="input_txt" data-skin="form">
                                                     <input type="text" class="text small" title="이메일 아이디 입력" placeholder="이메일 아이디"
-                                                     data-format="email" name="email_addr1" id="email_addr1" value="hong123"  autocomplete="off">
+                                                     data-format="email" name="email_addr1" id="email_addr1" value="hong123"  autocomplete="off"
+                                                     th:value="${ #authentication.principal.id }">
                                                 </span>
                                                 <span class="symbol">@</span>
                                                 <span class="select-email">
@@ -164,10 +165,6 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">SNS 로그인</th>
-                                        <td>
-                                           
-                                        </td>
                                     </tr>
                                     <tr class="input">
                                         <th scope="row">
