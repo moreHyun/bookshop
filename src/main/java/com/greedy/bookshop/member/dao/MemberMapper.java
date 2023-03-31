@@ -13,7 +13,7 @@ public interface MemberMapper {
 
     int insertMember(MemberDTO member);
 
-    int insertMemberRole();
+    int insertMemberRole(long memberNo);
 
     int updateMember(MemberDTO member);
 

@@ -63,15 +63,24 @@
         , USER_PWD
         , USER_NAME
         , USER_PHONE
+        , CREATE_USER_DATE
+        , USER_STATUS
+        , USER_ROLE_CODE
         )
         VALUES
         (
-          SEQ_USER_CODE.NEXTVAL
-        , #{ username }
-        , #{ password }
+          SEQ_USER.NEXTVAL
+        , #{ memberId }
+        , #{ memberPwd }
         , #{ name }
         , #{ phone }
+        , SYSDATE
+        , 'Y'
+        , 1
         )
+        <selectKey keyProperty="memberNo" resultType="long" order="AFTER">
+            SELECT USER_CODE AS memberNo FROM TBL_USER WHERE USER_ID = #{memberId}
+        </selectKey>
 	</insert>
 	
 	<insert id="insertMemberRole">
@@ -83,7 +92,7 @@
         )
         VALUES
         (
-          SEQ_USER_CODE.CURRVAL
+          #{memberNo}
         , 1
         )
 	</insert>
