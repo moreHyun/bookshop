@@ -33,8 +33,7 @@ public class SecurityConfig {
         return http
         		.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/myPage/**", "/center/**", "/cart/**").hasRole("USER")
-				.antMatchers(HttpMethod.POST, "/center/**").hasRole("ADMIN")
+                .antMatchers("/myPage/**").hasRole("USER")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().permitAll()
                 .and()

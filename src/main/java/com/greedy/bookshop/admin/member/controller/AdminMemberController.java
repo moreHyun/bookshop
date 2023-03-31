@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/adminmember")
 public class AdminMemberController {
 	
 	private AdminMemberService adminMemberService;
