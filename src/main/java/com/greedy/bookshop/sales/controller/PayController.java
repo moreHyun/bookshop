@@ -1,8 +1,12 @@
 package com.greedy.bookshop.sales.controller;
 
 import com.greedy.bookshop.sales.model.dto.CartDTO;
+import com.greedy.bookshop.sales.model.dto.PayDTO;
 import com.greedy.bookshop.sales.service.PayService;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +30,7 @@ public class PayController
     public RedirectView payment(@RequestBody long bookCode)
     {
         log.info("bookCode" + bookCode);
-        CartDTO cart = payService.getCartitem(bookCode);
-
+        List<PayDTO> cart = payService.getCartitem(bookCode);
 
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/pay/payment");
