@@ -115,7 +115,7 @@
              , A.ORDER_STATUS
              , A.ORDER_RECIPIENT
              , A.ORDER_RECIPIENT_PHONE
-             , A.ORDER_DESTINATION_NICKNAME0
+             , A.ORDER_DESTINATION_NICKNAME
              , A.ORDER_POSTAL_CODE
              , A.ORDER_ADDRESS
              , A.ORDER_DETAILED_ADDRESS
