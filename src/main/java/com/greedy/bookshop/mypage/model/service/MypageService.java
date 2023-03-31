@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.greedy.bookshop.center.common.Pagenation;
 import com.greedy.bookshop.center.common.SelectCriteria;
+import com.greedy.bookshop.member.dto.MemberDTO;
 import com.greedy.bookshop.mypage.model.dao.MypageMapper;
 import com.greedy.bookshop.mypage.model.dto.OrderDTO;
 

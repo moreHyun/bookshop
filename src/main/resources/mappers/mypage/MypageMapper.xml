@@ -15,12 +15,12 @@
         <result property="orderAddress" column="ORDER_ADDRESS"/>
         <result property="orderDetailedAddress" column="ORDER_DETAILED_ADDRESS"/>
         <result property="orderMeno" column="ORDER_MEMO"/>
-        <result property="userCode" column="USER_CODE"/>
         <result property="bookName" column="BOOK_NAME"/>
         <result property="productQuantity" column="PRODUCT_QUANTITY"/>
         <result property="price" column="PRICE"/>
         <result property="refundDate" column="REFUND_DATE"/>
         <result property="refundStatus" column="REFUND_STATUS"/>
+        <result property="userCode" column="USER_CODE"/>
     </resultMap>
 
 	<select id="selectPayCount" resultType="_int">
@@ -29,7 +29,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '결제완료'
-        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
 	</select>
 	
 	<select id="selectReadyCount" resultType="_int">
@@ -38,7 +38,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '배송준비'
-        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
 	</select>
 	
 	<select id="selectCompleteCount" resultType="_int">
@@ -47,7 +47,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '배송완료'
-        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
 	</select>
 	
 	<select id="selectOrderCount" resultType="_int">

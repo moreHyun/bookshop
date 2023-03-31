@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/mypage.css">
+    <link rel="stylesheet" href="/css/mypage/nav.css">
+    <link rel="stylesheet" href="/css/mypage/footer.css">
+    <link rel="stylesheet" href="/css/mypage/mypage.css">
     <title>nav</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,11 +42,11 @@
             <div class="test">
                 <div class="mypage-head">
                     <h1 class="tit">
-                        <a href="#">내정보</a>
+                        <a href="/mypage/orderhistory">내정보</a>
                     </h1>
                     <div class="grd-box">
                         <p class="txt">
-                            <a class="highlight">홍길동</a>님,반갑습니다.
+                            <a class="highlight" th:text="${ #authentication.principal.name }"></a>님,반갑습니다.
                         </p>
                     </div>
                 </div>
@@ -58,10 +58,10 @@
                                     <h2>내창고</h2>
                                     <ul>
                                         <li class="submenu">
-                                            <a href="#">주문/배송 조회</a>
+                                            <a href="/mypage/orderhistory">주문/배송 조회</a>
                                         </li>
                                         <li class="submenu">
-                                            <a href="#">환불 내역</a>
+                                            <a href="/mypage/refundhistory">환불 내역</a>
                                         </li>
                                         <li class="submenu">
                                             <a href="#">장바구니</a>
@@ -86,13 +86,13 @@
                                     <h2>내정보</h2>
                                     <ul>
                                         <li class="submenu">
-                                            <a href="#">회원 정보 수정</a>
+                                            <a href="/mypage/userinfoupdate">회원 정보 수정</a>
                                         </li>
                                         <li class="submenu">
-                                            <a href="#">배송지</a>
+                                            <a href="/mypage/addressregist">배송지</a>
                                         </li>
                                         <li class="submenu">
-                                            <a href="#">회원탈퇴</a>
+                                            <a href="/mypage/memdelete">회원탈퇴</a>
                                         </li>
                                     </ul>
                                 </li>

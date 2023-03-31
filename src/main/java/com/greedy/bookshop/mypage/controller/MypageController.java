@@ -1,18 +1,16 @@
 package com.greedy.bookshop.mypage.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.greedy.bookshop.member.dto.MemberDTO;
 import com.greedy.bookshop.mypage.model.service.MypageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -92,22 +90,23 @@ public class MypageController {
 	}
 	
 
+	@GetMapping("/userinfoupdate")
+	public String userInfoUpdate() {
+		
+		return "mypage/editinfo";
+	}
 	
-
+	@GetMapping("/memdelete")
+	public String memberDelte() {
+		
+		return "mypage/memdelete";
+	}
 	
-	
-	
-	
-	
-	
-//	@PostMapping("/updateinfo")
-//	public String updateUserInfo(@RequestParam("email_addr1") String email_addr1,
-//			@RequestParam(value = "info-email-domain") String emaio_domain,  Model model) {
-//		
-//			log.info("[MypageController] : {}", email_addr1 );
-//		 
-//		return "";
-//	}
+	@GetMapping("/addressregist")
+	public String addressRegist() {
+		
+		return "mypage/addressregist";
+	}
 	
 
 }
