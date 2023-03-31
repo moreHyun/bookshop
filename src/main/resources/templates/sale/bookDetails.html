@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8"/>
     <title>상세 책 정보</title>
     <link rel="stylesheet" type="text/css" href="/css/sales/bookDerails.css">
+	<link rel="stylesheet" type="text/css" href="/css/common/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/footer.css">
     <script>
         const m = '[[${message}]]';
         m && alert(m);

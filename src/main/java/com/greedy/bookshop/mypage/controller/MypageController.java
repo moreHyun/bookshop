@@ -3,21 +3,19 @@ package com.greedy.bookshop.mypage.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.greedy.bookshop.member.dto.MemberDTO;
 import com.greedy.bookshop.mypage.model.service.MypageService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/myPage")
+@RequestMapping("/mypage")
 public class MypageController {
 	
 	private final MypageService mypageService;

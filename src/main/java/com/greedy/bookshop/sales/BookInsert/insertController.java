@@ -30,7 +30,7 @@ public class insertController
 
         public List<String> loadFiles() throws IOException
         {
-            Path TitlefolderPath = Paths.get("C:/Users/gangc/OneDrive/바탕 화면/subProject/BookShop/src/main/resources/static/image/Book/Title/category3"); // 읽어올 파일이 들어있는 폴더 경로를 지정합니다.
+            Path TitlefolderPath = Paths.get("C:/Users/hi/git/bookshop/src/main/resources/static/image/Book/Title/category3"); // 읽어올 파일이 들어있는 폴더 경로를 지정합니다.
             List<String> filesContent = new ArrayList<>(); // 파일 내용을 저장할 리스트를 생성합니다.
 
             // Files.walk() 메서드를 사용하여 폴더 경로에 있는 모든 파일을 읽어옵니다.
@@ -51,8 +51,9 @@ public class insertController
     @GetMapping("book")
     public void insetBook()
     {
-        String path1 = "C:/Users/gangc/OneDrive/바탕 화면/subProject/bookshop/src/main/resources/static/image/Book/Title/category3";
-        String path2 = "C:/Users/gangc/OneDrive/바탕 화면/subProject/bookshop/src/main/resources/static/image/Book/sub/category3";
+    	log.info("들어왔음");
+        String path1 = "C:/Users/hi/git/bookshop/src/main/resources/static/image/Book/Title/category3";
+        String path2 = "C:/Users/hi/git/bookshop/src/main/resources/static/image/Book/sub/category3";
         File fw1 = new File(path1);
         File fw2 = new File(path2);
         File[] files1 = fw1.listFiles();
@@ -125,7 +126,8 @@ public class insertController
         for(int i = 0; i < books.length; i++)
         {
             books[i].setBookCode(i+1);
-            fileList.add(new FileDTO(0,subimg.get(i),"SUB",names[i],4,0,0,0,0));
+          //  fileList.add(new FileDTO(0,title.get(i),"TITLE",names[i],4,0,0,0,books[i].getBookCode()));
+            fileList.add(new FileDTO(0,subimg.get(i),"SUB",names[i],4,0,0,0,books[i].getBookCode()));
             log.info(i + "FileList : " + fileList.get(i));
             log.info(i + "bookcode : " + books[i].getBookCode());
         }

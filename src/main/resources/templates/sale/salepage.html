@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>sale</title>
@@ -41,8 +42,8 @@
                       <div th:if="${book.getBookPrice() == book.getBookTotalPrice()}">
                           <span  th:text="${book.getBookTotalPrice()} + 원"></span>
                       </div>
-                      <div th:if="${book.getBookPrice()} > ${book.getBookTotalPrice()}">
-                          <span th:text="${book.getBookPrice()} , ${book.getBookDiscount()} + % 할인"></span>
+                      <div th:if="${book.getBookDiscount()} > ${book.getBookTotalPrice()}">
+                          <span th:text="${book.getBookPrice()} + ${book.getBookDiscount()} + 할인"></span>
                           <span th:text="${book.getBookTotalPrice()} + 원"></span>
                       </div>
                   </a>
