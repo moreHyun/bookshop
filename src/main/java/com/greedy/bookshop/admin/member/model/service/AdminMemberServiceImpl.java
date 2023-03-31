@@ -74,11 +74,5 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	    public void updateMember(AdminMemberDTO member) {
 		 adminMemberMapper.updateMember(member);
 	    }
-	 
 
-
-	
-	
 	}
-
-

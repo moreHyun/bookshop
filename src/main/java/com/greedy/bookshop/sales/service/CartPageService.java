@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Slf4j
 @Service
-@Transactional
 public class CartPageService
 {
     private final CartMapper mapper;
@@ -34,23 +33,41 @@ public class CartPageService
         List<BookDTO> b = new ArrayList<>();
         List<CartDTO> c = mapper.selectUserCart(userCode);
         for(CartDTO cart : c)
-        {
-            log.info("Service] b : " + "들어옴");
             b.addAll(mapper.selectBookCart(cart.getBookCode()));
-            log.info("Service] b value : " + b);
-        }
-        for(int i = 0 ; i < b.size(); i++)
-        {
-           f.addAll(mapper.selectBookFile(b.get(i).getBookCode()));
 
-        }
+        for (BookDTO bookDTO : b)
+            f.addAll(mapper.selectBookFile(bookDTO.getBookCode()));
+
         m.put("cart",c);
         m.put("book",b);
         m.put("file",f);
-        for(int i = 0 ; i < m.size(); i++)
-        {
-            log.info("Serivce] : m " + i + " : " + m);
-        }
+
         return m;
+    }
+
+    public String UpdateStatus(long cartCode,long userCode)
+    {
+        CartDTO cart = mapper.selectCart2(cartCode,userCode);
+        int n = 0;
+        String m = "";
+        if(cart == null)
+        {
+            n = mapper.insertBuyitem(cartCode,userCode);
+        }
+        else
+        {
+            n = mapper.UpdateStatus(cart, userCode);
+        }
+        if(n == 1)
+            m = "네";
+        return m;
+    }
+
+    public void deleteItem(long cartCode,long userCode)
+    {
+        int r = 0;
+        String m = "";
+        log.info("u : " + userCode);
+        mapper.deleteItem(cartCode,userCode);
     }
 }

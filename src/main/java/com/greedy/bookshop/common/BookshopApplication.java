@@ -1,4 +1,4 @@
-package com.greedy.bookshop;
+package com.greedy.bookshop.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

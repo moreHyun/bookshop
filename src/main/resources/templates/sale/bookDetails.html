@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <div class="nav" th:replace="/main/nav.html"></div>
+    <div class="nav" th:replace="/common/nav.html"></div>
 </header>
 <div class="product-detail">
     <div class="product-detail-image" th:each="f : ${file}" th:if="${f.fileType} == 'TITLE'">
@@ -32,7 +32,7 @@
         <div class="button-container">
             <button class="Like-to-cart">찜하기</button>
             <button id="add-to-cart">장바구니 담기</button>
-            <button class="buy-now">구매하기</button>
+            <button id="buy-now">구매하기</button>
         </div>
         <script>
             document.getElementById("add-to-cart").addEventListener("click", function ()
@@ -53,15 +53,29 @@
                     })
                     .catch(error => console.log(error))
             })
-            let buy = document.getElementsByClassName("buy-now");
-            for(let i = 0 ; i < buy.length; i++)
-            {
-                buy[i].addEventListener("click", function ()
-                {
+            document.getElementById("buy-now").addEventListener("click",function (){
                     let b = '[[${book.bookCode}]]';
+                    fetch("/sale/buy",{
+                            method : 'POST',
+                            headers : {
+                                'Content-Type' : 'application/json;charset=UTF-8'
+                            },
+                            body : JSON.stringify
+                            ({
+                                bookCode : b
+                            })
+                        })
+                        .then(date =>
+                        {
+                            alert(date);
+                        })
+                        .then(respose =>
+                        {
+                            window.location.href = "/pay/payment";
+                        })
+                        .catch(error => console.log(error))
 
                 })
-            }
         </script>
     </div>
     <div class="SubImage">
@@ -82,6 +96,6 @@
 <script src="/js/sales/bookDetails.js"></script>
 </body>
 <footer class="footer">
-    <div th:replace="/main/footer.html"></div>
+    <div th:replace="/common/footer.html"></div>
 </footer>
 </html>

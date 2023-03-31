@@ -83,7 +83,7 @@ header {
     color: #000; /* 마우스 호버 시 글자 색상 변경 */
 }
 
-.buy-now {
+#buy-now {
     background-color: #f44336; /* 배경 색상 설정 */
     color: #fff; /* 글자 색상 설정 */
     border: none; /* 테두리 제거 */
@@ -92,7 +92,7 @@ header {
     cursor: pointer; /* 커서 모양 설정 */
 }
 
-.buy-now:hover {
+#buy-now:hover {
     background-color: #fff; /* 마우스 호버 시 배경 색상 변경 */
     color: #f44336; /* 마우스 호버 시 글자 색상 변경 */
 }
