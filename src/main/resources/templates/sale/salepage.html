@@ -42,8 +42,8 @@
                       <div th:if="${book.getBookPrice() == book.getBookTotalPrice()}">
                           <span  th:text="${book.getBookTotalPrice()} + 원"></span>
                       </div>
-                      <div th:if="${book.getBookPrice()} > ${book.getBookTotalPrice()}">
-                          <span th:text="${book.getBookPrice()}"></span><span th:text="${book.getBookDiscount()} + 1할인"></span>
+                      <div th:if="${book.getBookDiscount()} > ${book.getBookTotalPrice()}">
+                          <span th:text="${book.getBookPrice()} + ${book.getBookDiscount()} + 할인"></span>
                           <span th:text="${book.getBookTotalPrice()} + 원"></span>
                       </div>
                   </a>

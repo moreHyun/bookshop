@@ -126,7 +126,8 @@ public class insertController
         for(int i = 0; i < books.length; i++)
         {
             books[i].setBookCode(i+1);
-            fileList.add(new FileDTO(0,title.get(i),"TITLE",names[i],4,0,0,0,books[i].getBookCode()));
+          //  fileList.add(new FileDTO(0,title.get(i),"TITLE",names[i],4,0,0,0,books[i].getBookCode()));
+            fileList.add(new FileDTO(0,subimg.get(i),"SUB",names[i],4,0,0,0,books[i].getBookCode()));
             log.info(i + "FileList : " + fileList.get(i));
             log.info(i + "bookcode : " + books[i].getBookCode());
         }

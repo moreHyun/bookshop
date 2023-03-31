@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장바구니 페이지</title>
     <link rel="stylesheet" type="text/css" href="/css/cart/cart.css">
+    	<link rel="stylesheet" type="text/css" href="/css/common/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/footer.css">
 </head>
 <body>
 <header>
@@ -64,7 +66,7 @@
                     <p>배송비: <span id="delivery -price">3000</span>원</p>
                     <p>할인된 가격 : <span id="discount-price">0</span>원</p>
                     <p>총 결제 금액: <span id="total-amount">0</span>원</p>
-                    <button id="checkout-btn">결제하기</button>
+                    <button id="checkout-btn" th:onclick="location.href='/pay/payment'">결제하기</button>
                 </div>
             </div>
         </div>
