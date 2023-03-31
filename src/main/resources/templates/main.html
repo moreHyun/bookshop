@@ -4,13 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/common/nav.css">
     <link rel="stylesheet" href="/css/common/footer.css">
     <link rel="stylesheet" href="/css/common/main.css">
     <title>nav</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/event.js"></script>
+
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff; /* 배경색을 흰색으로 설정, 원하는 색상으로 변경 가능 */
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .left, .search, .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .search {
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .search input {
+            width: 100%;
+            max-width: 500px;
+            margin-right: 10px;
+        }
+
+        .logo img {
+            width: auto;
+            height: 40px; /* 로고 이미지 높이를 조절, 원하는 높이로 변경 가능 */
+        }
+
+        .search_img img {
+            height: 20px;
+            width: auto;
+        }
+    </style>
+
 
 </head>
 

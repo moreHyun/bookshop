@@ -101,6 +101,9 @@ public class MemberController {
 
 //        String address = zipCode + "$" + address1 + "$" + address2;
 //        member.setAddress(address);
+
+        System.out.println("-----------------");
+        System.out.println(member.getPassword());
         member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
 
         log.info("[MemberController] registMember request Member : " + member);

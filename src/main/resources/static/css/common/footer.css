@@ -105,19 +105,19 @@ footer
     justify-content: space-between;
 }
 
-.footer-copyright .footer-sns1 > img {
+.footer-copyright .footer-sns1 a > img {
     width: 30px;
     height: 30px;
     margin-right: 5px;
 }
 
-.footer-copyright .footer-sns2 > img {
+.footer-copyright .footer-sns2 a > img {
     width: 30px;
     height: 30px;
     margin-right: 5px;
 }
 
-.footer-copyright .footer-sns3 > img {
+.footer-copyright .footer-sns3 a > img {
     width: 30px;
     height: 30px;
     margin-right: 20px;
