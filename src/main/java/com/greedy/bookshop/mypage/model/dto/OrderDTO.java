@@ -2,6 +2,8 @@ package com.greedy.bookshop.mypage.model.dto;
 
 import java.util.Date;
 
+import com.greedy.bookshop.member.dto.MemberDTO;
+
 import lombok.Data;
 
 @Data
@@ -25,6 +27,7 @@ public class OrderDTO {
 	private int price;
 	private Date refundDate;
 	private String refundStatus;
+	private MemberDTO memberNO;
 	
 
 }

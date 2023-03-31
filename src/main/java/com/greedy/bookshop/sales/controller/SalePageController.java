@@ -84,18 +84,19 @@ public class SalePageController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<String> cartRegist(@RequestBody BookDTO bookCode, Model model)
+    public ResponseEntity<String> cartRegist(@RequestBody BookDTO bookCode)
     {
-        log.info("g2");
-        log.info("CartController] bookCode : " + bookCode);
-
         String m = salePageService.insertCart(bookCode.getBookCode(),1);
-
-
-
         return ResponseEntity.ok(m);
     }
 
+    @PostMapping("/buy")
+    public ResponseEntity<String> buyitem(@RequestBody BookDTO book)
+    {
+        log.info("gd");
+        String m = salePageService.buyitem(book.getBookCode(),1);
+        return ResponseEntity.ok(m);
+    }
 
 
 

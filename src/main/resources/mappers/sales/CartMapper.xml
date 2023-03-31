@@ -46,6 +46,7 @@
             *
         FROM TBL_CART
         WHERE USER_CODE = #{userCode}
+        AND ITEM_STATUS = 'N'
     </select>
 
     <select id="selectBookCart" resultMap="BookResultMap">
@@ -69,6 +70,16 @@
         FROM TBL_CART
         WHERE USER_CODE = #{userCode}
         AND BOOK_CODE = #{bookCode}
+        AND ITEM_STATUS = 'N'
+    </select>
+
+    <select id="selectCart2" resultMap="cartResultMap">
+        SELECT
+            *
+        FROM TBL_CART
+        WHERE USER_CODE = #{userCode}
+          AND CART_CODE = #{cartCode}
+          AND ITEM_STATUS = 'N'
     </select>
 
     <insert id="insertCart">
@@ -91,6 +102,7 @@
             )
     </insert>
 
+
     <update id="inneritem">
             UPDATE TBL_CART
             SET BOOK_QUANTITY = #{cart.bookQuantity} + 1
@@ -98,6 +110,46 @@
             AND USER_CODE = #{userCode}
     </update>
 
+    <insert id="insertBuyitem">
+        INSERT
+        INTO TBL_CART
+        (
+            CART_CODE,
+            BOOK_QUANTITY,
+            BOOK_CODE,
+            ITEM_STATUS,
+            USER_CODE
+        )
+        VALUES
+            (
+                SEQ_CATE.NEXTVAL,
+                1,
+                #{bookCode},
+                'Y',
+                #{userCode}
+            )
+    </insert>
 
+    <update id="upDateItem">
+        UPDATE TBL_CART
+            SET ITEM_STATUS = 'Y'
+            ,BOOK_QUANTITY =  #{cart.bookQuantity} + 1
+        WHERE USER_CODE = #{userCode}
+        AND BOOK_CODE = #{bookCode}
+    </update>
+
+    <update id="UpdateStatus">
+        UPDATE TBL_CART
+        SET ITEM_STATUS = 'Y'
+          ,BOOK_QUANTITY =  #{cart.bookQuantity} + 1
+        WHERE USER_CODE = #{userCode}
+          AND CART_CODE = #{cart.cartCode}
+    </update>
+
+    <delete id="deleteItem">
+            DELETE FROM TBL_CART
+            WHERE CART_CODE = #{cartCode}
+            AND USER_CODE = #{userCode}
+    </delete>
 </mapper>
 
