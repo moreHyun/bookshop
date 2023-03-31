@@ -17,11 +17,41 @@ function deselectAll() {
 // 선택된 상품을 삭제하는 함수
 function deleteSelected() {
   let checkboxes = document.getElementsByClassName("product-checkbox");
-  for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked) {
+  let items = document.getElementsByClassName("cart-item");
+  let code = 0;
+  let cartCode = [];
+  for(let i = 0; i < items.length; i++)
+  {
+    if(items[i].getElementsByClassName("product-checkbox")[0].checked)
+    {
+      code = items[i].getElementsByClassName("item-code")[0].textContent;
+      cartCode.push(code)
+    }
+  }
+  fetch("/cart/delete", {
+    method: 'POST',
+    headers:
+        {
+          'Content-Type': 'application/json'
+        },
+    body: JSON.stringify(cartCode)
+  })
+      .then(response => {
+        if (response.ok) {
+          console.log('데이터가 성공적으로 전송되었습니다.');
+        } else {
+          console.error('데이터 전송이 실패하였습니다.');
+        }
+      })
+      .catch(error => console.error('에러 발생:', error));
+  for (let i = 0; i < checkboxes.length; i++)
+  {
+    if (checkboxes[i].checked)
+    {
       checkboxes[i].parentNode.parentNode.remove();
     }
   }
+
 }
 
 // 상품 수량을 변경할 때마다 총 상품 가격을 업데이트하는 함수
@@ -67,18 +97,38 @@ function updateTotalPrice() {
 
 // 결제하기 버튼 클릭 시 호출되는 함수
 function checkout() {
+  let checkboxes = document.getElementsByClassName("product-checkbox");
   let items = document.getElementsByClassName("cart-item");
-  let selectedItems = [];
+  let cartCode = [];
   for (let i = 0; i < items.length; i++) {
     if (items[i].getElementsByClassName("product-checkbox")[0].checked)
     {
-      let name = items[i].getElementsByClassName("item-info")[0].getElementsByTagName("p")[0].textContent;
-      let price = items[i].getElementsByClassName("item-price")[0].textContent;
-      let quantity = items[i].getElementsByClassName("product-quantity")[0].value;
-      selectedItems.push({ name: name, price: price, quantity: quantity });
+      let code = items[i].getElementsByClassName("item-code")[0].textContent;
+      cartCode.push(code);
     }
   }
-  alert(JSON.stringify(selectedItems));
+  fetch("/cart/update", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cartCode)
+  })
+      .then(response => {
+        if (response.ok)
+        {
+          for (let i = 0; i < checkboxes.length; i++)
+          {
+            if (checkboxes[i].checked)
+            {
+              checkboxes[i].parentNode.parentNode.remove();
+            }
+          }
+        } else {
+          console.error('데이터 전송이 실패하였습니다.');
+        }
+      })
+      .catch(error => console.error('에러 발생:', error));
 }
 
 // 이벤트 리스너 등록
@@ -103,6 +153,7 @@ document.getElementById("delete-selected-btn").addEventListener("click", functio
   deleteSelected();
   updateTotalPrice();
 });
+
 let quantityInputs = document.getElementsByClassName("product-quantity");
 for (let i = 0; i < quantityInputs.length; i++) {
   quantityInputs[i].addEventListener("change", function() {

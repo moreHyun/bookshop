@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <div th:replace="/main/nav.html"></div>
+    <div th:replace="/common/nav.html"></div>
 </header>
 <main>
     <div class="container">
@@ -23,10 +23,10 @@
                     </li>
                 </ul>
             </div>
-            <th:block th:each="cart,stat : ${cart}" th:if="${user.no} != null and ${cart.cartCode} > 0">
-            <div class="cart-item">
+            <th:block th:each="cart,stat : ${cart}" th:if="${user.userCode} != null and ${cart.cartCode} > 0">
+            <div class="cart-item" >
                 <div class="item-checkbox">
-                    <input type="checkbox" class="product-checkbox">
+                    <p th:text="${cart.cartCode}" class="item-code"></p><input type="checkbox" class="product-checkbox">
                 </div>
                 <div class="item-info" th:if="${file.get(stat.index).getFileType()} == 'TITLE'">
                     <img th:src="${file.get(stat.index).getFileMainPath()}" alt="도서1" width="50" height="50">
@@ -46,7 +46,7 @@
                 </div>
             </div>
             </th:block>
-            <th:block th:if="${user.no} == null or ${cart.get(0).getCartCode} == null">
+            <th:block th:if="${user.userCode} == null or ${cart.get(0).getCartCode} == null">
                 <div class="cart-item">
                     <img src="/image/icon/youtube.png">
                     <p align="ceter">등록 된 상품이 없습니다.</p>
@@ -73,6 +73,6 @@
 <script src="/js/sales/basket.js"></script>
 </body>
 <footer>
-    <div th:replace="/main/footer.html"></div>
+    <div th:replace="/common/footer.html"></div>
 </footer>
 </html>

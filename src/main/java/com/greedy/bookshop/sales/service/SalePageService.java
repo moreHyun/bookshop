@@ -176,4 +176,28 @@ public class SalePageService
         }
         return m;
     }
+
+    public String buyitem(long bookCode, long userCode)
+    {
+        CartDTO cart = cartMapper.selectCart(bookCode,userCode);
+        log.info("b : " + bookCode );
+        log.info("u : " + userCode);
+        int n = 0;
+        String m = "";
+        if(cart == null)
+        {
+            n = cartMapper.insertBuyitem(bookCode,userCode);
+        }
+        else
+        {
+            n = cartMapper.upDateItem(bookCode, userCode, cart);
+        }
+
+        if(n == 1)
+        {
+            m = "구매페이지로 이동합니다";
+        }
+        log.info("m : " + m);
+        return m;
+    }
 }

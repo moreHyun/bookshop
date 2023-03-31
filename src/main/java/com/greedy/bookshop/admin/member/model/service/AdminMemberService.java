@@ -15,9 +15,4 @@ public interface AdminMemberService {
 	AdminMemberDTO selectMemberDetail(String id);
 
 	void updateMember(AdminMemberDTO member);
-	
-
-	
-
-
 }

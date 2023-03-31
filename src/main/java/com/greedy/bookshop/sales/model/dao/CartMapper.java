@@ -22,4 +22,14 @@ public interface CartMapper
     CartDTO selectCart(long bookCode, long userCode);
 
     int inneritem(long bookCode, long userCode,CartDTO cart);
+
+    int insertBuyitem(long bookCode, long userCode);
+
+    int upDateItem(long bookCode, long userCode,CartDTO cart);
+
+    int UpdateStatus(CartDTO cart,long userCode);
+
+    void deleteItem(long cartCode, long userCode);
+
+    CartDTO selectCart2(long cartCode, long userCode);
 }
