@@ -13,7 +13,7 @@ spring:
       enabled: true
       max-file-size: 128MB
       max-request-size: 128MB
-      location: C:/Users/gangc/OneDrive/바탕 화면/subProject/bookshop
+      location: C:/Lecture/dev/10_spring/3_spring-boot/SubProject
 
 mybatis:
   mapper-locations: mappers/**/*.xml

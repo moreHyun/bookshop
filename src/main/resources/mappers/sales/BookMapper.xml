@@ -214,7 +214,7 @@
                 null,
                 null,
                 null,
-                #{bookList.bookCode}
+                #{bookCode}
             )
     </insert>
 
