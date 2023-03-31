@@ -29,7 +29,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '결제완료'
-        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1
 	</select>
 	
 	<select id="selectReadyCount" resultType="_int">
@@ -38,7 +38,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '배송준비'
-        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1
 	</select>
 	
 	<select id="selectCompleteCount" resultType="_int">
@@ -47,7 +47,7 @@
         FROM TBL_ORDER
        	JOIN TBL_USER USING(USER_CODE)
 		WHERE ORDER_STATUS = '배송완료'
-        AND USER_CODE = 1<!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1
 	</select>
 	
 	<select id="selectOrderCount" resultType="_int">
@@ -63,7 +63,7 @@
 			  JOIN TBL_ORDER USING(USER_CODE)
 			  JOIN TBL_ORDER_DETAIL USING(ORDER_CODE)
 			  JOIN TBL_BOOK USING(BOOK_CODE)
-			  WHERE USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+			  WHERE USER_CODE = 1
               ORDER BY ORDER_DATE DESC)
 	</select>
 	<select id="selectOrderList" resultMap="orderResultMap">
@@ -92,7 +92,7 @@
    							    JOIN TBL_ORDER USING(USER_CODE)
     							JOIN TBL_ORDER_DETAIL USING(ORDER_CODE)
     							JOIN TBL_BOOK USING(BOOK_CODE)
-    							WHERE USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+    							WHERE USER_CODE = 1
     							ORDER BY ORDER_DATE DESC
   							) 
   			 <![CDATA[	
@@ -107,7 +107,7 @@
         FROM TBL_REFUND
         JOIN TBL_USER USING(USER_CODE)
 		WHERE REFUND_STATUS = 'Y'
-        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1
 	</select>
 	
 	<select id="selectNoCount" resultType="_int">
@@ -116,7 +116,7 @@
         FROM TBL_REFUND
         JOIN TBL_USER USING(USER_CODE)
 		WHERE REFUND_STATUS = 'N'
-        AND USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+        AND USER_CODE = 1 
 	</select>
 	
 	<select id="selectRefundCount" resultType="_int">
@@ -132,7 +132,7 @@
               JOIN TBL_ORDER C ON(B.ORDER_CODE = C.ORDER_CODE)
               JOIN TBL_ORDER_DETAIL D ON(C.ORDER_CODE = D.ORDER_CODE)
               JOIN TBL_BOOK E ON(D.BOOK_CODE = E.BOOK_CODE)
-              WHERE A.USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+              WHERE A.USER_CODE = 1
               ORDER BY B.REFUND_DATE DESC)
 	</select>
 	
@@ -160,7 +160,7 @@
 						JOIN TBL_ORDER C ON(B.ORDER_CODE = C.ORDER_CODE)
 						JOIN TBL_ORDER_DETAIL D ON(C.ORDER_CODE = D.ORDER_CODE)
 						JOIN TBL_BOOK E ON(D.BOOK_CODE = E.BOOK_CODE)
-						WHERE A.USER_CODE = 1 <!-- 임의로 넣어둔 부분 로그인하고 연동되면 #{ userCode }로 수정 -->
+						WHERE A.USER_CODE = 1
 						ORDER BY B.REFUND_DATE DESC
  						)
  						<![CDATA[	
