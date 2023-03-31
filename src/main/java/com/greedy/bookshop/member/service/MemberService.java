@@ -27,12 +27,12 @@ public class MemberService {
         return result != null ? true : false;
     }
 
-    public void registMember(MemberDTO member) throws MemberRegistException{
+    public void registMember(MemberDTO member) throws MemberRegistException {
 
         int result1 = mapper.insertMember(member);
-        int result2 = mapper.insertMemberRole();
+        //int result2 = mapper.insertMemberRole(member.getMemberNo());
 
-        if(!(result1 > 0 && result2 > 0)){
+        if(!(result1 > 0)){
             throw new MemberRegistException("회원 가입에 실패하였습니다.");
         }
     }
