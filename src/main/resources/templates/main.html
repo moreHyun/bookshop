@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/common/footer.css">
     <link rel="stylesheet" href="/css/common/main.css">
-    <title>nav</title>
+    <link rel="icon" href="../image/책장옆 복사본.png">
+    <title>책장옆</title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/event.js"></script>
@@ -31,15 +32,37 @@
         }
 
         .search {
-            flex-grow: 1;
             justify-content: center;
+            height: 40px;
+            width: 400px;
+            background: #ffffff;
+            border: 1px solid gray;
+            border-radius: 15px 15px 15px 15px;
         }
 
         .search input {
-            width: 100%;
-            max-width: 500px;
+            width: 100%
+            max-width: 700px;
             margin-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-left: 10px
+            font-size: 12px;
+            width: 355px;
+            border: 0px;
+            outline: none;
+            border-radius: 15px 15px 15px 15px;
         }
+
+        header .search button {
+            border: 0px;
+            background: white;
+            border-radius: 15px 15px 15px 15px;
+            outline: none;
+            float: right;
+            text-align: center;
+
+}
 
         .logo img {
             width: auto;
@@ -49,7 +72,31 @@
         .search_img img {
             height: 20px;
             width: auto;
+            display: inline-flex;
         }
+
+        .right ul {
+            display: flex;
+            list-style: none; /* Remove the default list bullet points */
+            padding: 0; /* Remove the default padding */
+        }
+
+        .right button {
+            border-radius: 15px;
+            border: 0px;
+            background-color: white;
+            font-size: 14px;
+            width: 80px;
+            height: 40px;
+            padding: 0 10px;
+        }
+
+        .right button:hover {
+            background-color: #CDE990; /* 원하는 색상으로 변경하세요 */
+            cursor: pointer;
+        }
+
+
     </style>
 
 
@@ -65,26 +112,28 @@
         <input type="text" placeholder="찾고 싶은 책을 검색해 보세요!">
         <button class="search_img"><img src="/image/search.png"></button>
     </div>
-    <div class="right">
-        <nav>
-            <ul>
-                <li><a href="/sale/salepage.html">책 창고</a></li>
-                <th:block sec:authorize="isAuthenticated()">
-                    <button onclick="location.href='/member/logout'">로그아웃</button>
-                </th:block>
-                <th:block sec:authorize="isAnonymous()">
-                    <button onclick="location.href='/member/login'">로그인</button>
-                </th:block>
-            </ul>
-        </nav>
-    </div>
+    <div class="fighting">
+        <div class="right">
+            <nav>
+                <ul>
+                    <button onclick="location.href='/sale/salepage?categoryCode=5'">책창고</button>
+                    <th:block sec:authorize="hasRole('USER')">
+                        <li><button onclick="location.href='/mypage/orderhistory'">내 정보</button></li>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ADMIN')">
+                        <li><button onclick="location.href='/adminmember/list'">관리자</button></li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <button onclick="location.href='/member/logout'">로그아웃</button>
+                    </th:block>
+                    <th:block sec:authorize="isAnonymous()">
+                        <button onclick="location.href='/member/login'">로그인</button>
+                    </th:block>
+                </ul>
+            </nav>
+        </div>
 
-    <th:block sec:authorize="hasRole('USER')">
-    <button onclick="location.href='/myPage/mainview'">내 정보</button>
-    </th:block>
-    <th:block sec:authorize="hasRole('ADMIN')">
-        <button onclick="location.href='/member/list'">관리자</button>
-    </th:block>
+    </div>
 
 </header>
 
